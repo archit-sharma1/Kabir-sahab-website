@@ -1,6 +1,6 @@
 # Kabir Saheb Doha Website
 
-A self-contained contemplative website featuring 55 Hindi dohas attributed to Sant Kabir, each paired with an English translation.
+A contemplative static website featuring 55 Hindi dohas attributed to Sant Kabir, each paired with an English translation.
 
 ## Features
 
@@ -12,9 +12,18 @@ A self-contained contemplative website featuring 55 Hindi dohas attributed to Sa
 - Embedded Kabir Saheb portrait
 - Responsive OLED-black design
 
+## Project structure
+
+- `index.html` — semantic page structure and references to the other layers
+- `styles.css` — visual design and responsive layout
+- `data/dohas.js` — browser-native data store containing all 55 Hindi and English records
+- `script.js` — application behavior, search, history, drawing, and copy actions
+
+The data file loads before `script.js`, so the site works when opened directly from disk without a server or build step.
+
 ## Run locally
 
-Open `index.html` directly in a modern web browser. No build step or external assets are required.
+Download the repository and open `index.html` in a modern web browser. No external assets or package installation are required.
 
 ## Live website
 
