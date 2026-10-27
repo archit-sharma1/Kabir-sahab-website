@@ -27,4 +27,6 @@ Download the repository and open `index.html` in a modern web browser. No extern
 
 ## Live website
 
-https://kabir-saheb-dohe.sarchit216-as.chatgpt.site
+[Open the public Cloudflare deployment](https://kabir-sahab-website.sarchit216-as.workers.dev/)
+
+The production website is hosted on Cloudflare Workers and is automatically deployed from the `main` branch.
