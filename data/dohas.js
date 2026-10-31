@@ -241,5 +241,9 @@ window.KABIR_DOHAS = [
     {
       text: "गुरु बेचारा क्या करे, शब्द न लागे अंग।\nकहैं कबीर काली चादर, कैसे चाढ़े रंग।।",
       meaning: "What can the poor Guru do if the Word does not touch one's being? Kabir says: how can a black cloth take on another colour?"
+    },
+    {
+      text: "चार राम हैं जगत में, तीन राम व्यवहार।\nचौथे राम सो सार हैं, ताको करो विचार।।",
+      meaning: "There are four forms of Ram in the world; three are known in ordinary usage. The fourth Ram is the true essence—reflect deeply upon that Ram."
     }
   ];
