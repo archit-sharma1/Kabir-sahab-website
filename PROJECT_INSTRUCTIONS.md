@@ -1,6 +1,6 @@
 # Kabir Saheb Doha Website — Project Instructions
 
-Last updated: 31 October 2026 (IST)
+Last updated: 1 November 2026 (IST)
 
 ## 1. Project identity
 
@@ -17,7 +17,7 @@ GitHub is now the source of truth. Make future code and content changes in the G
 
 ## 2. Website description
 
-This is a contemplative, responsive static website presenting 56 Hindi dohas attributed to Sant Kabir, each paired with an English plain-sense translation. Visitors can draw a random doha, search in Hindi or English, copy the Hindi and English text separately, and revisit recently drawn verses.
+This is a contemplative, responsive static website presenting 57 Hindi dohas attributed to Sant Kabir, each paired with an English plain-sense translation. Visitors can draw a random doha, search in Hindi or English, copy the Hindi and English text separately, and revisit recently drawn verses.
 
 The website uses a minimal OLED-black design and preserves the supplied Kabir Saheb portrait. It requires no framework, package installation, server, or build process and must remain usable when `index.html` is opened directly from disk.
 
@@ -62,7 +62,7 @@ Load order in `index.html` is important:
 - Is the only canonical doha content store.
 - Exposes an array through `window.KABIR_DOHAS`.
 - Every record must contain non-empty Hindi doha text and a non-empty English meaning.
-- The current production corpus contains **exactly 56 records**.
+- The current production corpus contains **exactly 57 records**.
 - When adding, correcting, or removing a doha, edit this file rather than duplicating content in HTML or `script.js`.
 
 ### `script.js`
@@ -81,7 +81,7 @@ const dohas = Array.isArray(window.KABIR_DOHAS) ? window.KABIR_DOHAS : [];
 
 Preserve all of the following unless the user explicitly requests a change:
 
-- All 56 Hindi dohas and all 56 English meanings.
+- All 57 Hindi dohas and all 57 English meanings.
 - Random **Draw a Doha** behavior.
 - Hindi and English keyword search.
 - Separate **Copy Hindi** and **Copy English** buttons.
@@ -131,12 +131,14 @@ Search must therefore ignore English capitalization and extra spaces while remai
 | `marketplace` | 3 matching dohas in the current corpus |
 | `चौथे राम` | 1 result: the “चार राम…” doha |
 | `four forms of ram` | 1 result: the “चार राम…” doha |
+| `ऐसी वाणी` | 1 result: the “ऐसी वाणी…” doha |
+| `speak such words` | 1 result: the “ऐसी वाणी…” doha |
 
 Also test uppercase English and queries containing leading, trailing, and repeated spaces.
 
 ## 7. Required latest dohas
 
-These records must remain present in the 56-doha corpus.
+These records must remain present in the 57-doha corpus.
 
 ### Doha 54
 
@@ -183,6 +185,21 @@ What can the poor Guru do if the Word does not touch one's being? Kabir says: ho
 There are four forms of Ram in the world; three are known in ordinary usage. The fourth Ram is the true essence—reflect deeply upon that Ram.
 ```
 
+### Doha 57
+
+**Hindi**
+
+```text
+ऐसी वाणी बोलिए, मन का आपा खोए।
+औरन को शीतल करे, आपहुँ शीतल होए।।
+```
+
+**English**
+
+```text
+Speak such words that the ego of the mind dissolves. They bring coolness to others, and you too become serene.
+```
+
 Do not silently modernize, transliterate, respell, or rewrite these approved texts. Propose textual corrections separately and obtain approval before changing the corpus.
 
 ## 8. GitHub change workflow
@@ -218,7 +235,7 @@ Run checks proportional to the change. A normal content or behavior change shoul
 - No accidental reintroduction of large inline CSS or application JavaScript.
 - `node --check data/dohas.js` succeeds.
 - `node --check script.js` succeeds.
-- `window.KABIR_DOHAS` contains exactly 56 complete records.
+- `window.KABIR_DOHAS` contains exactly 57 complete records.
 - No record has blank Hindi or English content.
 - CSS braces and syntax remain balanced.
 
@@ -290,6 +307,7 @@ When the user requests new or corrected verses:
 - Cloudflare Worker deployment created and made publicly accessible.
 - Public production search smoke tests passed for `काली चादर`, `गुरु बेचारा`, `diamond`, and `marketplace`.
 - Doha 56, “चार राम हैं जगत में…”, added with an original English plain-sense translation.
+- Doha 57, “ऐसी वाणी बोलिए…”, added with an original English plain-sense translation.
 
 ## 14. Instructions for future AI collaborators
 
