@@ -245,5 +245,9 @@ window.KABIR_DOHAS = [
     {
       text: "चार राम हैं जगत में, तीन राम व्यवहार।\nचौथे राम सो सार हैं, ताको करो विचार।।",
       meaning: "There are four forms of Ram in the world; three are known in ordinary usage. The fourth Ram is the true essence—reflect deeply upon that Ram."
+    },
+    {
+      text: "ऐसी वाणी बोलिए, मन का आपा खोए।\nऔरन को शीतल करे, आपहुँ शीतल होए।।",
+      meaning: "Speak such words that the ego of the mind dissolves. They bring coolness to others, and you too become serene."
     }
   ];
