@@ -249,5 +249,9 @@ window.KABIR_DOHAS = [
     {
       text: "ऐसी वाणी बोलिए, मन का आपा खोए।\nऔरन को शीतल करे, आपहुँ शीतल होए।।",
       meaning: "Speak such words that the ego of the mind dissolves. They bring coolness to others, and you too become serene."
+    },
+    {
+      text: "प्रभुता को सब कोई भजै, प्रभु को भजै न कोय।\nकहैं कबीर प्रभु को भजै, प्रभुता चेरी होय॥",
+      meaning: "Everyone worships power, but no one worships the Lord. Kabir says: whoever worships the Lord, power itself becomes their servant."
     }
   ];
