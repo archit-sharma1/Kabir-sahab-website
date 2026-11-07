@@ -17,11 +17,11 @@ window.KABIR_DOHAS = [
     },
     {
       text: "साईं इतना दीजिए, जा में कुटुम समाय।\nमैं भी भूखा न रहूँ, साधु न भूखा जाय॥",
-      meaning: "O Lord, grant me only so much that my household is content — that I go not hungry, and no guest leaves my door unfed."
+      meaning: "O Sai, give me only as much as my household needs — so that I do not go hungry, and no sadhu who comes to my door leaves hungry."
     },
     {
       text: "दुःख में सुमिरन सब करे, सुख में करे न कोय।\nजो सुख में सुमिरन करे, तो दुःख काहे होय॥",
-      meaning: "Everyone remembers God in sorrow; none in joy. If one remembered in joy too, why would sorrow ever come?"
+      meaning: "Everyone turns to remembrance of the Truth in sorrow; no one does so in joy. If one remembered in joy too, why would sorrow ever come?"
     },
     {
       text: "बड़ा हुआ तो क्या हुआ, जैसे पेड़ खजूर।\nपंथी को छाया नहीं, फल लागे अति दूर॥",
@@ -29,7 +29,7 @@ window.KABIR_DOHAS = [
     },
     {
       text: "जब मैं था तब हरि नहीं, अब हरि है मैं नाहिं।\nसब अँधियारा मिट गया, जब दीपक देख्या माहिं॥",
-      meaning: "When my ego was present, God was absent; now God is present, and my ego is gone. All darkness vanished the moment I saw the lamp within."
+      meaning: "When the ‘I’ was there, Hari was not; now Hari is, and the ‘I’ is gone. All darkness vanished the moment I saw the lamp within."
     },
     {
       text: "चलती चाकी देख कर, दिया कबीरा रोय।\nदो पाटन के बीच में, साबुत बचा न कोय॥",
@@ -41,11 +41,11 @@ window.KABIR_DOHAS = [
     },
     {
       text: "कस्तूरी कुण्डल बसे, मृग ढूँढे बन माहि।\nऐसे घट घट राम है, दुनिया देखे नाहि॥",
-      meaning: "The musk lies within the deer's own navel, yet it searches the forest for it. So does the Divine dwell in every heart, unseen by the world."
+      meaning: "The musk lies within the deer's own navel, yet it searches the forest for it. In the same way Ram, the Real, lives in every heart, yet the world does not see it."
     },
     {
       text: "जैसे तिल में तेल है, ज्यों चकमक में आग।\nतेरा साईं तुझ में है, तू जाग सके तो जाग॥",
-      meaning: "As oil dwells within the sesame seed, and fire within the flint, your Lord dwells within you — awaken to it if you can."
+      meaning: "As oil dwells within the sesame seed, and fire within the flint, your Sai, the Real, is within you — wake up to it if you can."
     },
     {
       text: "अति का भला न बोलना, अति की भली न चूप।\nअति का भला न बरसना, अति की भली न धूप॥",
@@ -53,7 +53,7 @@ window.KABIR_DOHAS = [
     },
     {
       text: "मन के हारे हार है, मन के जीते जीत।\nकहे कबीर हरि पाइए, मन ही की परतीत॥",
-      meaning: "Defeat lies in a defeated mind, victory in a victorious one. Kabir says: it is faith of the mind alone that leads one to God."
+      meaning: "Defeat lies in a defeated mind, victory in a victorious one. Kabir says: Hari is found only through the mind's own conviction."
     },
     {
       text: "कबीरा खड़ा बाज़ार में, माँगे सबकी खैर।\nना काहू से दोस्ती, ना काहू से बैर॥",
@@ -61,7 +61,7 @@ window.KABIR_DOHAS = [
     },
     {
       text: "गुरु गोविन्द दोऊ खड़े, काके लागूँ पाँय।\nबलिहारी गुरु आपने, गोविन्द दियो बताय॥",
-      meaning: "If the Guru and God both stand before me, whose feet should I touch first? I bow to the Guru, for it was he who showed me God."
+      meaning: "If the Guru and Govind both stand before me, whose feet should I touch first? I give myself to the Guru, for it was the Guru who showed me Govind."
     },
     {
       text: "जाति न पूछो साधु की, पूछ लीजिये ज्ञान।\nमोल करो तलवार का, पड़ा रहन दो म्यान॥",
@@ -97,7 +97,7 @@ window.KABIR_DOHAS = [
     },
     {
       text: "बुरे बख्त पर मीत सब, तज देते हैं साथ।\nकबिरा तेहि दिन जानिये, जब देवे परमेश्वर हाथ॥",
-      meaning: "In hard times even friends may leave one's side. Kabir says, know that day as blessed when it is God alone who holds your hand."
+      meaning: "In hard times even friends may leave one's side. Kabir says, know that day for what it is — the day when the Supreme alone holds your hand."
     },
     {
       text: "कबिरा सोई पीर है, जो जाने पर पीर।\nजो पर पीर न जानई, सो काफिर बे पीर॥",
@@ -201,7 +201,7 @@ window.KABIR_DOHAS = [
     },
     {
       text: "ऊँचे गाँव पहाड़ पर, औ मोटे की बाँह।\nऐसा ठाकुर सेविए, उबरिए जाकी छाँह॥",
-      meaning: "In a village high upon the mountain, seek the protection of the Mighty One. Serve such a Master that you may be saved beneath His shelter.",
+      meaning: "The village is high upon the mountain; hold on to the arm of the strong. Serve such a Thakur, a master, that you are saved in his shade.",
       source: "बीजक — साखी ३०"
     },
     {
@@ -252,6 +252,6 @@ window.KABIR_DOHAS = [
     },
     {
       text: "प्रभुता को सब कोई भजै, प्रभु को भजै न कोय।\nकहैं कबीर प्रभु को भजै, प्रभुता चेरी होय॥",
-      meaning: "Everyone worships power, but no one worships the Lord. Kabir says: whoever worships the Lord, power itself becomes their servant."
+      meaning: "Everyone worships power, but no one worships Prabhu, the Real. Kabir says: whoever worships Prabhu, power itself becomes their servant."
     }
   ];
