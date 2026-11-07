@@ -1,12 +1,12 @@
 // See https://svelte.dev/docs/kit/types#app.d.ts
-// for information about these interfaces
+import type { Doha } from '#lib/dohas.js';
+
 declare global {
 	namespace App {
-		// interface Error {}
-		// interface Locals {}
-		// interface PageData {}
-		// interface PageState {}
-		// interface Platform {}
+		interface PageData {
+			/** Set on /doha/[id] pages: the doha that page is about. */
+			doha?: Doha;
+		}
 	}
 }
 

@@ -261,6 +261,19 @@
     padding-top:16px;
   }
 
+  .notice{
+    width:100%;
+    text-align:center;
+    font-family:'Cormorant Garamond', serif;
+    font-style:italic;
+    font-size:1.1rem;
+    color:#c9b98f;
+  }
+
+  .notice a{
+    color:var(--thread-gold);
+  }
+
   .placeholder{
     font-family:'Cormorant Garamond', serif;
     font-style:italic;

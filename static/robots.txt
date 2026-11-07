@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://kabir-saheb.sant-vani.workers.dev/sitemap.xml
