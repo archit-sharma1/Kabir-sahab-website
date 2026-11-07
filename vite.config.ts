@@ -11,7 +11,7 @@ export default defineConfig({
 			},
 			// Every page is prerendered to plain HTML in build/, which Cloudflare
 			// serves as static assets (no server code runs).
-			adapter: adapter({ pages: 'build', assets: 'build', fallback: undefined, precompress: false, strict: true })
+			adapter: adapter({ pages: 'build', assets: 'build', fallback: '404.html', precompress: false, strict: true })
 		})
 	],
 	test: {

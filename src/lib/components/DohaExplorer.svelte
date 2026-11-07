@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { onMount, tick } from 'svelte';
-	import { goto } from '$app/navigation';
+	import { afterNavigate, goto } from '$app/navigation';
+	import { page } from '$app/state';
 	import { copyText, shareText } from '../clipboard.js';
 	import { explorer } from '../explorer.svelte.js';
 	import DohaCard from './DohaCard.svelte';
@@ -9,31 +10,35 @@
 
 	let card = $state<HTMLElement>();
 
-	// Per-doha links use the URL hash (#doha-N) for now.
-	const HASH = /^#doha-(\d+)$/;
+	// The doha of the /doha/N page being viewed, if any. Before the reader
+	// picks anything (and in the prerendered HTML) the card shows this one.
+	const pageDoha = $derived(page.data.doha ?? null);
+	const shown = $derived(explorer.current ?? pageDoha);
 
-	function setHash(id: number) {
-		if (location.hash === `#doha-${id}`) return;
-		goto(`#doha-${id}`, { replace: true, shallow: true });
-	}
-
-	function openFromHash() {
-		const m = HASH.exec(location.hash);
-		if (!m || Number(m[1]) === explorer.currentId) return;
-		explorer.open(Number(m[1]));
+	/** Each doha has its own page; showing one moves the URL there (new history entry, no scroll jump). */
+	function visit(id: number) {
+		if (page.url.pathname !== `/doha/${id}`) goto(`/doha/${id}`, { reset: false });
 	}
 
 	onMount(() => {
 		explorer.load();
-		openFromHash();
-		window.addEventListener('hashchange', openFromHash);
-		return () => window.removeEventListener('hashchange', openFromHash);
+		// Links shared before /doha/N pages existed used #doha-N on the home page.
+		const legacy = /^#doha-(\d+)$/.exec(location.hash);
+		if (legacy && location.pathname === '/') goto(`/doha/${legacy[1]}`, { replace: true });
+	});
+
+	// Arriving on a doha page from outside (first load, a link, back/forward)
+	// makes it the current doha. Our own goto() calls are skipped: the card has
+	// already changed, and a slow navigation must not overwrite a newer draw.
+	afterNavigate((nav) => {
+		const d = page.data.doha;
+		if (nav.type !== 'goto' && d && d.id !== explorer.currentId) explorer.open(d.id);
 	});
 
 	async function draw() {
 		// Keep the reader's viewport fixed when the new doha changes the page height.
 		const { scrollX, scrollY } = window;
-		setHash(explorer.draw());
+		visit(explorer.draw());
 		await tick();
 		window.scrollTo(scrollX, scrollY);
 		requestAnimationFrame(() => window.scrollTo(scrollX, scrollY));
@@ -41,13 +46,13 @@
 
 	function openFromSearch(id: number) {
 		explorer.open(id);
-		setHash(id);
+		visit(id);
 		card?.scrollIntoView({ behavior: 'smooth', block: 'center' });
 	}
 
 	function openFromHistory(id: number) {
 		explorer.open(id);
-		setHash(id);
+		visit(id);
 	}
 
 	// Button labels that flash a confirmation for 1.5 s.
@@ -58,16 +63,16 @@
 	}
 
 	async function copy(key: 'hindi' | 'english') {
-		const d = explorer.current;
+		const d = shown;
 		if (!d) return;
 		await copyText(key === 'hindi' ? d.text : d.meaning);
 		flash(key, 'Copied!');
 	}
 
 	async function share() {
-		const d = explorer.current;
+		const d = shown;
 		if (!d) return;
-		const url = `${location.origin}${location.pathname}#doha-${d.id}`;
+		const url = `${location.origin}/doha/${d.id}`;
 		const text = shareText(d);
 		if (navigator.share) {
 			try {
@@ -84,17 +89,17 @@
 
 <SearchBox onselect={openFromSearch} />
 
-<DohaCard doha={explorer.current} bind:element={card} />
+<DohaCard doha={shown} bind:element={card} />
 
 <div class="actions">
 	<button id="drawBtn" type="button" onclick={draw}>Draw a Doha</button>
-	<button id="copyHindiBtn" class="secondary" type="button" hidden={!explorer.current} onclick={() => copy('hindi')}
+	<button id="copyHindiBtn" class="secondary" type="button" hidden={!shown} onclick={() => copy('hindi')}
 		>{flashed.hindi ?? 'Copy Hindi'}</button
 	>
-	<button id="copyMeaningBtn" class="secondary" type="button" hidden={!explorer.current} onclick={() => copy('english')}
+	<button id="copyMeaningBtn" class="secondary" type="button" hidden={!shown} onclick={() => copy('english')}
 		>{flashed.english ?? 'Copy English'}</button
 	>
-	<button id="shareBtn" class="secondary" type="button" hidden={!explorer.current} onclick={share}
+	<button id="shareBtn" class="secondary" type="button" hidden={!shown} onclick={share}
 		>{flashed.share ?? 'Share'}</button
 	>
 </div>
