@@ -10,128 +10,142 @@ Last updated: 7 November 2026 (IST)
 - **Default branch:** `main`
 - **Repository visibility:** Private
 - **Canonical production URL:** https://kabir-saheb.sant-vani.workers.dev/
-- **Hosting:** Cloudflare Workers with automatic deployment from GitHub
+- **Framework:** SvelteKit 3 (Svelte 5, TypeScript, Vite 8), fully prerendered with `@sveltejs/adapter-static`
+- **Hosting:** Cloudflare Workers static assets (Worker `kabir-saheb`), built and deployed automatically from GitHub `main`
 - **Legacy ChatGPT Site:** https://kabir-saheb-dohe.sarchit216-as.chatgpt.site
 
 GitHub is now the source of truth. Make future code and content changes in the GitHub repository, not in the legacy ChatGPT Site, unless the user explicitly asks to update both.
 
 ## 2. Website description
 
-This is a contemplative, responsive static website presenting 58 Hindi dohas traditionally attributed to Kabir Saheb, each paired with an original English plain-sense meaning. Visitors can:
+This is a contemplative, responsive website presenting 58 Hindi dohas traditionally attributed to Kabir Saheb, each paired with an original English plain-sense meaning. Visitors can:
 
 - draw a random doha;
 - search in Hindi, romanised Hindi or English;
 - copy the Hindi and English text separately;
-- share a doha or link straight to it (`#doha-N`);
+- share a doha;
+- open any doha at its own address (`/doha/N`);
 - revisit recently drawn verses, even after a refresh.
 
 Each card shows the doha number and its source.
 
-The website uses a minimal OLED-black design and preserves the supplied Kabir Saheb portrait. It requires no framework, package installation, server, or build process and must remain usable when `index.html` is opened directly from disk.
+The website uses a minimal OLED-black design and the Kabir Saheb portrait. It is built with SvelteKit and **prerendered**: `npm run build` writes plain HTML, CSS and JS for the home page, all 58 doha pages, the 404 page and `sitemap.xml` into `build/`, and Cloudflare serves those files. No server code runs in production.
 
 ## 3. Current project structure
 
 ```text
 Kabir-sahab-website/
-├── index.html          # Semantic markup, meta/preview tags and asset references
-├── styles.css          # @font-face rules, visual design and responsive styling
-├── script.js           # Draw, search, history, copy, share and #doha-N links
-├── data/
-│   └── dohas.js        # Canonical browser-native store containing all dohas
-├── images/             # Portrait (WebP + JPEG), touch icon, og-image.jpg (1200×630)
-├── fonts/              # 8 self-hosted .woff2 files + LICENSE.md / OFL.txt
-├── favicon.ico         # Browser tab icon
-├── _headers            # Cloudflare cache-control and security headers
-├── .assetsignore       # Files Cloudflare must not publish (Markdown, .git)
-└── README.md           # Repository overview and usage notes
+├── src/
+│   ├── app.html                  # HTML shell (lang="en", icons, font preloads)
+│   ├── app.css                   # @font-face rules and the complete visual design
+│   ├── app.d.ts                  # App.PageData type (doha on /doha/N pages)
+│   ├── lib/
+│   │   ├── dohas.ts              # THE doha content store (typed, 58 records)
+│   │   ├── search.ts             # Whole-word search + SEARCH_ALIASES
+│   │   ├── history.ts            # "Previously drawn" + no-repeat draw
+│   │   ├── explorer.svelte.ts    # Shared state: current doha, round, history
+│   │   ├── clipboard.ts          # Copy helper and share text
+│   │   ├── site.ts               # Site URL, title, description, preview image
+│   │   ├── *.test.ts             # Vitest unit tests (run with npm test)
+│   │   └── components/           # SiteHeader, SearchBox, DohaCard, HistoryList,
+│   │                             # DohaExplorer, SiteFooter, Seo
+│   └── routes/
+│       ├── +layout.svelte        # Header, explorer and footer (stay mounted)
+│       ├── +layout.ts            # prerender = true for every page
+│       ├── +page.svelte          # Home: head tags only
+│       ├── +error.svelte         # 404 / error notice (noindex)
+│       ├── doha/[id]/            # /doha/1 … /doha/58 with their own head tags
+│       └── sitemap.xml/          # Prerendered sitemap
+├── static/                       # Copied as-is into build/
+│   ├── _headers                  # Cloudflare cache-control and security headers
+│   ├── favicon.ico, robots.txt
+│   ├── images/                   # Portrait (WebP + JPEG), touch icon, og-image.jpg
+│   └── fonts/                    # 8 self-hosted .woff2 files + licences
+├── vite.config.ts                # SvelteKit config (adapter, CSP), Vitest config
+├── wrangler.jsonc                # Cloudflare Worker: serves build/ as static assets
+├── package.json                  # Scripts: dev, build, check, test, preview:cloudflare
+├── README.md
+└── PROJECT_INSTRUCTIONS.md
 ```
 
-Load order in `index.html` is important:
+`build/`, `.svelte-kit/` and `node_modules/` are generated and git-ignored.
 
-```html
-<script src="data/dohas.js"></script>
-<script src="script.js"></script>
-```
-
-`data/dohas.js` must load first because it defines `window.KABIR_DOHAS`. `script.js` reads that array into its own closure and then deletes the global, so the corpus is not listed on `window` in the DevTools console. (The data file itself is still publicly downloadable, as with any static site.)
-
-Both files, and `styles.css`, are referenced with a `?v=YYYYMMDD.N` version string (currently `?v=20261107.15`; all three share one value). **Bump that version in `index.html` whenever `styles.css`, `script.js` or `data/dohas.js` changes**, because `_headers` lets browsers cache those files for up to 7 days. Do not replace it with a fetched JSON file unless the user explicitly agrees to drop direct `file://` offline support.
+Imports inside the app use Node subpath imports: `import { dohas } from '#lib/dohas.js'`. That is SvelteKit 3's replacement for `$lib`; write `.js` even for `.ts` files.
 
 ## 4. Architectural responsibilities
 
-### `index.html`
+### `src/lib/dohas.ts`
 
-- Contains semantic page structure only.
-- References `styles.css`, `data/dohas.js`, and `script.js` (each with a `?v=` cache-busting version).
-- Wraps the page content in a `<main>` landmark and includes a meta description. Do not put the doha count in the description or titles; it goes stale.
-- Carries Open Graph and Twitter tags with absolute URLs to the production domain. The preview image is `images/og-image.jpg` (1200×630). If the production URL changes, update `canonical`, `og:url` and both image URLs.
-- Must not absorb the full CSS, application logic, or doha database back into inline blocks.
+- Is the only canonical doha content store. Pages and components `import` it; nothing is put on `window`.
+- Every record must contain non-empty Hindi doha text and a non-empty English meaning.
+- Every record has a permanent numeric `id` (1–58 today). Ids are shown as "Doha N" and are the `/doha/N` page address. **Never renumber or reuse an id**; a new doha gets the next unused number, and a removed doha's id is retired (its page then returns 404).
+- An optional `source` (e.g. `बीजक — साखी ३`) is shown on the card. Records without one show "Traditionally attributed to Kabir Saheb". Only add a source you can cite. Records that no published collection could be traced to carry `unverified: true` and show "Source unverified" instead (currently ids 23 and 25). Remove the flag and add a `source` once one is found.
+- The current production corpus contains **exactly 58 records**. `src/lib/dohas.test.ts` enforces the count, unique ids, the `।` / `॥` line endings, the "Kabir Saheb" rule and the unverified list. Update the test when the corpus changes on purpose.
+
+### `src/lib/search.ts`, `history.ts`, `explorer.svelte.ts`
+
+- Pure logic lives in `src/lib` and is unit-tested. Components stay thin.
+- `explorer.svelte.ts` holds the current doha, the draw round, the counter and the history in Svelte 5 `$state`. Because it is a module, state survives navigation between pages.
+- History is stored by doha id in `localStorage` under `kabir-saheb.history`. The doha on the card is never listed under "Previously drawn".
+
+### Components and routes
+
+- `+layout.svelte` renders the header, `DohaExplorer` and footer, so they stay mounted while the reader moves between `/` and `/doha/N`. Pages only add head tags through `Seo.svelte`.
+- `DohaExplorer`:
+  - Draw, search results and history items move to `/doha/N` with `goto(…, { reset: false })`. That is a normal history entry (Back works) with no scroll jump; Draw also keeps the viewport fixed.
+  - Only first loads, links and Back/Forward set the card from the URL (`afterNavigate`, `type !== 'goto'`), so a slow navigation can never overwrite a newer draw.
+  - Old `/#doha-N` links redirect to `/doha/N`.
+- **Share** uses `navigator.share` when available. Otherwise it copies the doha, meaning and `/doha/N` link, and shows "Link copied!".
+- `/doha/[id]/+page.ts` lists every id in `entries()` so all 58 pages are prerendered. The doha itself is in the HTML, so search engines and readers without JavaScript see it.
 - `<html lang="en">`. Every element containing Hindi carries `lang="hi"`: the kicker, the doha text, Hindi source labels, search-result first lines and history items. Keep this when adding new Hindi text.
-- Preloads the two above-the-fold fonts (Cormorant Garamond 600 and the Tiro Devanagari subset).
-- Preserve accessible labels, IDs, headings, footer attribution, and mobile viewport configuration.
+- Keep the existing IDs and class names (`#drawBtn`, `#card`, `.doha-text`, `.history-item`…). The CSS and the browser regression tests rely on them.
 
-### `styles.css`
+### `src/app.css`
 
-- Owns the existing OLED-black visual system and responsive layout.
-- Preserve the portrait presentation, doha card, buttons, search results, history section, typography, spacing, and focus/hover states.
-- Starts with `@font-face` rules for the self-hosted fonts in `fonts/` (`font-display: swap`; Tiro Devanagari Hindi is split into Devanagari and Latin subsets with `unicode-range`). Do not switch to Google Fonts or another CDN: the CSP allows only `'self'`, and the site must work offline.
+- Owns the OLED-black visual system and responsive layout, starting with `@font-face` rules for the self-hosted fonts in `static/fonts/` (`font-display: swap`; Tiro Devanagari Hindi is split into Devanagari and Latin subsets with `unicode-range`).
+- Do not switch to Google Fonts or another CDN: the CSP allows only `'self'`.
+- **No inline `<style>` elements or inline event handlers.** Use classes in `app.css`.
 - Avoid visual redesigns unless the user explicitly requests one.
 
-### `data/dohas.js`
+### `vite.config.ts` (CSP)
 
-- Is the only canonical doha content store.
-- Exposes an array through `window.KABIR_DOHAS`.
-- Every record must contain non-empty Hindi doha text and a non-empty English meaning.
-- Every record has a permanent numeric `id` (1–58 today). Ids are shown as "Doha N" and used in links. **Never renumber or reuse an id**; a new doha gets the next unused number, and a removed doha's id is retired.
-- An optional `source` (e.g. `बीजक — साखी ३`) is shown on the card. Records without one show "Traditionally attributed to Kabir Saheb". Only add a source you can cite. Records that no published collection could be traced to carry `unverified: true` and show "Source unverified" instead (currently ids 23 and 25). Remove the flag and add a `source` once one is found.
-- The current production corpus contains **exactly 58 records**.
-- When adding, correcting, or removing a doha, edit this file rather than duplicating content in HTML or `script.js`.
+- SvelteKit writes a Content-Security-Policy `<meta>` tag into every prerendered page (`csp.mode: 'hash'`). It adds the hash of its own start-up script, so `script-src` stays `'self'` with no `'unsafe-inline'`.
+- `style-src-attr 'unsafe-inline'` is allowed only because SvelteKit's route announcer (which tells screen readers about page changes) is hidden with an inline `style` attribute. Style attributes can't run code.
+- If a new external resource is added (fonts, scripts, images from another domain), add it to these directives or it will be blocked.
 
-### `script.js`
+### `static/_headers` (Cloudflare)
 
-- Runs inside an IIFE so none of its variables become globals.
-- Reads the corpus with:
+- HTML keeps Cloudflare's default `Cache-Control: public, max-age=0, must-revalidate`: browsers revalidate with the ETag and get a cheap 304, so new deploys appear immediately.
+- `/_app/immutable/*` (SvelteKit's hashed JS/CSS) and `/fonts/*` are cached for a year as `immutable`; `/images/*` for 30 days. **No more manual `?v=` bumping**: SvelteKit puts a content hash in every JS/CSS file name.
+- Security headers: HSTS, COOP, X-Frame-Options, nosniff, Referrer-Policy, Permissions-Policy, and a header CSP with what a `<meta>` CSP can't express (`frame-ancestors 'none'`).
 
-```js
-const dohas = Array.isArray(window.KABIR_DOHAS) ? window.KABIR_DOHAS : [];
-```
+### `wrangler.jsonc`
 
-  and then removes `window.KABIR_DOHAS`.
-
-- Must fail clearly if the data file does not load.
-- Owns random drawing, bilingual search, history, copy and share buttons, result selection, and `#doha-N` links.
-- **Links:** showing a doha updates the URL hash to `#doha-<id>` (via `window.history.replaceState`), and loading or changing the hash opens that doha. Links use the permanent `id`, never the array position.
-- **Share:** uses `navigator.share` when available. Otherwise it copies the doha, meaning and link, and shows "Link copied!".
-- **History:** stored by doha id in `localStorage` under `kabir-saheb.history`. The doha on the card is never listed under "Previously drawn".
-- The portrait is a normal image file in `images/` (a 264 px wide WebP with a JPEG fallback, shown at 132 px). It used to be embedded in `script.js` as about 500 KB of Base64; do not re-embed it. Relative image paths still work when `index.html` is opened from disk.
-
-### `_headers` (Cloudflare)
-
-- HTML is served with `Cache-Control: public, max-age=0, must-revalidate`, so browsers revalidate with the ETag and get a cheap 304 when nothing changed. New deploys appear immediately.
-- CSS, JS and `data/` are cached for 7 days (busted by the `?v=` version); images for 30 days; `/fonts/*` for a year as `immutable` (a changed font must get a new file name).
-- Also sets security headers (CSP, HSTS, COOP, X-Frame-Options, nosniff, Referrer-Policy). If a new external resource is added (fonts, scripts, images from another domain), update the Content-Security-Policy or it will be blocked.
+- Worker name `kabir-saheb` (must match the dashboard). It serves `build/` as static assets with `not_found_handling: "404-page"` (unknown URLs get `404.html` with a 404 status) and `html_handling: "auto-trailing-slash"` (`/doha/12/` redirects to `/doha/12`).
+- If the production URL changes, update `wrangler.jsonc`, `SITE_URL` in `src/lib/site.ts` and `static/robots.txt`.
 
 ## 5. Non-negotiable functional requirements
 
 Preserve all of the following unless the user explicitly requests a change:
 
 - All 58 Hindi dohas and all 58 English meanings.
-- Random **Draw a Doha** behavior.
+- Random **Draw a Doha** behavior (no repeats until every doha has been shown), with the "doha N of 58 shown this round" counter.
 - Hindi and English keyword search.
-- Separate **Copy Hindi** and **Copy English** buttons.
-- "Previously drawn" lists the last five dohas viewed **before** the one on the card (the current doha is never repeated there). It is saved by doha id in `localStorage` (`kabir-saheb.history`) so it survives a refresh, and falls back to memory if storage is blocked.
+- Separate **Copy Hindi** and **Copy English** buttons, and **Share**.
+- A prerendered page per doha at `/doha/N`, with its own title, description and preview text. Old `/#doha-N` links keep redirecting.
+- "Previously drawn" lists the last five dohas viewed **before** the one on the card. It survives a refresh, and falls back to memory if storage is blocked.
 - Clicking a search result or history item displays that doha.
 - Kabir Saheb portrait and attribution (painting by Sharan, Wikimedia Commons, CC BY-SA 4.0, with the note that adapted images are shared under the same licence).
-- Tagline credit "— Acharya Prashant".
-- Per-doha links (`#doha-N`) and the Share button.
+- Tagline credit "— Acharya Prashant" (same italic Cormorant Garamond as the quote).
 - Doha number and source label on every card.
 - Existing OLED-black responsive design.
-- Direct offline use without installing packages or running a server.
 - No automatic scrolling when drawing a doha.
+
+Opening `index.html` directly from disk is **no longer supported** (dropped with the SvelteKit migration). Preview locally with `npm run dev` or `npm run preview:cloudflare`.
 
 ## 6. Search contract
 
-Search must examine both fields for every record:
+Search lives in `src/lib/search.ts` and must examine both fields for every record:
 
 1. Hindi doha text.
 2. English meaning.
@@ -165,7 +179,7 @@ Search must therefore ignore English capitalization and extra spaces while remai
 - Queries shorter than 2 letters show "Type at least 2 letters to search."
 - English words also match simple plural/verb endings (`word` → `words`, `die` → `died`).
 - For search only, nukta is ignored and chandrabindu is treated as anusvara (`बजार` = `बाज़ार` stem, `माँ` = `मां`).
-- `SEARCH_ALIASES` in `script.js` maps romanised Hindi (`mann` → `मन`, `ram` → `राम`, `shabd` → `शब्द`…) and English themes (`truth`, `death`, `god`, `ego`…) to related words. Add to it when a natural query finds nothing.
+- `SEARCH_ALIASES` in `src/lib/search.ts` maps romanised Hindi (`mann` → `मन`, `ram` → `राम`, `shabd` → `शब्द`…) and English themes (`truth`, `death`, `god`, `ego`…) to related words. Add to it when a natural query finds nothing.
 
 ### Required regression searches
 
@@ -186,7 +200,7 @@ Search must therefore ignore English capitalization and extra spaces while remai
 | `a` | No results, message asks for at least 2 letters |
 | `mann`, `guru`, `love`, `ego`, `truth`, `death` | At least 1 result each (the placeholder examples must all work) |
 
-Also test uppercase English and queries containing leading, trailing, and repeated spaces.
+All of these, plus uppercase and extra-space variants, are automated in `src/lib/search.test.ts` (`npm test`). Add a row there whenever you add one here.
 
 ## 7. Required latest dohas
 
@@ -306,52 +320,53 @@ Do not push feature work directly to `main`. Do not create a new repository or c
 
 ## 9. Validation checklist
 
-Run checks proportional to the change. A normal content or behavior change should include all of the following:
+Run checks proportional to the change. A normal content or behavior change should include all of the following.
 
-### Static validation
+### Automated (must all pass before opening a PR)
 
-- `index.html` references `styles.css`.
-- `index.html` loads `data/dohas.js` before `script.js`.
-- No accidental reintroduction of large inline CSS or application JavaScript.
-- `node --check data/dohas.js` succeeds.
-- `node --check script.js` succeeds.
-- `window.KABIR_DOHAS` contains exactly 58 complete records.
-- No record has blank Hindi or English content.
-- CSS braces and syntax remain balanced.
+```bash
+npm install
+npm test          # Vitest: corpus integrity, regression searches, history/draw
+npm run check     # svelte-check: 0 errors, 0 warnings
+npm run build     # prerenders 61 HTML pages + sitemap into build/
+```
 
-### Functional validation
+### In a browser
 
-- Page loads without console errors.
-- `typeof window.KABIR_DOHAS` is `"undefined"` after load.
-- Lighthouse Accessibility, Best Practices and SEO show no failed audits.
-- Portrait appears.
-- **Draw a Doha** works repeatedly.
-- Copy Hindi and Copy English work independently.
-- History shows the last five previous dohas, never the current one, reopens them on click, and survives a page refresh.
-- Empty search is handled gracefully.
-- Hindi and English searches work.
-- Search ignores capitalization and extra whitespace.
-- All the regression searches in section 6 return the expected results.
-- `#doha-N` opens that doha, including from `file://`. Share copies the doha and link when `navigator.share` is unavailable.
+Run `npm run preview:cloudflare`. It builds and serves `build/` through Cloudflare's own runtime (`wrangler dev`), so `_headers`, 404 handling and redirects match production. Then check:
+
+- No console errors, and no Content-Security-Policy violations.
+- Portrait appears and fonts load.
+- **Draw a Doha** works repeatedly. The URL moves to `/doha/N`, the title follows, the viewport doesn't jump, and the counter reads "doha N of 58".
+- **Back** returns to the previous doha.
+- Copy Hindi, Copy English and Share work. Share copies a `/doha/N` link when `navigator.share` is unavailable.
 - Copy and Share buttons appear when a doha is opened from search, history or a link, not only after Draw.
-- The `?v=` version was bumped if `styles.css`, `script.js` or `data/dohas.js` changed.
+- History shows the last five previous dohas, never the current one, and survives a refresh.
+- `/doha/N` opened directly shows that doha, including with JavaScript disabled.
+- `/#doha-12` redirects to `/doha/12`. `/doha/999` returns 404 with the notice.
 - Layout remains usable on narrow mobile screens and desktop widths.
+- Lighthouse Accessibility, Best Practices and SEO show no failed audits.
 
 ### Post-deployment smoke test
 
 After the user merges the pull request and Cloudflare deploys `main`:
 
-- Open the production URL in a logged-out/private browser session.
-- Confirm it does not redirect to Cloudflare Access login.
-- Repeat the mandatory search tests against production.
-- Confirm the draw, copy and share controls still work.
-- Check the response headers in DevTools (Cache-Control, CSP, HSTS), and that `/README.md` returns 404.
-- Paste the URL into WhatsApp and check that the preview shows the title and picture.
+- Open the production URL in a logged-out/private browser session. Confirm it does not redirect to Cloudflare Access login.
+- Repeat the search, draw, copy and share checks against production.
+- Open `/doha/31` directly and check its title.
+- In DevTools, check the response headers: Cache-Control, CSP, HSTS; `/_app/immutable/*` cached for a year.
+- Check that `/README.md` returns 404.
+- Paste a `/doha/N` link into WhatsApp and check that the preview shows that doha's title and text.
 
 ## 10. Cloudflare deployment and access
 
-- The canonical public site runs at `kabir-saheb.sant-vani.workers.dev`.
-- Merges into `main` should trigger the production deployment automatically.
+- The canonical public site runs at `kabir-saheb.sant-vani.workers.dev`, served by the Worker `kabir-saheb`.
+- **Workers Builds settings** (Cloudflare dashboard → Workers & Pages → `kabir-saheb` → Settings → Build):
+  - Build command: `npm run build`
+  - Deploy command: `npx wrangler deploy`
+  - Root directory: `/`
+- `wrangler deploy` reads `wrangler.jsonc` and uploads `build/`.
+- Merges into `main` trigger the production build and deployment automatically.
 - Keep **production traffic public** because the website is intended for public reading.
 - If preview deployments are used, restrict **previews only** to the owner's Cloudflare account or exact authorized email.
 - Do not select an Access policy that protects **all production traffic**.
@@ -360,9 +375,11 @@ After the user merges the pull request and Cloudflare deploys `main`:
 
 If a deployment succeeds but the public URL shows a Cloudflare login screen, Cloudflare Access is protecting production. Remove that production rule or make this Worker public, then retest as a logged-out visitor.
 
+If a build fails, the previous deployment stays live. Check the build log in the dashboard.
+
 ## 11. Security and privacy rules
 
-- This is a client-side static website. Anything shipped in HTML, CSS, JavaScript, or the data file is publicly downloadable.
+- This is a client-side static website. Anything shipped in HTML, CSS or JavaScript, including the doha data bundled from `src/lib/dohas.ts`, is publicly downloadable.
 - Never add passwords, API tokens, private keys, personal data, or other secrets to the repository.
 - Do not treat repository privacy as protection for secrets included in deployed assets.
 - Keep external links using `rel="noopener noreferrer"` when opening a new tab.
@@ -416,6 +433,15 @@ When the user requests new or corrected verses:
 - **Fonts and language:** self-hosted fonts, `lang="en"` page with Hindi marked `lang="hi"`.
 - **History:** "Previously drawn" no longer repeats the current doha and survives a refresh.
 
+**7 November 2026, SvelteKit migration (PRs #27, #29, #30 and the deploy PR):**
+
+- **Stack:** moved to SvelteKit 3 (Svelte 5, TypeScript), fully prerendered with adapter-static and served by Cloudflare from `build/`.
+- **Data:** the doha data became a typed module (`src/lib/dohas.ts`); the `window` global is gone for good.
+- **Code:** search and history logic moved into `src/lib`, with 32 Vitest tests. The UI was split into Svelte components with the same look and behaviour.
+- **Per-doha pages:** `/doha/1` … `/doha/58` are prerendered with their own titles, descriptions and preview text. The URL follows the reader, Back works, Share links to `/doha/N`, and old `#doha-N` links redirect.
+- **Site files:** 404 page, `sitemap.xml` and `robots.txt` added.
+- **Security and caching:** strict CSP via SvelteKit `<meta>` tags (hash mode), hashed JS/CSS cached for a year, and no more manual `?v=` bumps.
+
 ## 14. Instructions for future AI collaborators
 
 When asked to update this project:
@@ -424,9 +450,9 @@ When asked to update this project:
 - Inspect the current files before proposing or making changes.
 - Use GitHub branches and pull requests as the default delivery workflow.
 - Preserve the existing design and behavior unless the requested change requires otherwise.
-- Keep content in `data/dohas.js`, styles in `styles.css`, structure in `index.html`, and behavior in `script.js`.
-- Call him "Kabir Saheb" in all English text you add.
-- Validate locally before opening a pull request.
+- Keep content in `src/lib/dohas.ts`, logic in `src/lib/*.ts` (with tests), UI in `src/lib/components/`, page head tags in `src/routes/`, and styles in `src/app.css`.
+- This is **SvelteKit 3**, not 2: config is in `vite.config.ts` (there is no `svelte.config.js`), imports use `#lib/…` (not `$lib`), and `goto` takes `{ replace, reset, shallow }`.
+- Run `npm test`, `npm run check` and `npm run build` before opening a pull request, and test in `npm run preview:cloudflare`.
 - Report exact tests and results; do not claim deployment until the live URL has been checked.
+- Call him "Kabir Saheb" in all English text you add.
 - Ask for clarification only when a choice would materially change content, design, access, or repository history.
-

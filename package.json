@@ -12,7 +12,9 @@
 		"preview": "vite preview",
 		"prepare": "svelte-kit sync || echo ''",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
-		"test": "vitest run"
+		"test": "vitest run",
+		"preview:cloudflare": "npm run build && wrangler dev",
+		"deploy": "npm run build && wrangler deploy"
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-static": "^4.0.1",
@@ -22,6 +24,7 @@
 		"svelte-check": "^4.7.8",
 		"typescript": "^6.0.3",
 		"vite": "^8.3.6",
-		"vitest": "^5.1.0"
+		"vitest": "^5.1.0",
+		"wrangler": "^4.158.0"
 	}
 }
