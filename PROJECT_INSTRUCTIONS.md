@@ -17,7 +17,7 @@ GitHub is now the source of truth. Make future code and content changes in the G
 
 ## 2. Website description
 
-This is a contemplative, responsive static website presenting 58 Hindi dohas traditionally attributed to Kabir Saheb, each paired with an original English plain-sense meaning. Visitors can:
+This is a contemplative, responsive static website presenting 184 Hindi dohas traditionally attributed to Kabir Saheb, each paired with an original English plain-sense meaning. Visitors can:
 
 - draw a random doha;
 - search in Hindi, romanised Hindi or English;
@@ -83,8 +83,8 @@ Both files, and `styles.css`, are referenced with a `?v=YYYYMMDD.N` version stri
 - Exposes an array through `window.KABIR_DOHAS`.
 - Every record must contain non-empty Hindi doha text and a non-empty English meaning.
 - Every record has a permanent numeric `id` (1–58 today). Ids are shown as "Doha N" and used in links. **Never renumber or reuse an id**; a new doha gets the next unused number, and a removed doha's id is retired.
-- An optional `source` (e.g. `बीजक — साखी ३`) is shown on the card. Records without one show "Traditionally attributed to Kabir Saheb". Only add a source you can cite. Records that no published collection could be traced to carry `unverified: true` and show "Source unverified" instead (currently ids 23 and 25). Remove the flag and add a `source` once one is found.
-- The current production corpus contains **exactly 58 records**.
+- An optional `source` (e.g. `बीजक — साखी ३`) is shown on the card. Records without one show "Traditionally attributed to Kabir Saheb". Only add a source you can cite. Records that no published collection could be traced to carry `unverified: true` and show "Source unverified" instead (currently ids 23, 25 and 59–184). Remove the flag and add a `source` once one is found.
+- The current production corpus contains **exactly 184 records**.
 - When adding, correcting, or removing a doha, edit this file rather than duplicating content in HTML or `script.js`.
 
 ### `script.js`
@@ -115,7 +115,7 @@ const dohas = Array.isArray(window.KABIR_DOHAS) ? window.KABIR_DOHAS : [];
 
 Preserve all of the following unless the user explicitly requests a change:
 
-- All 58 Hindi dohas and all 58 English meanings.
+- All 184 Hindi dohas and all 184 English meanings.
 - Random **Draw a Doha** behavior.
 - Hindi and English keyword search.
 - Separate **Copy Hindi** and **Copy English** buttons.
@@ -173,7 +173,7 @@ Search must therefore ignore English capitalization and extra spaces while remai
 | --- | --- |
 | `काली चादर` | 1 result: the “गुरु बेचारा…” doha |
 | `गुरु बेचारा` | 1 result: the “गुरु बेचारा…” doha |
-| `diamond` | 2 matching dohas in the current corpus |
+| `diamond` | 4 matching dohas in the current corpus |
 | `marketplace` | 3 matching dohas in the current corpus |
 | `चौथे राम` | 1 result: the “चार राम…” doha |
 | `four forms of ram` | 1 result: the “चार राम…” doha |
@@ -182,7 +182,7 @@ Search must therefore ignore English capitalization and extra spaces while remai
 | `प्रभुता चेरी` | 1 result: the “प्रभुता को…” doha |
 | `power itself becomes` | 1 result: the “प्रभुता को…” doha |
 | `घट घट राम` | 1 result: the “कस्तूरी कुण्डल बसे…” doha |
-| `ram` | 3 results; must not include “माटी कहे कुम्हार…” (“trample”) |
+| `ram` | 19 results; must not include “माटी कहे कुम्हार…” (“trample”) |
 | `a` | No results, message asks for at least 2 letters |
 | `mann`, `guru`, `love`, `ego`, `truth`, `death` | At least 1 result each (the placeholder examples must all work) |
 
@@ -190,7 +190,7 @@ Also test uppercase English and queries containing leading, trailing, and repeat
 
 ## 7. Required latest dohas
 
-These records must remain present in the 58-doha corpus.
+These records must remain present in the 184-doha corpus.
 
 ### Doha 54
 
@@ -315,7 +315,7 @@ Run checks proportional to the change. A normal content or behavior change shoul
 - No accidental reintroduction of large inline CSS or application JavaScript.
 - `node --check data/dohas.js` succeeds.
 - `node --check script.js` succeeds.
-- `window.KABIR_DOHAS` contains exactly 58 complete records.
+- `window.KABIR_DOHAS` contains exactly 184 complete records.
 - No record has blank Hindi or English content.
 - CSS braces and syntax remain balanced.
 
@@ -396,6 +396,7 @@ When the user requests new or corrected verses:
 - Doha 56, “चार राम हैं जगत में…”, added with an original English plain-sense translation.
 - Doha 57, “ऐसी वाणी बोलिए…”, added with an original English plain-sense translation.
 - Doha 58, “प्रभुता को सब कोई भजै…”, added with an original English plain-sense translation.
+- 126 additional discovery verses from BhaktiMala added as ids 59–184 with original literal English translations; all are marked `unverified: true` pending confirmation from published Kabir sources.
 
 **7 November 2026 (PRs #9–#23):**
 
@@ -429,4 +430,5 @@ When asked to update this project:
 - Validate locally before opening a pull request.
 - Report exact tests and results; do not claim deployment until the live URL has been checked.
 - Ask for clarification only when a choice would materially change content, design, access, or repository history.
+
 
