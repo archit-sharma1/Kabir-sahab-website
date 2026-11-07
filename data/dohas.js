@@ -111,6 +111,7 @@ window.KABIR_DOHAS = [
     },
     {
       id: 23,
+      unverified: true,
       text: "आपुहि गावे आपुहि सुने, आपहि करता टीक।\nकहे कबीर कुछ हाथ न आवे, ज्यों मथे रीत ही रीत॥",
       meaning: "One who sings his own praise, hears it himself, and rates himself — such churning is empty, says Kabir, and yields nothing."
     },
@@ -121,6 +122,7 @@ window.KABIR_DOHAS = [
     },
     {
       id: 25,
+      unverified: true,
       text: "बुरे बख्त पर मीत सब, तज देते हैं साथ।\nकबिरा तेहि दिन जानिये, जब देवे परमेश्वर हाथ॥",
       meaning: "In hard times even friends may leave one's side. Kabir says, know that day for what it is — the day when the Supreme alone holds your hand."
     },
@@ -163,7 +165,7 @@ window.KABIR_DOHAS = [
     },
     {
       id: 33,
-      text: "शब्द शब्द बहु अंतर है, सार शब्द मथि लीजे।\nकह कबीर जेहि सार शब्द नहि, धिग जीवन तेहि दीजे॥",
+      text: "शब्द शब्द बहु अंतरा, सार शब्द मथि लीजे।\nकह कबीर जेहि सार शब्द नहि, धिग जीवन तेहि दीजे॥",
       meaning: "There is a vast difference between one 'word' and another; churn them and take the essential Word. Kabir says: a life that has not found that essential Word is a life gone to waste.",
       source: "बीजक — साखी ५"
     },

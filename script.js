@@ -62,12 +62,14 @@
   // Each doha has a permanent `id` in data/dohas.js; it never changes, even
   // if dohas are removed or reordered, so numbers and links stay stable.
   function sourceLabel(d){
+    if (d.unverified) return 'Source unverified';
     return d.source || 'Traditionally attributed to Kabir';
   }
 
   function metaLine(d){
     return '<p class="doha-meta"><span class="doha-number">Doha ' + d.id + '</span>' +
-      '<span class="doha-source"' + (d.source ? ' lang="hi"' : '') + '>' + sourceLabel(d) + '</span></p>';
+      '<span class="doha-source' + (d.unverified ? ' unverified' : '') + '"' + (d.source && !d.unverified ? ' lang="hi"' : '') +
+      (d.unverified ? ' title="No published source has been found for this doha yet."' : '') + '>' + sourceLabel(d) + '</span></p>';
   }
 
   function showDoha(idx){
