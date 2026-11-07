@@ -1,0 +1,33 @@
+# Cloudflare Workers static-assets headers.
+# This file is read by Cloudflare at deploy time and is not served as a page.
+# Docs: https://developers.cloudflare.com/workers/static-assets/headers/
+
+# Security headers for every response.
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: strict-origin-when-cross-origin
+  Strict-Transport-Security: max-age=31536000; includeSubDomains
+  Cross-Origin-Opener-Policy: same-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
+  Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'; frame-ancestors 'none'
+
+# HTML: cached by the browser, but revalidated on each visit with the ETag
+# (a cheap 304 when nothing changed), so a new deploy shows up immediately.
+/
+  Cache-Control: public, max-age=0, must-revalidate
+/index.html
+  Cache-Control: public, max-age=0, must-revalidate
+
+# CSS and JS are requested with a ?v= version in index.html.
+# Bump that version whenever styles.css, script.js or data/dohas.js changes.
+/styles.css
+  Cache-Control: public, max-age=604800, stale-while-revalidate=86400
+/script.js
+  Cache-Control: public, max-age=604800, stale-while-revalidate=86400
+/data/*
+  Cache-Control: public, max-age=604800, stale-while-revalidate=86400
+
+# Portrait images rarely change.
+/images/*
+  Cache-Control: public, max-age=2592000, stale-while-revalidate=604800
