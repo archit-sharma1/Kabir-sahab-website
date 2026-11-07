@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { dohas } from './dohas.js';
 
 describe('doha corpus', () => {
-	it('has 58 records', () => expect(dohas).toHaveLength(58));
+	it('has 184 records', () => expect(dohas).toHaveLength(184));
 
 	it('ids are unique positive integers', () => {
 		const ids = dohas.map((d) => d.id);
@@ -17,12 +17,19 @@ describe('doha corpus', () => {
 		}
 	});
 
-	it('every doha has two lines ending in । and ॥', () => {
-		for (const d of dohas) {
+	it('dohas 1–58 have two lines ending in । and ॥', () => {
+		for (const d of dohas.filter((x) => x.id <= 58)) {
 			const lines = d.text.split('\n');
 			expect(lines, `doha ${d.id}`).toHaveLength(2);
 			expect(lines[0].endsWith('।'), `doha ${d.id} line 1`).toBe(true);
 			expect(lines[1].endsWith('॥'), `doha ${d.id} line 2`).toBe(true);
+		}
+	});
+
+	it('every verse has at least two lines and ends with ॥', () => {
+		for (const d of dohas) {
+			expect(d.text.split('\n').length, `doha ${d.id}`).toBeGreaterThanOrEqual(2);
+			expect(d.text.endsWith('॥'), `doha ${d.id}`).toBe(true);
 		}
 	});
 
@@ -32,7 +39,12 @@ describe('doha corpus', () => {
 		}
 	});
 
-	it('only dohas 23 and 25 are marked unverified', () => {
-		expect(dohas.filter((d) => d.unverified).map((d) => d.id)).toEqual([23, 25]);
+	it('unverified: 23, 25 and the BhaktiMala additions 59–184', () => {
+		const expected = [23, 25, ...Array.from({ length: 126 }, (_, i) => 59 + i)];
+		expect(dohas.filter((d) => d.unverified).map((d) => d.id)).toEqual(expected);
+	});
+
+	it('no record is both unverified and sourced', () => {
+		expect(dohas.filter((d) => d.unverified && d.source)).toEqual([]);
 	});
 });

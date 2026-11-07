@@ -72,17 +72,17 @@
 	async function share() {
 		const d = shown;
 		if (!d) return;
-		const url = `${location.origin}/doha/${d.id}`;
-		const text = shareText(d);
+		const text = shareText(d, `${location.origin}/doha/${d.id}`);
 		if (navigator.share) {
 			try {
-				await navigator.share({ title: `Kabir Saheb — Doha ${d.id}`, text, url });
+				// The link is inside `text` (not a separate `url`) so every app gets the same layout.
+				await navigator.share({ title: `Kabir Saheb — Doha ${d.id}`, text });
 				return;
 			} catch (err) {
 				if ((err as Error)?.name === 'AbortError') return;
 			}
 		}
-		await copyText(`${text}\n${url}`);
+		await copyText(text);
 		flash('share', 'Link copied!');
 	}
 </script>
