@@ -104,7 +104,7 @@ Preserve all of the following unless the user explicitly requests a change:
 - Random **Draw a Doha** behavior.
 - Hindi and English keyword search.
 - Separate **Copy Hindi** and **Copy English** buttons.
-- Recently drawn history, retaining the last five dohas.
+- "Previously drawn" lists the last five dohas viewed **before** the one on the card (the current doha is never repeated there). It is saved by doha id in `localStorage` (`kabir-saheb.history`) so it survives a refresh, and falls back to memory if storage is blocked.
 - Clicking a search result or history item displays that doha.
 - Kabir Saheb portrait and attribution.
 - Existing OLED-black responsive design.
@@ -298,7 +298,7 @@ Run checks proportional to the change. A normal content or behavior change shoul
 - Portrait appears.
 - **Draw a Doha** works repeatedly.
 - Copy Hindi and Copy English work independently.
-- History retains and reopens the last five drawn dohas.
+- History shows the last five previous dohas, never the current one, reopens them on click, and survives a page refresh.
 - Empty search is handled gracefully.
 - Hindi and English searches work.
 - Search ignores capitalization and extra whitespace.

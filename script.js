@@ -21,12 +21,33 @@
   const historyList = document.getElementById('historyList');
   const historyEmpty = document.getElementById('historyEmpty');
 
-  // In-memory only: this history is intentionally NOT saved to disk/storage,
-  // so it starts fresh every time the page is opened or refreshed.
+  // Recently viewed dohas, newest first, including the one on the card.
+  // Saved by doha id in localStorage so the list survives a refresh; if
+  // storage is unavailable (private mode, file:// quirks) it stays in memory.
+  const HISTORY_KEY = 'kabir-saheb.history';
+  const HISTORY_SIZE = 5;
   let seenIndices = [];
-  let history = [];       // holds up to 5 most-recent doha indices, newest first
+  let recent = loadHistory();
   let currentIndex = null;
-  let drawCount = 0;
+
+  function loadHistory(){
+    try {
+      const ids = JSON.parse(localStorage.getItem(HISTORY_KEY) || '[]');
+      if (!Array.isArray(ids)) return [];
+      return ids
+        .map(id => dohas.findIndex(d => d.id === id))
+        .filter(idx => idx !== -1)
+        .slice(0, HISTORY_SIZE + 1);
+    } catch (e) {
+      return [];
+    }
+  }
+
+  function saveHistory(){
+    try {
+      localStorage.setItem(HISTORY_KEY, JSON.stringify(recent.map(idx => dohas[idx].id)));
+    } catch (e) {}
+  }
 
   function pickIndex(){
     if (seenIndices.length >= dohas.length) seenIndices = [];
@@ -88,28 +109,32 @@
   }
 
   function addToHistory(idx){
-    // move to front if already present, else unshift and cap at 5
-    history = history.filter(i => i !== idx);
-    history.unshift(idx);
-    if (history.length > 5) history = history.slice(0, 5);
+    // Move to front if already present. Keep one extra slot because the
+    // doha on the card is not listed under "previously drawn".
+    recent = recent.filter(i => i !== idx);
+    recent.unshift(idx);
+    if (recent.length > HISTORY_SIZE + 1) recent = recent.slice(0, HISTORY_SIZE + 1);
+    saveHistory();
   }
 
   function renderHistory(){
-    historySection.hidden = drawCount < 2;
-    if (drawCount < 2 || history.length === 0){
-      historyList.innerHTML = '';
+    const previous = recent.filter(idx => idx !== currentIndex).slice(0, HISTORY_SIZE);
+    historySection.hidden = previous.length === 0;
+    historyList.innerHTML = '';
+    if (previous.length === 0){
       historyList.appendChild(historyEmpty);
       return;
     }
-    historyList.innerHTML = '';
-    history.forEach(idx => {
+    previous.forEach(idx => {
       const item = document.createElement('button');
       item.type = 'button';
-      item.className = 'history-item' + (idx === currentIndex ? ' active' : '');
+      item.className = 'history-item';
       item.lang = 'hi';
       item.textContent = firstLine(dohas[idx].text);
       item.addEventListener('click', () => {
+        addToHistory(idx);
         showDoha(idx);
+        counter.textContent = '';
       });
       historyList.appendChild(item);
     });
@@ -121,7 +146,6 @@
     const scrollY = window.scrollY;
     const idx = pickIndex();
     addToHistory(idx);
-    drawCount += 1;
     showDoha(idx);
     counter.textContent = 'doha ' + (seenIndices.length) + ' of ' + dohas.length + ' shown this round';
     window.scrollTo(scrollX, scrollY);
@@ -306,4 +330,6 @@
 
   window.addEventListener('hashchange', openFromHash);
   openFromHash();
+
+  renderHistory();
 })();
