@@ -137,6 +137,15 @@ function normalizeSearchText(value) {
 
 Search must therefore ignore English capitalization and extra spaces while remaining reliable for Devanagari text.
 
+### Whole-word matching
+
+- Search matches **whole words**, not letters inside words: `ram` finds `राम` and `Ram` but not `trample`. Words are split on anything that is not a letter, combining mark (matra) or digit, so Devanagari words tokenize correctly.
+- Every query word must match somewhere in the doha or its meaning, in any order. Common English stop words (`of`, `the`, `a`…) are ignored when other words are present.
+- Queries shorter than 2 letters show "Type at least 2 letters to search."
+- English words also match simple plural/verb endings (`word` → `words`, `die` → `died`).
+- For search only, nukta is ignored and chandrabindu is treated as anusvara (`बजार` = `बाज़ार` stem, `माँ` = `मां`).
+- `SEARCH_ALIASES` in `script.js` maps romanised Hindi (`mann` → `मन`, `ram` → `राम`, `shabd` → `शब्द`…) and English themes (`truth`, `death`, `god`, `ego`…) to related words. Add to it when a natural query finds nothing.
+
 ### Required regression searches
 
 | Query | Expected result |
@@ -151,6 +160,10 @@ Search must therefore ignore English capitalization and extra spaces while remai
 | `speak such words` | 1 result: the “ऐसी वाणी…” doha |
 | `प्रभुता चेरी` | 1 result: the “प्रभुता को…” doha |
 | `power itself becomes` | 1 result: the “प्रभुता को…” doha |
+| `घट घट राम` | 1 result: the “कस्तूरी कुण्डल बसे…” doha |
+| `ram` | 3 results; must not include “माटी कहे कुम्हार…” (“trample”) |
+| `a` | No results, message asks for at least 2 letters |
+| `mann`, `guru`, `love`, `ego`, `truth`, `death` | At least 1 result each (the placeholder examples must all work) |
 
 Also test uppercase English and queries containing leading, trailing, and repeated spaces.
 

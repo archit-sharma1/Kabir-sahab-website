@@ -136,6 +136,64 @@
       .trim();
   }
 
+  // Search matches whole words, not letters inside words, so "ram" finds
+  // "राम" and "Ram" but not "trample". Every query word must match (in any
+  // order). Romanised Hindi and a few English themes are expanded below so
+  // common queries like "mann", "truth" or "death" find the right dohas.
+  const MIN_QUERY_LENGTH = 2;
+  const STOP_WORDS = new Set(['a', 'an', 'the', 'of', 'to', 'in', 'is', 'and', 'or', 'on', 'at', 'by', 'for', 'be']);
+  const SEARCH_ALIASES = {
+    // Romanised Hindi → Devanagari
+    man: ['मन', 'मना', 'mind'], mann: ['मन', 'मना', 'mind'], mana: ['मन', 'मना', 'mind'], mun: ['मन', 'mind'],
+    ram: ['राम'], raam: ['राम'], rama: ['राम'],
+    guru: ['गुरु'], hari: ['हरि'], prabhu: ['प्रभु'], govind: ['गोविन्द'],
+    sai: ['साईं'], sain: ['साईं'], saain: ['साईं'], sayeen: ['साईं'],
+    kabir: ['कबीर', 'कबीरा', 'कबिरा'], kabira: ['कबीर', 'कबीरा', 'कबिरा'],
+    prem: ['प्रेम', 'love'], pyar: ['प्रेम', 'love'],
+    shabd: ['शब्द', 'शब्दहि', 'शब्दे', 'word'], shabad: ['शब्द', 'शब्दहि', 'शब्दे', 'word'], sabad: ['शब्द', 'शब्दहि', 'शब्दे', 'word'],
+    heera: ['हीरा', 'diamond'], hira: ['हीरा', 'diamond'], hansa: ['हंसा', 'swan'], hans: ['हंसा', 'swan'],
+    chandan: ['चंदन', 'sandalwood'], paani: ['पानी', 'water'], pani: ['पानी', 'water'],
+    jeev: ['जीव', 'जीवत'], jiv: ['जीव', 'जीवत'], kaal: ['काल'], kal: ['काल'], aaj: ['आज'],
+    dukh: ['दुःख', 'sorrow'], sukh: ['सुख', 'joy'], nindak: ['निंदक', 'critic'], aapa: ['आपा', 'ego'],
+    // English themes → related words used in the dohas and meanings
+    mind: ['मन', 'मना'], love: ['प्रेम'], word: ['शब्द', 'शब्दहि', 'शब्दे'],
+    ego: ['आपा', 'pride'], pride: ['ego', 'आपा'],
+    truth: ['true', 'truly', 'real', 'reality', 'essence', 'सत्य', 'सांच', 'सार'],
+    death: ['die', 'died', 'dies', 'dying', 'mortal', 'forever', 'vanish', 'मुआ', 'मुए', 'मरि'],
+    die: ['death', 'died', 'dies', 'dying', 'मुआ', 'मुए'],
+    god: ['lord', 'divine', 'हरि', 'राम', 'साईं', 'प्रभु', 'गोविन्द', 'परमेश्वर', 'भगवान'],
+    lord: ['god', 'divine', 'हरि', 'राम', 'साईं', 'प्रभु', 'गोविन्द', 'परमेश्वर', 'भगवान'],
+    diamond: ['हीरा', 'हीरे'], swan: ['हंसा'], critic: ['निंदक'], teacher: ['गुरु', 'guru'],
+  };
+  const ENGLISH_SUFFIXES = ['s', 'es', 'ed', 'd', 'ing', "'s"];
+
+  // Extra folding for search only: drop nukta and treat chandrabindu as
+  // anusvara, so बाजार/बाज़ार and माँ/मां match each other.
+  function foldForSearch(value){
+    return normalizeSearchText(value)
+      .normalize('NFD')
+      .replace(/़/g, '')
+      .replace(/ँ/g, 'ं')
+      .normalize('NFC');
+  }
+
+  function tokenize(value){
+    return foldForSearch(value).split(/[^\p{L}\p{M}\p{N}']+/u).filter(Boolean);
+  }
+
+  const searchIndex = dohas.map(d => new Set(tokenize(d.text + ' ' + (d.meaning || '') + ' ' + (d.source || ''))));
+
+  function wordMatches(words, term){
+    if (words.has(term)) return true;
+    if (!/^[a-z']+$/.test(term)) return false;
+    return ENGLISH_SUFFIXES.some(suffix => words.has(term + suffix));
+  }
+
+  function termAlternatives(term){
+    const aliases = (SEARCH_ALIASES[term] || []).map(foldForSearch);
+    return [term].concat(aliases);
+  }
+
   function runSearch(){
     const query = normalizeSearchText(searchInput.value);
     searchResults.innerHTML = '';
@@ -143,12 +201,17 @@
       searchStatus.textContent = '';
       return;
     }
+    const allTerms = tokenize(query);
+    const meaningful = allTerms.filter(t => !STOP_WORDS.has(t));
+    const terms = (meaningful.length ? meaningful : allTerms).filter(t => t.length >= MIN_QUERY_LENGTH);
+    if (terms.length === 0){
+      searchStatus.textContent = 'Type at least ' + MIN_QUERY_LENGTH + ' letters to search.';
+      return;
+    }
     const matches = [];
-    dohas.forEach((d, idx) => {
-      const searchableText = normalizeSearchText(d.text + ' ' + (d.meaning || ''));
-      if (searchableText.includes(query)){
-        matches.push(idx);
-      }
+    searchIndex.forEach((words, idx) => {
+      const allFound = terms.every(term => termAlternatives(term).some(alt => wordMatches(words, alt)));
+      if (allFound) matches.push(idx);
     });
     if (matches.length === 0){
       searchStatus.textContent = 'No doha found for "' + searchInput.value.trim() + '".';
