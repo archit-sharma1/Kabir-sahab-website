@@ -152,7 +152,7 @@ window.KABIR_DOHAS = [
     {
       id: 31,
       text: "शब्द हमारा आदि का, शब्दहि पैठा जीव।\nफूल रहन की टोकनी, घोरा खाया घीव॥",
-      meaning: "Our Word is primordial; the living being has entered into that Word. Yet the basket meant to preserve the flower has consumed the very ghee meant to sustain it. — a warning that the means can swallow the essence when the primal Word is forgotten.",
+      meaning: "Our Word is from the very beginning, and the living being has entered into the Word. But ghee poured into a flower basket cannot be held — it runs out, and the horse eats it: a teaching given to an unfit vessel is lost.",
       source: "बीजक — साखी ३"
     },
     {
