@@ -15,6 +15,7 @@
   const btn = document.getElementById('drawBtn');
   const copyHindiBtn = document.getElementById('copyHindiBtn');
   const copyMeaningBtn = document.getElementById('copyMeaningBtn');
+  const shareBtn = document.getElementById('shareBtn');
   const counter = document.getElementById('counter');
   const historySection = document.getElementById('historySection');
   const historyList = document.getElementById('historyList');
@@ -55,7 +56,31 @@
       metaLine(d) +
       '<p class="doha-text">' + d.text + '</p>' +
       '<p class="meaning">' + d.meaning + '</p>';
+    copyHindiBtn.hidden = false;
+    copyMeaningBtn.hidden = false;
+    shareBtn.hidden = false;
+    setDohaHash(d.id);
     renderHistory();
+  }
+
+  // Per-doha links use the URL hash (#doha-12), so they also work when the
+  // page is opened from disk and need no server routes.
+  const HASH_PREFIX = '#doha-';
+
+  function dohaLink(d){
+    return location.href.split('#')[0] + HASH_PREFIX + d.id;
+  }
+
+  function setDohaHash(id){
+    if (location.hash === HASH_PREFIX + id) return;
+    try { window.history.replaceState(null, '', HASH_PREFIX + id); } catch (e) {}
+  }
+
+  function indexFromHash(){
+    const m = /^#doha-(\d+)$/.exec(location.hash);
+    if (!m) return -1;
+    const id = Number(m[1]);
+    return dohas.findIndex(d => d.id === id);
   }
 
   function firstLine(text){
@@ -97,14 +122,12 @@
     addToHistory(idx);
     drawCount += 1;
     showDoha(idx);
-    copyHindiBtn.hidden = false;
-    copyMeaningBtn.hidden = false;
     counter.textContent = 'doha ' + (seenIndices.length) + ' of ' + dohas.length + ' shown this round';
     window.scrollTo(scrollX, scrollY);
     requestAnimationFrame(() => window.scrollTo(scrollX, scrollY));
   }
 
-  async function copyText(text, button){
+  async function copyText(text, button, doneLabel){
     try {
       await navigator.clipboard.writeText(text);
     } catch (err) {
@@ -118,7 +141,7 @@
       document.body.removeChild(ta);
     }
     const original = button.textContent;
-    button.textContent = 'Copied!';
+    button.textContent = doneLabel || 'Copied!';
     setTimeout(() => { button.textContent = original; }, 1500);
   }
 
@@ -253,4 +276,33 @@
   btn.addEventListener('click', renderDoha);
   copyHindiBtn.addEventListener('click', copyHindi);
   copyMeaningBtn.addEventListener('click', copyMeaning);
+
+  async function shareDoha(){
+    if (currentIndex === null) return;
+    const d = dohas[currentIndex];
+    const url = dohaLink(d);
+    const text = d.text + '\n\n' + d.meaning + '\n— Kabir Saheb, Doha ' + d.id;
+    if (navigator.share){
+      try {
+        await navigator.share({ title: 'Kabir Saheb — Doha ' + d.id, text: text, url: url });
+        return;
+      } catch (err) {
+        if (err && err.name === 'AbortError') return;
+      }
+    }
+    copyText(text + '\n' + url, shareBtn, 'Link copied!');
+  }
+
+  shareBtn.addEventListener('click', shareDoha);
+
+  function openFromHash(){
+    const idx = indexFromHash();
+    if (idx === -1 || idx === currentIndex) return;
+    addToHistory(idx);
+    showDoha(idx);
+    counter.textContent = '';
+  }
+
+  window.addEventListener('hashchange', openFromHash);
+  openFromHash();
 })();
