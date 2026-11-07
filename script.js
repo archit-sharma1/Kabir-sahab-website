@@ -63,7 +63,7 @@
   // if dohas are removed or reordered, so numbers and links stay stable.
   function sourceLabel(d){
     if (d.unverified) return 'Source unverified';
-    return d.source || 'Traditionally attributed to Kabir';
+    return d.source || 'Traditionally attributed to Kabir Saheb';
   }
 
   function metaLine(d){

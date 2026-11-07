@@ -42,7 +42,7 @@ window.KABIR_DOHAS = [
     {
       id: 9,
       text: "चलती चाकी देख कर, दिया कबीरा रोय।\nदो पाटन के बीच में, साबुत बचा न कोय॥",
-      meaning: "Seeing the grinding millstone, Kabir wept — for between its two wheels, nothing whole ever survives."
+      meaning: "Seeing the grinding millstone, Kabir Saheb wept — for between its two wheels, nothing whole ever survives."
     },
     {
       id: 10,
@@ -67,12 +67,12 @@ window.KABIR_DOHAS = [
     {
       id: 14,
       text: "मन के हारे हार है, मन के जीते जीत।\nकहे कबीर हरि पाइए, मन ही की परतीत॥",
-      meaning: "Defeat lies in a defeated mind, victory in a victorious one. Kabir says: Hari is found only through the mind's own conviction."
+      meaning: "Defeat lies in a defeated mind, victory in a victorious one. Kabir Saheb says: Hari is found only through the mind's own conviction."
     },
     {
       id: 15,
       text: "कबीरा खड़ा बाज़ार में, माँगे सबकी खैर।\nना काहू से दोस्ती, ना काहू से बैर॥",
-      meaning: "Kabir stands in the marketplace wishing everyone well — friendship with none in particular, enmity with none at all."
+      meaning: "Kabir Saheb stands in the marketplace wishing everyone well — friendship with none in particular, enmity with none at all."
     },
     {
       id: 16,
@@ -113,7 +113,7 @@ window.KABIR_DOHAS = [
       id: 23,
       unverified: true,
       text: "आपुहि गावे आपुहि सुने, आपहि करता टीक।\nकहे कबीर कुछ हाथ न आवे, ज्यों मथे रीत ही रीत॥",
-      meaning: "One who sings his own praise, hears it himself, and rates himself — such churning is empty, says Kabir, and yields nothing."
+      meaning: "One who sings his own praise, hears it himself, and rates himself — such churning is empty, says Kabir Saheb, and yields nothing."
     },
     {
       id: 24,
@@ -124,12 +124,12 @@ window.KABIR_DOHAS = [
       id: 25,
       unverified: true,
       text: "बुरे बख्त पर मीत सब, तज देते हैं साथ।\nकबिरा तेहि दिन जानिये, जब देवे परमेश्वर हाथ॥",
-      meaning: "In hard times even friends may leave one's side. Kabir says, know that day for what it is — the day when the Supreme alone holds your hand."
+      meaning: "In hard times even friends may leave one's side. Kabir Saheb says, know that day for what it is — the day when the Supreme alone holds your hand."
     },
     {
       id: 26,
       text: "कबिरा सोई पीर है, जो जाने पर पीर।\nजो पर पीर न जानई, सो काफिर बे पीर॥",
-      meaning: "Kabir says, a true guide is one who feels another's pain. One who does not feel another's pain is faithless, without compassion."
+      meaning: "Kabir Saheb says, a true guide is one who feels another's pain. One who does not feel another's pain is faithless, without compassion."
     },
     {
       id: 27,
@@ -144,12 +144,12 @@ window.KABIR_DOHAS = [
     {
       id: 29,
       text: "सुखिया सब संसार है, खाए अरु सोवे।\nदुखिया दास कबीर है, जागे अरु रोवे॥",
-      meaning: "The whole world is content, eating and sleeping without a care. Kabir alone stays sorrowful, awake through the night, and weeps."
+      meaning: "The whole world is content, eating and sleeping without a care. Kabir Saheb alone stays sorrowful, awake through the night, and weeps."
     },
     {
       id: 30,
       text: "कबीर सोता क्या करे, जागो जपो मुरार।\nएक दिना है सोवना, लंबे पाँव पसार॥",
-      meaning: "Kabir asks, why do you lie asleep? Wake up and remember Murari. A day is coming when you will sleep for good, your legs stretched out long."
+      meaning: "Kabir Saheb asks, why do you lie asleep? Wake up and remember Murari. A day is coming when you will sleep for good, your legs stretched out long."
     },
     {
       id: 31,
@@ -166,7 +166,7 @@ window.KABIR_DOHAS = [
     {
       id: 33,
       text: "शब्द शब्द बहु अंतरा, सार शब्द मथि लीजे।\nकह कबीर जेहि सार शब्द नहि, धिग जीवन तेहि दीजे॥",
-      meaning: "There is a vast difference between one 'word' and another; churn them and take the essential Word. Kabir says: a life that has not found that essential Word is a life gone to waste.",
+      meaning: "There is a vast difference between one 'word' and another; churn them and take the essential Word. Kabir Saheb says: a life that has not found that essential Word is a life gone to waste.",
       source: "बीजक — साखी ५"
     },
     {
@@ -238,7 +238,7 @@ window.KABIR_DOHAS = [
     {
       id: 45,
       text: "अजपा जपत अड़ि आसने, पिण्ड झरोखे नूर।\nतांके दिल में हौं बसौं, सेना लिये हजूर॥",
-      meaning: "Established in the seat of inner, unuttered remembrance, one sees the Light through the window of the body. In such a heart, says Kabir, I dwell in full presence.",
+      meaning: "Established in the seat of inner, unuttered remembrance, one sees the Light through the window of the body. In such a heart, says Kabir Saheb, I dwell in full presence.",
       source: "बीजक — साखी २८"
     },
     {
@@ -256,13 +256,13 @@ window.KABIR_DOHAS = [
     {
       id: 48,
       text: "जेहि मारग गये पंडिता, तेही गई बहीर।\nऊँची घाटी राम की, तेहि चढ़ि रहे कबीर॥",
-      meaning: "The scholars went by one road, and the crowd followed after them. Kabir climbed instead the steep ascent of Ram.",
+      meaning: "The scholars went by one road, and the crowd followed after them. Kabir Saheb climbed instead the steep ascent of Ram.",
       source: "बीजक — साखी ३१"
     },
     {
       id: 49,
       text: "घर कबीर का शिखर पर, जहाँ सिलहली गैल।\nपाँव न टिके पिपीलिका, खलकन लादे बैल॥",
-      meaning: "Kabir's home is upon the summit, reached by a slippery path. Even an ant cannot keep its footing there, yet worldly people try to load an ox and take it up.",
+      meaning: "Kabir Saheb's home is upon the summit, reached by a slippery path. Even an ant cannot keep its footing there, yet worldly people try to load an ox and take it up.",
       source: "बीजक — साखी ३३"
     },
     {
@@ -297,7 +297,7 @@ window.KABIR_DOHAS = [
     {
       id: 55,
       text: "गुरु बेचारा क्या करे, शब्द न लागे अंग।\nकहैं कबीर काली चादर, कैसे चढ़े रंग॥",
-      meaning: "What can the poor Guru do if the Word does not touch one's being? Kabir says: how can a black cloth take on another colour?"
+      meaning: "What can the poor Guru do if the Word does not touch one's being? Kabir Saheb says: how can a black cloth take on another colour?"
     },
     {
       id: 56,
@@ -312,6 +312,6 @@ window.KABIR_DOHAS = [
     {
       id: 58,
       text: "प्रभुता को सब कोई भजै, प्रभु को भजै न कोय।\nकहैं कबीर प्रभु को भजै, प्रभुता चेरी होय॥",
-      meaning: "Everyone worships power, but no one worships Prabhu, the Real. Kabir says: whoever worships Prabhu, power itself becomes their servant."
+      meaning: "Everyone worships power, but no one worships Prabhu, the Real. Kabir Saheb says: whoever worships Prabhu, power itself becomes their servant."
     }
   ];
