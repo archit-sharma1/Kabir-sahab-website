@@ -110,9 +110,21 @@ window.KABIR_DOHAS = [
       meaning: "Those who dived deep into the water found the pearl; I, timid, feared drowning and stayed sitting on the shore."
     },
     {
+      id: 23,
+      unverified: true,
+      text: "आपुहि गावे आपुहि सुने, आपहि करता टीक।\nकहे कबीर कुछ हाथ न आवे, ज्यों मथे रीत ही रीत॥",
+      meaning: "One who sings his own praise, hears it himself, and rates himself — such churning is empty, says Kabir, and yields nothing."
+    },
+    {
       id: 24,
       text: "धीरे धीरे रे मना, धीरे सब कुछ होय।\nमाली सींचे सौ घड़ा, ऋतु आये फल होय॥",
       meaning: "Slowly, slowly, O mind, everything happens in its own time. The gardener may pour a hundred pots of water, but the fruit ripens only in its season."
+    },
+    {
+      id: 25,
+      unverified: true,
+      text: "बुरे बख्त पर मीत सब, तज देते हैं साथ।\nकबिरा तेहि दिन जानिये, जब देवे परमेश्वर हाथ॥",
+      meaning: "In hard times even friends may leave one's side. Kabir says, know that day for what it is — the day when the Supreme alone holds your hand."
     },
     {
       id: 26,

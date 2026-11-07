@@ -17,7 +17,7 @@ GitHub is now the source of truth. Make future code and content changes in the G
 
 ## 2. Website description
 
-This is a contemplative, responsive static website presenting 56 Hindi dohas attributed to Sant Kabir, each paired with an English plain-sense translation. Visitors can draw a random doha, search in Hindi or English, copy the Hindi and English text separately, and revisit recently drawn verses.
+This is a contemplative, responsive static website presenting 58 Hindi dohas attributed to Sant Kabir, each paired with an English plain-sense translation. Visitors can draw a random doha, search in Hindi or English, copy the Hindi and English text separately, and revisit recently drawn verses.
 
 The website uses a minimal OLED-black design and preserves the supplied Kabir Saheb portrait. It requires no framework, package installation, server, or build process and must remain usable when `index.html` is opened directly from disk.
 
@@ -71,8 +71,8 @@ Both files, and `styles.css`, are referenced with a `?v=YYYYMMDD` version string
 - Exposes an array through `window.KABIR_DOHAS`.
 - Every record must contain non-empty Hindi doha text and a non-empty English meaning.
 - Every record has a permanent numeric `id` (1–58 today). Ids are shown as "Doha N" and used in links. **Never renumber or reuse an id**; a new doha gets the next unused number, and a removed doha's id is retired.
-- An optional `source` (e.g. `बीजक — साखी ३`) is shown on the card. Records without one show "Traditionally attributed to Kabir". Only add a source you can cite.
-- The current production corpus contains **exactly 56 records** (ids 1–58; ids 23 and 25 were retired on 7 November 2026 because no source could be found).
+- An optional `source` (e.g. `बीजक — साखी ३`) is shown on the card. Records without one show "Traditionally attributed to Kabir". Only add a source you can cite. Records that no published collection could be traced to carry `unverified: true` and show "Source unverified" instead (currently ids 23 and 25). Remove the flag and add a `source` once one is found.
+- The current production corpus contains **exactly 58 records**.
 - When adding, correcting, or removing a doha, edit this file rather than duplicating content in HTML or `script.js`.
 
 ### `script.js`
@@ -100,7 +100,7 @@ const dohas = Array.isArray(window.KABIR_DOHAS) ? window.KABIR_DOHAS : [];
 
 Preserve all of the following unless the user explicitly requests a change:
 
-- All 56 Hindi dohas and all 56 English meanings.
+- All 58 Hindi dohas and all 58 English meanings.
 - Random **Draw a Doha** behavior.
 - Hindi and English keyword search.
 - Separate **Copy Hindi** and **Copy English** buttons.
@@ -172,7 +172,7 @@ Also test uppercase English and queries containing leading, trailing, and repeat
 
 ## 7. Required latest dohas
 
-These records must remain present in the corpus.
+These records must remain present in the 58-doha corpus.
 
 ### Doha 54
 
@@ -286,7 +286,7 @@ Run checks proportional to the change. A normal content or behavior change shoul
 - No accidental reintroduction of large inline CSS or application JavaScript.
 - `node --check data/dohas.js` succeeds.
 - `node --check script.js` succeeds.
-- `window.KABIR_DOHAS` contains exactly 56 complete records.
+- `window.KABIR_DOHAS` contains exactly 58 complete records.
 - No record has blank Hindi or English content.
 - CSS braces and syntax remain balanced.
 
