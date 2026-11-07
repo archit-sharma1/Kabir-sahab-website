@@ -42,6 +42,11 @@
     gap:28px;
   }
 
+  .loom > picture{
+    display:block;
+    line-height:0;
+  }
+
   .portrait{
     width:132px;
     height:auto;
@@ -147,7 +152,7 @@
     font-family:'Cormorant Garamond', serif;
     font-style:italic;
     font-size:1.2rem;
-    color:#736c5c;
+    color:var(--muted);
     text-align:center;
   }
 

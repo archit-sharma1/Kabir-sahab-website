@@ -27,9 +27,13 @@ The website uses a minimal OLED-black design and preserves the supplied Kabir Sa
 Kabir-sahab-website/
 ├── index.html          # Semantic markup and asset references
 ├── styles.css          # Complete visual design and responsive styling
-├── script.js           # Search, random draw, history, copying and portrait setup
+├── script.js           # Search, random draw, history and copying
 ├── data/
 │   └── dohas.js        # Canonical browser-native store containing all dohas
+├── images/             # Kabir Saheb portrait (WebP + JPEG fallback) and touch icon
+├── favicon.ico         # Browser tab icon
+├── _headers            # Cloudflare cache-control and security headers
+├── .assetsignore       # Files Cloudflare must not publish (Markdown, .git)
 └── README.md           # Repository overview and usage notes
 ```
 
@@ -40,14 +44,17 @@ Load order in `index.html` is important:
 <script src="script.js"></script>
 ```
 
-`data/dohas.js` must load first because it defines `window.KABIR_DOHAS`. Do not replace it with a fetched JSON file unless the user explicitly agrees to drop direct `file://` offline support.
+`data/dohas.js` must load first because it defines `window.KABIR_DOHAS`. `script.js` reads that array into its own closure and then deletes the global, so the corpus is not listed on `window` in the DevTools console. (The data file itself is still publicly downloadable, as with any static site.)
+
+Both files, and `styles.css`, are referenced with a `?v=YYYYMMDD` version string. **Bump that version in `index.html` whenever `styles.css`, `script.js` or `data/dohas.js` changes**, because `_headers` lets browsers cache those files for up to 7 days. Do not replace it with a fetched JSON file unless the user explicitly agrees to drop direct `file://` offline support.
 
 ## 4. Architectural responsibilities
 
 ### `index.html`
 
 - Contains semantic page structure only.
-- References `styles.css`, `data/dohas.js`, and `script.js`.
+- References `styles.css`, `data/dohas.js`, and `script.js` (each with a `?v=` cache-busting version).
+- Wraps the page content in a `<main>` landmark and includes a meta description.
 - Must not absorb the full CSS, application logic, or doha database back into inline blocks.
 - Preserve accessible labels, IDs, headings, footer attribution, and mobile viewport configuration.
 
@@ -67,15 +74,24 @@ Load order in `index.html` is important:
 
 ### `script.js`
 
+- Runs inside an IIFE so none of its variables become globals.
 - Reads the corpus with:
 
 ```js
 const dohas = Array.isArray(window.KABIR_DOHAS) ? window.KABIR_DOHAS : [];
 ```
 
+  and then removes `window.KABIR_DOHAS`.
+
 - Must fail clearly if the data file does not load.
-- Owns random drawing, bilingual search, history, copy buttons, result selection, and the embedded portrait.
-- The portrait is intentionally stored as chunked Base64 and assembled in JavaScript so the project remains self-contained and works offline.
+- Owns random drawing, bilingual search, history, copy buttons, and result selection.
+- The portrait is a normal image file in `images/` (a 264 px wide WebP with a JPEG fallback, shown at 132 px). It used to be embedded in `script.js` as about 500 KB of Base64; do not re-embed it. Relative image paths still work when `index.html` is opened from disk.
+
+### `_headers` (Cloudflare)
+
+- HTML is served with `Cache-Control: public, max-age=0, must-revalidate`, so browsers revalidate with the ETag and get a cheap 304 when nothing changed. New deploys appear immediately.
+- CSS, JS and `data/` are cached for 7 days (busted by the `?v=` version); images for 30 days.
+- Also sets security headers (CSP, HSTS, COOP, X-Frame-Options, nosniff, Referrer-Policy). If a new external resource is added (fonts, scripts, images from another domain), update the Content-Security-Policy or it will be blocked.
 
 ## 5. Non-negotiable functional requirements
 
@@ -259,6 +275,8 @@ Run checks proportional to the change. A normal content or behavior change shoul
 ### Functional validation
 
 - Page loads without console errors.
+- `typeof window.KABIR_DOHAS` is `"undefined"` after load.
+- Lighthouse Accessibility, Best Practices and SEO show no failed audits.
 - Portrait appears.
 - **Draw a Doha** works repeatedly.
 - Copy Hindi and Copy English work independently.

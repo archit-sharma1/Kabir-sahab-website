@@ -3,17 +3,28 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kabir Saheb</title>
-<link rel="stylesheet" href="styles.css">
+<title>Kabir Saheb — Dohas of Sant Kabir in Hindi with English Meaning</title>
+<meta name="description" content="Read 58 dohas of Sant Kabir in Hindi with plain-sense English meanings. Draw a random doha, search by Hindi or English keyword, and copy verses to share.">
+<meta name="theme-color" content="#000000">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+<link rel="stylesheet" href="styles.css?v=20261107">
 </head>
 <body>
 
-  <div class="loom">
-    <img
-      class="portrait"
-      id="portraitImg"
-      alt="kabir saheb"
-    />
+  <main class="loom">
+    <picture>
+      <source srcset="images/kabir-saheb.webp" type="image/webp">
+      <img
+        class="portrait"
+        id="portraitImg"
+        src="images/kabir-saheb.jpg"
+        width="132"
+        height="175"
+        fetchpriority="high"
+        alt="Portrait of Kabir Saheb"
+      />
+    </picture>
 
     <div class="heading">
       <p class="kicker">संत कबीर साहेब</p>
@@ -24,7 +35,7 @@
     <div class="search">
       <h2>search doha by keyword</h2>
       <div class="search-row">
-        <input type="text" id="searchInput" placeholder="e.g. mann, guru, love, ego, truth..." />
+        <input type="text" id="searchInput" aria-label="Search dohas by keyword" placeholder="e.g. mann, guru, love, ego, truth..." />
         <button id="searchBtn" class="secondary">Search</button>
       </div>
       <div id="searchStatus"></div>
@@ -54,10 +65,10 @@
       <p>Portrait: "Kabir Saheb" — painting by Sharan, provided by the user.</p>
       <p>Downloaded from: <a href="https://upload.wikimedia.org/wikipedia/commons/3/32/Kabir_Das.jpg?utm_source=hi.wikipedia.org&amp;utm_campaign=index&amp;utm_content=original" target="_blank" rel="noopener noreferrer">upload.wikimedia.org</a></p>
     </footer>
-  </div>
+  </main>
 
-<script src="data/dohas.js"></script>
-<script src="script.js"></script>
+<script src="data/dohas.js?v=20261107"></script>
+<script src="script.js?v=20261107"></script>
 
 </body>
 </html>
