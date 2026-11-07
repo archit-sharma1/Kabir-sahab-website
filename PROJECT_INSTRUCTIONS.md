@@ -36,7 +36,7 @@ The website uses a minimal OLED-black design and the Kabir Saheb portrait. It is
 ```text
 Kabir-sahab-website/
 ├── src/
-│   ├── app.html                  # HTML shell (lang="en", icons, font preloads)
+│   ├── app.html                  # HTML shell (lang="en", icons, portrait + font preloads)
 │   ├── app.css                   # @font-face rules and the complete visual design
 │   ├── app.d.ts                  # App.PageData type (doha on /doha/N pages)
 │   ├── lib/
@@ -101,6 +101,14 @@ Imports inside the app use Node subpath imports: `import { dohas } from '#lib/do
 - `<html lang="en">`. Every element containing Hindi carries `lang="hi"`: the kicker, the doha text, Hindi source labels, search-result first lines and history items. Keep this when adding new Hindi text.
 - Keep the existing IDs and class names (`#drawBtn`, `#card`, `.doha-text`, `.history-item`…). The CSS and the browser regression tests rely on them.
 
+### Loading performance (`src/app.html`, `SiteHeader.svelte`)
+
+- The portrait is the largest element on the home page, so `app.html` preloads it first (`<link rel="preload" as="image" … fetchpriority="high">`), before SvelteKit's script preloads and the fonts. Under throttling this halved home-page LCP (4.0 s → 2.0 s).
+- The portrait has two sizes: `kabir-saheb-132.*` (132 px, ~5 KB) for normal screens and `kabir-saheb.*` (264 px) for high-density screens. Keep the `<picture>` `srcset` and the preload's `imagesrcset` in step.
+- Only the Cormorant Garamond 600 font (the title) is preloaded. Preloading the 97 KB Devanagari font competed with the portrait and didn't help; it loads from the CSS with `font-display: swap`.
+- Inlining the CSS (`inlineStyleThreshold`) was tried and rejected: it makes all eight fonts download immediately at top priority, which slowed the portrait.
+- When reading Lighthouse, run it in an incognito window without extensions. Password-manager extensions (e.g. Bitwarden) add JavaScript and block the back/forward cache ("WebAuthentication API").
+
 ### `src/app.css`
 
 - Owns the OLED-black visual system and responsive layout, starting with `@font-face` rules for the self-hosted fonts in `static/fonts/` (`font-display: swap`; Tiro Devanagari Hindi is split into Devanagari and Latin subsets with `unicode-range`).
@@ -116,7 +124,7 @@ Imports inside the app use Node subpath imports: `import { dohas } from '#lib/do
 
 ### `static/_headers` (Cloudflare)
 
-- HTML keeps Cloudflare's default `Cache-Control: public, max-age=0, must-revalidate`: browsers revalidate with the ETag and get a cheap 304, so new deploys appear immediately.
+- Pages (`/`, `/doha/*`): `Cache-Control: public, max-age=300, stale-while-revalidate=86400`. Browsers reuse a page for 5 minutes without asking at all; after that they show their copy instantly and refresh it in the background, for up to a day. A new deploy therefore reaches returning visitors within about 5 minutes. Cloudflare's edge cache sits in front either way (`cf-cache-status: HIT`). `/sitemap.xml` and `/robots.txt` are cached for an hour; `/_app/version.json` keeps `max-age=0` because SvelteKit checks it to notice new deploys.
 - `/_app/immutable/*` (SvelteKit's hashed JS/CSS) and `/fonts/*` are cached for a year as `immutable`; `/images/*` for 30 days. **No more manual `?v=` bumping**: SvelteKit puts a content hash in every JS/CSS file name.
 - Security headers: HSTS, COOP, X-Frame-Options, nosniff, Referrer-Policy, Permissions-Policy, and a header CSP with what a `<meta>` CSP can't express (`frame-ancestors 'none'`).
 
@@ -355,7 +363,7 @@ After the user merges the pull request and Cloudflare deploys `main`:
 - Open the production URL in a logged-out/private browser session. Confirm it does not redirect to Cloudflare Access login.
 - Repeat the search, draw, copy and share checks against production.
 - Open `/doha/31` directly and check its title.
-- In DevTools, check the response headers: Cache-Control, CSP, HSTS; `/_app/immutable/*` cached for a year.
+- In DevTools, check the response headers: pages `max-age=300, stale-while-revalidate=86400`; `/_app/immutable/*` and fonts a year; CSP; HSTS.
 - Check that `/README.md` returns 404.
 - Paste a `/doha/N` link into WhatsApp and check that the preview shows that doha's title and text.
 
