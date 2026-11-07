@@ -1,6 +1,6 @@
 # Kabir Saheb Doha Website
 
-A contemplative static website featuring 58 Hindi dohas traditionally attributed to Kabir Saheb, each paired with an original plain-sense English meaning.
+A contemplative static website featuring 184 Hindi verses attributed to Kabir Saheb, each paired with an original plain-sense English meaning. Entries whose published source has not yet been verified are clearly marked.
 
 ## Features
 
@@ -23,7 +23,7 @@ A contemplative static website featuring 58 Hindi dohas traditionally attributed
 - `index.html` — page structure, meta and preview tags, and references to the other files
 - `styles.css` — `@font-face` rules, visual design and responsive layout
 - `script.js` — drawing, search, history, copy, share and per-doha links
-- `data/dohas.js` — the only content store: all 58 records (`id`, Hindi `text`, English `meaning`, optional `source`, optional `unverified`)
+- `data/dohas.js` — the only content store: all 184 records (`id`, Hindi `text`, English `meaning`, optional `source`, optional `unverified`)
 - `images/` — portrait (WebP with JPEG fallback), Apple touch icon, and the 1200×630 link-preview image
 - `fonts/` — the eight `.woff2` font files and their licences (SIL OFL 1.1)
 - `favicon.ico` — browser tab icon
@@ -55,3 +55,4 @@ Download the repository and open `index.html` in a modern web browser. No packag
 [Open the public Cloudflare deployment](https://kabir-saheb.sant-vani.workers.dev/)
 
 The production website is hosted on Cloudflare Workers and is automatically deployed from the `main` branch.
+
