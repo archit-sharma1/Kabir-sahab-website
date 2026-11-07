@@ -69,6 +69,8 @@ Both files, and `styles.css`, are referenced with a `?v=YYYYMMDD` version string
 - Is the only canonical doha content store.
 - Exposes an array through `window.KABIR_DOHAS`.
 - Every record must contain non-empty Hindi doha text and a non-empty English meaning.
+- Every record has a permanent numeric `id` (1–58 today). Ids are shown as "Doha N" and used in links. **Never renumber or reuse an id**; a new doha gets the next unused number, and a removed doha's id is retired.
+- An optional `source` (e.g. `बीजक — साखी ३`) is shown on the card. Records without one show "Traditionally attributed to Kabir". Only add a source you can cite.
 - The current production corpus contains **exactly 58 records**.
 - When adding, correcting, or removing a doha, edit this file rather than duplicating content in HTML or `script.js`.
 
