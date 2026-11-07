@@ -177,7 +177,7 @@ These records must remain present in the 58-doha corpus.
 
 ```text
 हीरा पड़ा बाज़ार में, दुनिया जामे डोल।
-जहाँ हीरे का पारखी, तहाँ हीरे का मोल।।
+जहाँ हीरे का पारखी, तहाँ हीरे का मोल॥
 ```
 
 **English**
@@ -192,7 +192,7 @@ A diamond lies in the marketplace while the world wanders around it. Where there
 
 ```text
 गुरु बेचारा क्या करे, शब्द न लागे अंग।
-कहैं कबीर काली चादर, कैसे चाढ़े रंग।।
+कहैं कबीर काली चादर, कैसे चढ़े रंग॥
 ```
 
 **English**
@@ -207,7 +207,7 @@ What can the poor Guru do if the Word does not touch one's being? Kabir says: ho
 
 ```text
 चार राम हैं जगत में, तीन राम व्यवहार।
-चौथे राम सो सार हैं, ताको करो विचार।।
+चौथे राम सो सार हैं, ताको करो विचार॥
 ```
 
 **English**
@@ -222,7 +222,7 @@ There are four forms of Ram in the world; three are known in ordinary usage. The
 
 ```text
 ऐसी वाणी बोलिए, मन का आपा खोए।
-औरन को शीतल करे, आपहुँ शीतल होए।।
+औरन को शीतल करे, आपहुँ शीतल होए॥
 ```
 
 **English**
@@ -245,6 +245,8 @@ Speak such words that the ego of the mind dissolves. They bring coolness to othe
 ```text
 Everyone worships power, but no one worships the Lord. Kabir says: whoever worships the Lord, power itself becomes their servant.
 ```
+
+**Text conventions (applied 7 November 2026):** the first line of every doha ends with `।` and the second with `॥`. The word for market is spelled `बाज़ार` throughout. Doha 55 uses `चढ़े` (corrected from `चाढ़े`). Doha 30 uses the common version "कबीर सोता क्या करे, जागो जपो मुरार। / एक दिना है सोवना, लंबे पाँव पसार॥".
 
 Do not silently modernize, transliterate, respell, or rewrite these approved texts. Propose textual corrections separately and obtain approval before changing the corpus.
 

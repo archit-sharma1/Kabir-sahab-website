@@ -152,6 +152,7 @@
     prem: ['प्रेम', 'love'], pyar: ['प्रेम', 'love'],
     shabd: ['शब्द', 'शब्दहि', 'शब्दे', 'word'], shabad: ['शब्द', 'शब्दहि', 'शब्दे', 'word'], sabad: ['शब्द', 'शब्दहि', 'शब्दे', 'word'],
     heera: ['हीरा', 'diamond'], hira: ['हीरा', 'diamond'], hansa: ['हंसा', 'swan'], hans: ['हंसा', 'swan'],
+    bazar: ['बाज़ार', 'marketplace'], bazaar: ['बाज़ार', 'marketplace'], bajar: ['बाज़ार', 'marketplace'], murari: ['मुरार'], 'बजार': ['बाज़ार'],
     chandan: ['चंदन', 'sandalwood'], paani: ['पानी', 'water'], pani: ['पानी', 'water'],
     jeev: ['जीव', 'जीवत'], jiv: ['जीव', 'जीवत'], kaal: ['काल'], kal: ['काल'], aaj: ['आज'],
     dukh: ['दुःख', 'sorrow'], sukh: ['सुख', 'joy'], nindak: ['निंदक', 'critic'], aapa: ['आपा', 'ego'],
