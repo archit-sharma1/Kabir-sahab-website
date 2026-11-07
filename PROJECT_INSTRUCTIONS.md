@@ -54,7 +54,8 @@ Both files, and `styles.css`, are referenced with a `?v=YYYYMMDD` version string
 
 - Contains semantic page structure only.
 - References `styles.css`, `data/dohas.js`, and `script.js` (each with a `?v=` cache-busting version).
-- Wraps the page content in a `<main>` landmark and includes a meta description.
+- Wraps the page content in a `<main>` landmark and includes a meta description. Do not put the doha count in the description or titles; it goes stale.
+- Carries Open Graph and Twitter tags with absolute URLs to the production domain. The preview image is `images/og-image.jpg` (1200×630). If the production URL changes, update `canonical`, `og:url` and both image URLs.
 - Must not absorb the full CSS, application logic, or doha database back into inline blocks.
 - Preserve accessible labels, IDs, headings, footer attribution, and mobile viewport configuration.
 
