@@ -104,6 +104,15 @@
     margin:6px 0 0;
   }
 
+  .heading .tagline-credit{
+    font-family:'Poppins', sans-serif;
+    font-style:normal;
+    font-size:0.8rem;
+    letter-spacing:0.04em;
+    color:var(--muted);
+    margin:6px 0 0;
+  }
+
   .card{
     position:relative;
     width:100%;
