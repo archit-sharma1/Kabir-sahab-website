@@ -110,19 +110,9 @@ window.KABIR_DOHAS = [
       meaning: "Those who dived deep into the water found the pearl; I, timid, feared drowning and stayed sitting on the shore."
     },
     {
-      id: 23,
-      text: "आपुहि गावे आपुहि सुने, आपहि करता टीक।\nकहे कबीर कुछ हाथ न आवे, ज्यों मथे रीत ही रीत॥",
-      meaning: "One who sings his own praise, hears it himself, and rates himself — such churning is empty, says Kabir, and yields nothing."
-    },
-    {
       id: 24,
       text: "धीरे धीरे रे मना, धीरे सब कुछ होय।\nमाली सींचे सौ घड़ा, ऋतु आये फल होय॥",
       meaning: "Slowly, slowly, O mind, everything happens in its own time. The gardener may pour a hundred pots of water, but the fruit ripens only in its season."
-    },
-    {
-      id: 25,
-      text: "बुरे बख्त पर मीत सब, तज देते हैं साथ।\nकबिरा तेहि दिन जानिये, जब देवे परमेश्वर हाथ॥",
-      meaning: "In hard times even friends may leave one's side. Kabir says, know that day for what it is — the day when the Supreme alone holds your hand."
     },
     {
       id: 26,
@@ -152,7 +142,7 @@ window.KABIR_DOHAS = [
     {
       id: 31,
       text: "शब्द हमारा आदि का, शब्दहि पैठा जीव।\nफूल रहन की टोकनी, घोरा खाया घीव॥",
-      meaning: "Our Word is primordial; the living being has entered into that Word. Yet the basket meant to preserve the flower has consumed the very ghee meant to sustain it. — a warning that the means can swallow the essence when the primal Word is forgotten.",
+      meaning: "Our Word is from the very beginning, and the living being has entered into the Word. But ghee poured into a flower basket cannot be held — it runs out, and the horse eats it: a teaching given to an unfit vessel is lost.",
       source: "बीजक — साखी ३"
     },
     {
@@ -163,7 +153,7 @@ window.KABIR_DOHAS = [
     },
     {
       id: 33,
-      text: "शब्द शब्द बहु अंतर है, सार शब्द मथि लीजे।\nकह कबीर जेहि सार शब्द नहि, धिग जीवन तेहि दीजे॥",
+      text: "शब्द शब्द बहु अंतरा, सार शब्द मथि लीजे।\nकह कबीर जेहि सार शब्द नहि, धिग जीवन तेहि दीजे॥",
       meaning: "There is a vast difference between one 'word' and another; churn them and take the essential Word. Kabir says: a life that has not found that essential Word is a life gone to waste.",
       source: "बीजक — साखी ५"
     },
