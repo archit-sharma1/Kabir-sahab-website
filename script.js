@@ -2,8 +2,8 @@
   'use strict';
 
   // A curated collection of well-known dohas (couplets) attributed to Sant Kabir Das (c. 15th century).
-  // These verses are part of the public-domain Kabir Bijak / Sakhi tradition, passed down orally
-  // and in print for over 500 years. English renderings below are plain-sense paraphrases, not
+  // These verses are traditionally attributed to Kabir, from the Bijak and the oral
+  // tradition, passed down for over 500 years. English renderings below are plain-sense paraphrases, not
   // literal or copyrighted translations.
   const dohas = Array.isArray(window.KABIR_DOHAS) ? window.KABIR_DOHAS : [];
   // Hand-off is complete: remove the global so the corpus isn't listed on
