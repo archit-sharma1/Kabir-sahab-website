@@ -46,7 +46,7 @@
 
   function metaLine(d){
     return '<p class="doha-meta"><span class="doha-number">Doha ' + d.id + '</span>' +
-      '<span class="doha-source">' + sourceLabel(d) + '</span></p>';
+      '<span class="doha-source"' + (d.source ? ' lang="hi"' : '') + '>' + sourceLabel(d) + '</span></p>';
   }
 
   function showDoha(idx){
@@ -54,7 +54,7 @@
     const d = dohas[idx];
     card.innerHTML =
       metaLine(d) +
-      '<p class="doha-text">' + d.text + '</p>' +
+      '<p class="doha-text" lang="hi">' + d.text + '</p>' +
       '<p class="meaning">' + d.meaning + '</p>';
     copyHindiBtn.hidden = false;
     copyMeaningBtn.hidden = false;
@@ -106,6 +106,7 @@
       const item = document.createElement('button');
       item.type = 'button';
       item.className = 'history-item' + (idx === currentIndex ? ' active' : '');
+      item.lang = 'hi';
       item.textContent = firstLine(dohas[idx].text);
       item.addEventListener('click', () => {
         showDoha(idx);
@@ -256,7 +257,7 @@
       result.type = 'button';
       result.className = 'search-result';
       result.innerHTML =
-        '<p class="sr-line"><span class="sr-number">' + dohas[idx].id + '.</span> ' + firstLine(dohas[idx].text) + '</p>' +
+        '<p class="sr-line"><span class="sr-number">' + dohas[idx].id + '.</span> <span lang="hi">' + firstLine(dohas[idx].text) + '</span></p>' +
         '<p class="sr-meaning">' + dohas[idx].meaning + '</p>';
       result.addEventListener('click', () => {
         addToHistory(idx);
