@@ -2,3 +2,16 @@
 .git
 .github
 *.md
+
+# SvelteKit source (until the Cloudflare deploy switches to the build/ output)
+src
+static
+build
+node_modules
+.svelte-kit
+package.json
+package-lock.json
+tsconfig.json
+vite.config.ts
+.npmrc
+.gitignore
