@@ -225,6 +225,12 @@
     text-transform:uppercase;
   }
 
+  .doha-source.unverified{
+    font-style:italic;
+    border-bottom:1px dotted var(--muted);
+    cursor:help;
+  }
+
   .search-result .sr-number{
     font-family:'Poppins', sans-serif;
     font-size:0.8rem;
