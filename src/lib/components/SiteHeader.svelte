@@ -1,17 +1,21 @@
-<!-- 132 px for normal screens, 264 px for high-density (2x) screens. -->
-<picture>
-	<source srcset="/images/kabir-saheb-132.webp 1x, /images/kabir-saheb.webp 2x" type="image/webp" />
-	<img
-		class="portrait"
-		id="portraitImg"
-		src="/images/kabir-saheb-132.jpg"
-		srcset="/images/kabir-saheb-132.jpg 1x, /images/kabir-saheb.jpg 2x"
-		width="132"
-		height="175"
-		fetchpriority="high"
-		alt="Portrait of Kabir Saheb"
-	/>
-</picture>
+<script lang="ts">
+	// One 2x source (264 × 350). @sveltejs/enhanced-img turns it into AVIF,
+	// WebP and JPEG at 132 px (1x) and 264 px (2x) with hashed file names.
+	import portrait from '#lib/assets/kabir-saheb.png?enhanced';
+
+	// The preload for this image is added at the top of <head> by
+	// src/hooks.server.ts, so it is fetched before scripts and fonts.
+</script>
+
+<enhanced:img
+	src={portrait}
+	class="portrait"
+	id="portraitImg"
+	width="132"
+	height="175"
+	fetchpriority="high"
+	alt="Portrait of Kabir Saheb"
+/>
 
 <div class="heading">
 	<p class="kicker" lang="hi">संत कबीर साहेब</p>

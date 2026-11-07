@@ -36,7 +36,8 @@ The website uses a minimal OLED-black design and the Kabir Saheb portrait. It is
 ```text
 Kabir-sahab-website/
 ├── src/
-│   ├── app.html                  # HTML shell (lang="en", icons, portrait + font preloads)
+│   ├── app.html                  # HTML shell (lang="en", icons, preloads)
+│   ├── hooks.server.ts           # Puts the portrait preload first in <head>
 │   ├── app.css                   # @font-face rules and the complete visual design
 │   ├── app.d.ts                  # App.PageData type (doha on /doha/N pages)
 │   ├── lib/
@@ -46,6 +47,7 @@ Kabir-sahab-website/
 │   │   ├── explorer.svelte.ts    # Shared state: current doha, round, history
 │   │   ├── clipboard.ts          # Copy helper and share text
 │   │   ├── site.ts               # Site URL, title, description, preview image
+│   │   ├── assets/kabir-saheb.png # Portrait source (2x), optimised at build time
 │   │   ├── *.test.ts             # Vitest unit tests (run with npm test)
 │   │   └── components/           # SiteHeader, SearchBox, DohaCard, HistoryList,
 │   │                             # DohaExplorer, SiteFooter, Seo
@@ -59,7 +61,7 @@ Kabir-sahab-website/
 ├── static/                       # Copied as-is into build/
 │   ├── _headers                  # Cloudflare cache-control and security headers
 │   ├── favicon.ico, robots.txt
-│   ├── images/                   # Portrait (WebP + JPEG), touch icon, og-image.jpg
+│   ├── images/                   # Touch icon and og-image.jpg (fixed URLs)
 │   └── fonts/                    # 8 self-hosted .woff2 files + licences
 ├── vite.config.ts                # SvelteKit config (adapter, CSP), Vitest config
 ├── wrangler.jsonc                # Cloudflare Worker: serves build/ as static assets
@@ -101,10 +103,11 @@ Imports inside the app use Node subpath imports: `import { dohas } from '#lib/do
 - `<html lang="en">`. Every element containing Hindi carries `lang="hi"`: the kicker, the doha text, Hindi source labels, search-result first lines and history items. Keep this when adding new Hindi text.
 - Keep the existing IDs and class names (`#drawBtn`, `#card`, `.doha-text`, `.history-item`…). The CSS and the browser regression tests rely on them.
 
-### Loading performance (`src/app.html`, `SiteHeader.svelte`)
+### Images and loading performance
 
-- The portrait is the largest element on the home page, so `app.html` preloads it first (`<link rel="preload" as="image" … fetchpriority="high">`), before SvelteKit's script preloads and the fonts. Under throttling this halved home-page LCP (4.0 s → 2.0 s).
-- The portrait has two sizes: `kabir-saheb-132.*` (132 px, ~5 KB) for normal screens and `kabir-saheb.*` (264 px) for high-density screens. Keep the `<picture>` `srcset` and the preload's `imagesrcset` in step.
+- The portrait uses **`@sveltejs/enhanced-img`** (plugin in `vite.config.ts`, before `sveltekit()`). The only source file is `src/lib/assets/kabir-saheb.png`, at 2x the display size (264 × 350). At build time `<enhanced:img>` in `SiteHeader.svelte` turns it into AVIF, WebP and JPEG at 132 px (1x) and 264 px (2x), with hashed names under `/_app/immutable/assets/` (cached for a year). EXIF data is stripped and width and height are set. AVIF is 2.8 KB at 1x and 7.9 KB at 2x. To change the portrait, replace that PNG; never hand-make resized copies.
+- The portrait is the largest element on the home page, so its AVIF preload must come **before** SvelteKit's script preloads. Component `<svelte:head>` tags always come after them, so `src/hooks.server.ts` inserts the preload into the `%kabir.portrait-preload%` placeholder at the top of `app.html` when pages are prerendered. Under throttling this is the difference between LCP 2.0 s and 4.0 s.
+- `og-image.jpg` and `apple-touch-icon.png` stay in `static/images/`: crawlers and iOS need fixed URLs.
 - Only the Cormorant Garamond 600 font (the title) is preloaded. Preloading the 97 KB Devanagari font competed with the portrait and didn't help; it loads from the CSS with `font-display: swap`.
 - Inlining the CSS (`inlineStyleThreshold`) was tried and rejected: it makes all eight fonts download immediately at top priority, which slowed the portrait.
 - When reading Lighthouse, run it in an incognito window without extensions. Password-manager extensions (e.g. Bitwarden) add JavaScript and block the back/forward cache ("WebAuthentication API").
