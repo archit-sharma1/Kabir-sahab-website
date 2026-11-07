@@ -101,7 +101,7 @@ const dohas = Array.isArray(window.KABIR_DOHAS) ? window.KABIR_DOHAS : [];
 - Must fail clearly if the data file does not load.
 - Owns random drawing, bilingual search, history, copy and share buttons, result selection, and `#doha-N` links.
 - **Links:** showing a doha updates the URL hash to `#doha-<id>` (via `window.history.replaceState`), and loading or changing the hash opens that doha. Links use the permanent `id`, never the array position.
-- **Share:** uses `navigator.share` when available. Otherwise it copies the doha, meaning and link, and shows "Link copied!".
+- **Share:** uses `navigator.share` when available. Otherwise it copies the same content and shows "Link copied!". Shared content ends with `— Kabir Saheb` (without a doha number), followed by a blank line and the doha link.
 - **History:** stored by doha id in `localStorage` under `kabir-saheb.history`. The doha on the card is never listed under "Previously drawn".
 - The portrait is a normal image file in `images/` (a 264 px wide WebP with a JPEG fallback, shown at 132 px). It used to be embedded in `script.js` as about 500 KB of Base64; do not re-embed it. Relative image paths still work when `index.html` is opened from disk.
 
@@ -430,5 +430,6 @@ When asked to update this project:
 - Validate locally before opening a pull request.
 - Report exact tests and results; do not claim deployment until the live URL has been checked.
 - Ask for clarification only when a choice would materially change content, design, access, or repository history.
+
 
 
