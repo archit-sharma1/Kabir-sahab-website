@@ -18,7 +18,7 @@ GitHub is now the source of truth. Make future code and content changes in the G
 
 ## 2. Website description
 
-This is a contemplative, responsive website presenting 58 Hindi dohas traditionally attributed to Kabir Saheb, each paired with an original English plain-sense meaning. Visitors can:
+This is a contemplative, responsive website presenting 184 Hindi verses attributed to Kabir Saheb, each paired with an original English plain-sense meaning. Visitors can:
 
 - draw a random doha;
 - search in Hindi, romanised Hindi or English;
@@ -29,7 +29,7 @@ This is a contemplative, responsive website presenting 58 Hindi dohas traditiona
 
 Each card shows the doha number and its source.
 
-The website uses a minimal OLED-black design and the Kabir Saheb portrait. It is built with SvelteKit and **prerendered**: `npm run build` writes plain HTML, CSS and JS for the home page, all 58 doha pages, the 404 page and `sitemap.xml` into `build/`, and Cloudflare serves those files. No server code runs in production.
+The website uses a minimal OLED-black design and the Kabir Saheb portrait. It is built with SvelteKit and **prerendered**: `npm run build` writes plain HTML, CSS and JS for the home page, all 184 doha pages, the 404 page and `sitemap.xml` into `build/`, and Cloudflare serves those files. No server code runs in production.
 
 ## 3. Current project structure
 
@@ -40,7 +40,7 @@ Kabir-sahab-website/
 │   ├── app.css                   # @font-face rules and the complete visual design
 │   ├── app.d.ts                  # App.PageData type (doha on /doha/N pages)
 │   ├── lib/
-│   │   ├── dohas.ts              # THE doha content store (typed, 58 records)
+│   │   ├── dohas.ts              # THE doha content store (typed, 184 records)
 │   │   ├── search.ts             # Whole-word search + SEARCH_ALIASES
 │   │   ├── history.ts            # "Previously drawn" + no-repeat draw
 │   │   ├── explorer.svelte.ts    # Shared state: current doha, round, history
@@ -54,7 +54,7 @@ Kabir-sahab-website/
 │       ├── +layout.ts            # prerender = true for every page
 │       ├── +page.svelte          # Home: head tags only
 │       ├── +error.svelte         # 404 / error notice (noindex)
-│       ├── doha/[id]/            # /doha/1 … /doha/58 with their own head tags
+│       ├── doha/[id]/            # /doha/1 … /doha/184 with their own head tags
 │       └── sitemap.xml/          # Prerendered sitemap
 ├── static/                       # Copied as-is into build/
 │   ├── _headers                  # Cloudflare cache-control and security headers
@@ -78,9 +78,10 @@ Imports inside the app use Node subpath imports: `import { dohas } from '#lib/do
 
 - Is the only canonical doha content store. Pages and components `import` it; nothing is put on `window`.
 - Every record must contain non-empty Hindi doha text and a non-empty English meaning.
-- Every record has a permanent numeric `id` (1–58 today). Ids are shown as "Doha N" and are the `/doha/N` page address. **Never renumber or reuse an id**; a new doha gets the next unused number, and a removed doha's id is retired (its page then returns 404).
-- An optional `source` (e.g. `बीजक — साखी ३`) is shown on the card. Records without one show "Traditionally attributed to Kabir Saheb". Only add a source you can cite. Records that no published collection could be traced to carry `unverified: true` and show "Source unverified" instead (currently ids 23 and 25). Remove the flag and add a `source` once one is found.
-- The current production corpus contains **exactly 58 records**. `src/lib/dohas.test.ts` enforces the count, unique ids, the `।` / `॥` line endings, the "Kabir Saheb" rule and the unverified list. Update the test when the corpus changes on purpose.
+- Every record has a permanent numeric `id` (1–184 today). Ids are shown as "Doha N" and are the `/doha/N` page address. **Never renumber or reuse an id**; a new doha gets the next unused number, and a removed doha's id is retired (its page then returns 404).
+- An optional `source` (e.g. `बीजक — साखी ३`) is shown on the card. Records without one show "Traditionally attributed to Kabir Saheb". Only add a source you can cite. Records that no published collection could be traced to carry `unverified: true` and show "Source unverified" instead (currently ids 23, 25 and 59–184). Remove the flag and add a `source` once one is found.
+- The current production corpus contains **exactly 184 records**. Ids 59–184 are 126 discovery verses from BhaktiMala with original literal English translations, all `unverified: true` pending confirmation from published Kabir sources. Two of them (#102, #130) are four-line verses rather than two-line dohas.
+- `src/lib/dohas.test.ts` enforces the count, unique ids, line endings (`।` / `॥` for dohas 1–58; every verse ends with `॥`), the "Kabir Saheb" rule and the unverified list. Update the test when the corpus changes on purpose.
 
 ### `src/lib/search.ts`, `history.ts`, `explorer.svelte.ts`
 
@@ -95,8 +96,8 @@ Imports inside the app use Node subpath imports: `import { dohas } from '#lib/do
   - Draw, search results and history items move to `/doha/N` with `goto(…, { reset: false })`. That is a normal history entry (Back works) with no scroll jump; Draw also keeps the viewport fixed.
   - Only first loads, links and Back/Forward set the card from the URL (`afterNavigate`, `type !== 'goto'`), so a slow navigation can never overwrite a newer draw.
   - Old `/#doha-N` links redirect to `/doha/N`.
-- **Share** uses `navigator.share` when available. Otherwise it copies the doha, meaning and `/doha/N` link, and shows "Link copied!".
-- `/doha/[id]/+page.ts` lists every id in `entries()` so all 58 pages are prerendered. The doha itself is in the HTML, so search engines and readers without JavaScript see it.
+- **Share** uses `navigator.share` when available. Otherwise it copies the same content and shows "Link copied!". Shared content is the doha, a blank line, the meaning, `— Kabir Saheb` (no doha number), a blank line, and the `/doha/N` link (`shareText` in `src/lib/clipboard.ts`, covered by a test).
+- `/doha/[id]/+page.ts` lists every id in `entries()` so all 184 pages are prerendered. The doha itself is in the HTML, so search engines and readers without JavaScript see it.
 - `<html lang="en">`. Every element containing Hindi carries `lang="hi"`: the kicker, the doha text, Hindi source labels, search-result first lines and history items. Keep this when adding new Hindi text.
 - Keep the existing IDs and class names (`#drawBtn`, `#card`, `.doha-text`, `.history-item`…). The CSS and the browser regression tests rely on them.
 
@@ -128,8 +129,8 @@ Imports inside the app use Node subpath imports: `import { dohas } from '#lib/do
 
 Preserve all of the following unless the user explicitly requests a change:
 
-- All 58 Hindi dohas and all 58 English meanings.
-- Random **Draw a Doha** behavior (no repeats until every doha has been shown), with the "doha N of 58 shown this round" counter.
+- All 184 Hindi verses and all 184 English meanings.
+- Random **Draw a Doha** behavior (no repeats until every doha has been shown), with the "doha N of 184 shown this round" counter.
 - Hindi and English keyword search.
 - Separate **Copy Hindi** and **Copy English** buttons, and **Share**.
 - A prerendered page per doha at `/doha/N`, with its own title, description and preview text. Old `/#doha-N` links keep redirecting.
@@ -187,7 +188,7 @@ Search must therefore ignore English capitalization and extra spaces while remai
 | --- | --- |
 | `काली चादर` | 1 result: the “गुरु बेचारा…” doha |
 | `गुरु बेचारा` | 1 result: the “गुरु बेचारा…” doha |
-| `diamond` | 2 matching dohas in the current corpus |
+| `diamond` | 4 matching dohas in the current corpus |
 | `marketplace` | 3 matching dohas in the current corpus |
 | `चौथे राम` | 1 result: the “चार राम…” doha |
 | `four forms of ram` | 1 result: the “चार राम…” doha |
@@ -196,7 +197,7 @@ Search must therefore ignore English capitalization and extra spaces while remai
 | `प्रभुता चेरी` | 1 result: the “प्रभुता को…” doha |
 | `power itself becomes` | 1 result: the “प्रभुता को…” doha |
 | `घट घट राम` | 1 result: the “कस्तूरी कुण्डल बसे…” doha |
-| `ram` | 3 results; must not include “माटी कहे कुम्हार…” (“trample”) |
+| `ram` | 19 results; must not include “माटी कहे कुम्हार…” (“trample”) |
 | `a` | No results, message asks for at least 2 letters |
 | `mann`, `guru`, `love`, `ego`, `truth`, `death` | At least 1 result each (the placeholder examples must all work) |
 
@@ -204,7 +205,7 @@ All of these, plus uppercase and extra-space variants, are automated in `src/lib
 
 ## 7. Required latest dohas
 
-These records must remain present in the 58-doha corpus.
+These records must remain present in the 184-verse corpus.
 
 ### Doha 54
 
@@ -328,7 +329,7 @@ Run checks proportional to the change. A normal content or behavior change shoul
 npm install
 npm test          # Vitest: corpus integrity, regression searches, history/draw
 npm run check     # svelte-check: 0 errors, 0 warnings
-npm run build     # prerenders 61 HTML pages + sitemap into build/
+npm run build     # prerenders 187 HTML pages + sitemap into build/
 ```
 
 ### In a browser
@@ -337,9 +338,9 @@ Run `npm run preview:cloudflare`. It builds and serves `build/` through Cloudfla
 
 - No console errors, and no Content-Security-Policy violations.
 - Portrait appears and fonts load.
-- **Draw a Doha** works repeatedly. The URL moves to `/doha/N`, the title follows, the viewport doesn't jump, and the counter reads "doha N of 58".
+- **Draw a Doha** works repeatedly. The URL moves to `/doha/N`, the title follows, the viewport doesn't jump, and the counter reads "doha N of 184".
 - **Back** returns to the previous doha.
-- Copy Hindi, Copy English and Share work. Share copies a `/doha/N` link when `navigator.share` is unavailable.
+- Copy Hindi, Copy English and Share work. Without `navigator.share`, Share copies the doha, meaning, `— Kabir Saheb`, a blank line and the `/doha/N` link.
 - Copy and Share buttons appear when a doha is opened from search, history or a link, not only after Draw.
 - History shows the last five previous dohas, never the current one, and survives a refresh.
 - `/doha/N` opened directly shows that doha, including with JavaScript disabled.
@@ -413,6 +414,8 @@ When the user requests new or corrected verses:
 - Doha 56, “चार राम हैं जगत में…”, added with an original English plain-sense translation.
 - Doha 57, “ऐसी वाणी बोलिए…”, added with an original English plain-sense translation.
 - Doha 58, “प्रभुता को सब कोई भजै…”, added with an original English plain-sense translation.
+- 126 additional discovery verses from BhaktiMala added as ids 59–184 with original literal English translations; all are marked `unverified: true` pending confirmation from published Kabir sources (PR #26).
+- Shared text signature changed to `— Kabir Saheb` (no doha number), with a blank line before the link (PR #28).
 
 **7 November 2026 (PRs #9–#23):**
 
@@ -436,9 +439,9 @@ When the user requests new or corrected verses:
 **7 November 2026, SvelteKit migration (PRs #27, #29, #30 and the deploy PR):**
 
 - **Stack:** moved to SvelteKit 3 (Svelte 5, TypeScript), fully prerendered with adapter-static and served by Cloudflare from `build/`.
-- **Data:** the doha data became a typed module (`src/lib/dohas.ts`); the `window` global is gone for good.
+- **Data:** the doha data (all 184 verses, including PR #26) became a typed module (`src/lib/dohas.ts`); the `window` global is gone for good. PR #28's share format was carried over.
 - **Code:** search and history logic moved into `src/lib`, with 32 Vitest tests. The UI was split into Svelte components with the same look and behaviour.
-- **Per-doha pages:** `/doha/1` … `/doha/58` are prerendered with their own titles, descriptions and preview text. The URL follows the reader, Back works, Share links to `/doha/N`, and old `#doha-N` links redirect.
+- **Per-doha pages:** `/doha/1` … `/doha/184` are prerendered with their own titles, descriptions and preview text. The URL follows the reader, Back works, Share links to `/doha/N`, and old `#doha-N` links redirect.
 - **Site files:** 404 page, `sitemap.xml` and `robots.txt` added.
 - **Security and caching:** strict CSP via SvelteKit `<meta>` tags (hash mode), hashed JS/CSS cached for a year, and no more manual `?v=` bumps.
 

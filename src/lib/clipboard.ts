@@ -18,7 +18,18 @@ export async function copyText(text: string): Promise<void> {
 	}
 }
 
-/** Text used by Copy-all and Share: the doha, its meaning and attribution. */
-export function shareText(d: { id: number; text: string; meaning: string }): string {
-	return `${d.text}\n\n${d.meaning}\n— Kabir Saheb, Doha ${d.id}`;
+/**
+ * What Share sends (and copies, when the share sheet is unavailable):
+ *
+ *     [Hindi doha]
+ *
+ *     [English meaning]
+ *     — Kabir Saheb
+ *
+ *     https://…/doha/N
+ *
+ * The signature has no doha number; a blank line separates it from the link.
+ */
+export function shareText(d: { text: string; meaning: string }, url: string): string {
+	return `${d.text}\n\n${d.meaning}\n— Kabir Saheb\n\n${url}`;
 }
