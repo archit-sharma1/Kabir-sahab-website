@@ -138,6 +138,30 @@
     background:transparent;
   }
 
+  .doha-meta{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    gap:12px;
+    flex-wrap:wrap;
+    margin:-16px 0 0;
+    font-family:'Poppins', sans-serif;
+    font-size:0.75rem;
+    letter-spacing:0.04em;
+    color:var(--muted);
+  }
+
+  .doha-number{
+    color:var(--thread-gold);
+    text-transform:uppercase;
+  }
+
+  .search-result .sr-number{
+    font-family:'Poppins', sans-serif;
+    font-size:0.8rem;
+    color:var(--thread-gold);
+  }
+
   .doha-text{
     font-family:'Tiro Devanagari Hindi', serif;
     font-size:1.5rem;

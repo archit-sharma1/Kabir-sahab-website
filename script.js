@@ -37,15 +37,24 @@
     return idx;
   }
 
+  // Each doha has a permanent `id` in data/dohas.js; it never changes, even
+  // if dohas are removed or reordered, so numbers and links stay stable.
+  function sourceLabel(d){
+    return d.source || 'Traditionally attributed to Kabir';
+  }
+
+  function metaLine(d){
+    return '<p class="doha-meta"><span class="doha-number">Doha ' + d.id + '</span>' +
+      '<span class="doha-source">' + sourceLabel(d) + '</span></p>';
+  }
+
   function showDoha(idx){
     currentIndex = idx;
     const d = dohas[idx];
     card.innerHTML =
+      metaLine(d) +
       '<p class="doha-text">' + d.text + '</p>' +
-      (d.meaning ? '<p class="meaning">' + d.meaning + '</p>' :
-        '<p class="meaning">' + d.source + '</p>');
-    copyMeaningBtn.disabled = !d.meaning;
-    copyMeaningBtn.title = d.meaning ? '' : 'English meaning is not included for this Bijak sakhi.';
+      '<p class="meaning">' + d.meaning + '</p>';
     renderHistory();
   }
 
@@ -119,7 +128,7 @@
   }
 
   function copyMeaning(){
-    if (currentIndex === null || !dohas[currentIndex].meaning) return;
+    if (currentIndex === null) return;
     copyText(dohas[currentIndex].meaning, copyMeaningBtn);
   }
 
@@ -224,8 +233,8 @@
       result.type = 'button';
       result.className = 'search-result';
       result.innerHTML =
-        '<p class="sr-line">' + firstLine(dohas[idx].text) + '</p>' +
-        '<p class="sr-meaning">' + (dohas[idx].meaning || dohas[idx].source) + '</p>';
+        '<p class="sr-line"><span class="sr-number">' + dohas[idx].id + '.</span> ' + firstLine(dohas[idx].text) + '</p>' +
+        '<p class="sr-meaning">' + dohas[idx].meaning + '</p>';
       result.addEventListener('click', () => {
         addToHistory(idx);
         showDoha(idx);
