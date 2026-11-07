@@ -1,6 +1,6 @@
 # Kabir Saheb Doha Website — Project Instructions
 
-Last updated: 5 November 2026 (IST)
+Last updated: 7 November 2026 (IST)
 
 ## 1. Project identity
 
@@ -9,7 +9,7 @@ Last updated: 5 November 2026 (IST)
 - **Repository URL:** https://github.com/archit-sharma1/Kabir-sahab-website
 - **Default branch:** `main`
 - **Repository visibility:** Private
-- **Canonical production URL:** https://kabir-sahab-website.sarchit216-as.workers.dev/
+- **Canonical production URL:** https://kabir-saheb.sant-vani.workers.dev/
 - **Hosting:** Cloudflare Workers with automatic deployment from GitHub
 - **Legacy ChatGPT Site:** https://kabir-saheb-dohe.sarchit216-as.chatgpt.site
 
@@ -280,7 +280,7 @@ After the user merges the pull request and Cloudflare deploys `main`:
 
 ## 10. Cloudflare deployment and access
 
-- The canonical public site runs at `kabir-sahab-website.sarchit216-as.workers.dev`.
+- The canonical public site runs at `kabir-saheb.sant-vani.workers.dev`.
 - Merges into `main` should trigger the production deployment automatically.
 - Keep **production traffic public** because the website is intended for public reading.
 - If preview deployments are used, restrict **previews only** to the owner's Cloudflare account or exact authorized email.

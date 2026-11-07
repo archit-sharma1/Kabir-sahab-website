@@ -27,6 +27,6 @@ Download the repository and open `index.html` in a modern web browser. No extern
 
 ## Live website
 
-[Open the public Cloudflare deployment](https://kabir-sahab-website.sarchit216-as.workers.dev/)
+[Open the public Cloudflare deployment](https://kabir-saheb.sant-vani.workers.dev/)
 
 The production website is hosted on Cloudflare Workers and is automatically deployed from the `main` branch.
