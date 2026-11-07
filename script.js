@@ -308,16 +308,17 @@
     if (currentIndex === null) return;
     const d = dohas[currentIndex];
     const url = dohaLink(d);
-    const text = d.text + '\n\n' + d.meaning + '\n— Kabir Saheb, Doha ' + d.id;
+    const text = d.text + '\n\n' + d.meaning + '\n— Kabir Saheb';
+    const sharedText = text + '\n\n' + url;
     if (navigator.share){
       try {
-        await navigator.share({ title: 'Kabir Saheb — Doha ' + d.id, text: text, url: url });
+        await navigator.share({ title: 'Kabir Saheb — Doha ' + d.id, text: sharedText });
         return;
       } catch (err) {
         if (err && err.name === 'AbortError') return;
       }
     }
-    copyText(text + '\n' + url, shareBtn, 'Link copied!');
+    copyText(sharedText, shareBtn, 'Link copied!');
   }
 
   shareBtn.addEventListener('click', shareDoha);
@@ -335,3 +336,4 @@
 
   renderHistory();
 })();
+
