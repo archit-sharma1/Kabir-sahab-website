@@ -12,7 +12,7 @@ class Explorer {
 	currentId = $state<number | null>(null);
 	recent = $state<number[]>([]);
 	seen = $state<number[]>([]);
-	/** "doha N of 184 shown this round" after a draw; empty otherwise. */
+	/** "doha N of 252 shown this round" after a draw; empty otherwise. */
 	counter = $state('');
 
 	#loaded = false;

@@ -1088,5 +1088,345 @@ export const dohas: readonly Doha[] = [
 		unverified: true,
 		text: "जब मन लागे राम से, तब सब सुख पाय।\nकहे कबीर सुनो भाई, मन को राम लगाय॥",
 		meaning: "When the mind becomes attached to Ram, then it obtains all happiness. Kabir Saheb says: listen, brother; attach the mind to Ram."
+	},
+	{
+		id: 185,
+		text: "सुरति करो मेरे साइयाँ, हम हैं भवजल माहिं।\nआपे ही बह जाएंगे, जो नहीं पकड़ो बाहिं॥",
+		meaning: "Remember me, my Master; I am caught in the waters of worldly existence. If You do not hold my arm, I will simply be swept away."
+	},
+	{
+		id: 186,
+		text: "कबीर माया पापिनी, लोभ भुलाया लोग।\nपूरा किन्हु न भोगया, इसका यही वियोग॥",
+		meaning: "Kabir Saheb says Maya is sinful; through greed she has led people astray. No one has ever enjoyed her completely; this is the separation she always leaves behind."
+	},
+	{
+		id: 187,
+		text: "मन राजा मन रंक है, मन कायर मन शूर।\nशून्य शिखर पर मन रहे, मस्तक पावे नूर॥",
+		meaning: "The mind is king and the mind is beggar; the mind is coward and the mind is hero. When the mind rests at the summit of emptiness, the brow receives the light."
+	},
+	{
+		id: 188,
+		text: "कबीर यह मन लालची, समझै नाहिं गंवार।\nभजन करन को आलसी, खाने को तैयार॥",
+		meaning: "Kabir Saheb says this mind is greedy, and the fool does not understand. It is lazy when it comes to devotion, but always ready to eat."
+	},
+	{
+		id: 189,
+		text: "सुमिरन सुरति लगाय के, मुख से कछु न बोल।\nबाहर के पट बंद कर, अन्तर के पट खोल॥",
+		meaning: "Keep your attention fixed in remembrance and say nothing with the mouth. Close the outer doors and open the inner ones."
+	},
+	{
+		id: 190,
+		text: "कबीरा यह गत अटपटी, चटपट लखि न जाए।\nजब मन की खटपट मिटे, अधर भया ठहराए॥",
+		meaning: "Kabir Saheb says this state is strange; it cannot be grasped in a hurry. When the mind's restless clatter ends, one comes to rest in the beyond."
+	},
+	{
+		id: 191,
+		text: "मन के बहुतक रंग हैं, छिन-छिन बदले सोय।\nएक रंग में जो रहे, ऐसा बिरला कोय॥",
+		meaning: "The mind has many colours, changing from moment to moment. Rare is the one who stays in a single colour."
+	},
+	{
+		id: 192,
+		text: "कबीरा गर्व न कीजिये, कबहुँ न हँसिये कोय।\nअजहूँ नाव समुद्र में, को जाने का होय॥",
+		meaning: "Kabir Saheb says: do not be proud, and never laugh at anyone. Your boat is still out at sea; who knows what will happen?"
+	},
+	{
+		id: 193,
+		text: "मरण भला तब जानिए, टूट जाए हंकार।\nजग की मरनी क्यों मरे, दिन में सौ-सौ बार॥",
+		meaning: "Know that death is good when the ego breaks. Why die the world's kind of death, a hundred times a day?"
+	},
+	{
+		id: 194,
+		text: "साहब तुम ही दयाल हो, तुम लगि मेरी दौड़।\nजैसे काग जहाज को, सूझे और न ठौर॥",
+		meaning: "Sahib, You alone are merciful; all my running ends at You. Like the crow on a ship at sea, I can see no other place to rest."
+	},
+	{
+		id: 195,
+		text: "साहब के दरबार में, कमी काहू की नाहिं।\nबंदा मौज न पावही, चूक चाकरी माहिं॥",
+		meaning: "In the Sahib's court nothing is lacking. If the servant does not find joy, the fault lies in his own service."
+	},
+	{
+		id: 196,
+		text: "तन की भूख सहज है, तीन पाव की सेर।\nमन की भूख अनंत है, निगले मेरु सुमेर॥",
+		meaning: "The body's hunger is easily met; three quarters of a ser will do. The mind's hunger is endless; it would swallow the mountains Meru and Sumeru."
+	},
+	{
+		id: 197,
+		text: "आग-आँच सहना सुगम, सुगम खड़ग की धार।\nनेह निबाहन एक रस, महा कठिन व्यवहार॥",
+		meaning: "Bearing the heat of fire is easy, and so is the edge of a sword. Keeping love steady and unchanging is the hardest practice of all."
+	},
+	{
+		id: 198,
+		text: "आग लगी आकाश में, झर-झर गिरे अंगार।\nना होते जो साधुजन, जल मरता संसार॥",
+		meaning: "Fire has broken out in the sky, and embers rain down. If there were no saints, the world would burn to death."
+	},
+	{
+		id: 199,
+		text: "कबीर रसरी पाँव में, कहाँ सोवें सुख चैन।\nसांस नगाड़ा कूच का, जागत है दिन रैन॥",
+		meaning: "Kabir Saheb says: with the rope already on your feet, how can you sleep in comfort? Each breath is the drum of departure, beating day and night."
+	},
+	{
+		id: 200,
+		text: "साधु ऐसा चाहिए, जैसा सूप सुभाय।\nसार-सार को गहि रहे, थोथा देय उड़ाय॥",
+		meaning: "A saint should be like a winnowing basket by nature, keeping the grain and letting the empty husk blow away."
+	},
+	{
+		id: 201,
+		text: "राम नाम कड़वा लगे, मीठे लागे दाम।\nदुविधा में दोनों गए, माया मिली न राम॥",
+		meaning: "Ram's name tastes bitter and money tastes sweet. Caught in two minds, one loses both: neither Maya nor Ram is found."
+	},
+	{
+		id: 202,
+		text: "हद हद करते सब गए, बेहद गया न कोय।\nअनहद के मैदान में, रहा कबीरा सोय॥",
+		meaning: "Everyone went about within limits; no one went into the limitless. In the field of the unstruck sound, Kabir Saheb rests."
+	},
+	{
+		id: 203,
+		text: "दौड़त दौड़त दौड़िया, जेती मन की दौड़।\nदौड़ि थके मन थिर भया, वस्तु ठौर की ठौर॥",
+		meaning: "I ran and ran, as far as the mind could run. When the running wore itself out, the mind grew still, and what I sought was right where it had always been."
+	},
+	{
+		id: 204,
+		text: "ज्ञानी भूले ज्ञान कथि, निकट रहा निज रूप।\nबाहर खोजे बापुरे, भीतर वस्तु अनूप॥",
+		meaning: "The learned lose their way talking about knowledge, while their own true form stays close by. The poor souls search outside; the incomparable thing is within."
+	},
+	{
+		id: 205,
+		text: "लिखा-लिखी की है नहीं, देखा-देखी बात।\nदुल्हा-दुल्हन मिल गए, फीकी पड़ी बारात॥",
+		meaning: "This is not a matter of writing, nor of seeing and copying. When bride and groom have met, the wedding procession loses its colour."
+	},
+	{
+		id: 206,
+		text: "भागे भला न होएगा, कहाँ धरोगे पाँव।\nसिर सौंपो सीधे लड़ो, काहे करो कुदाँव॥",
+		meaning: "Running away will do no good; where will you set your feet? Surrender your head and fight straight; why play tricks?"
+	},
+	{
+		id: 207,
+		text: "सूरा नाम रखाय के, अब क्यों डरना वीर।\nअड़े रहना मैदान में, सम्मुख सहना तीर॥",
+		meaning: "Having taken the name of warrior, why be afraid now, brave one? Stand firm on the field and take the arrows head-on."
+	},
+	{
+		id: 208,
+		text: "हरि मरें तो हम मरें, हमरी मरे बलाय।\nसांचे गुरु का बालका, मरे न मारा जाय॥",
+		meaning: "If Hari dies, then I will die; otherwise let my troubles die instead. The child of a true Guru neither dies nor can be killed."
+	},
+	{
+		id: 209,
+		text: "आठ पहर चौसठ घड़ी, लागि रहे अनुराग।\nहृदय पलक ना बीसरे, तब साँचा बैराग॥",
+		meaning: "Through all eight watches and sixty-four ghadis of the day, love stays fixed. When the heart does not forget even for the blink of an eye, that is true detachment."
+	},
+	{
+		id: 210,
+		text: "सूरा सोय सराहिए, लड़े मुक्ति के हेत।\nपुर्जा-पुर्जा कट पड़े, तबहुँ न छाड़े खेत॥",
+		meaning: "Praise as a warrior the one who fights for liberation. Even cut to pieces, he does not leave the field."
+	},
+	{
+		id: 211,
+		text: "ते दिन गए अकारथ ही, संगत भई न संग।\nप्रेम बिना पशु जीवना, भक्ति बिना भगवंत॥",
+		meaning: "Those days passed in vain in which there was no company of saints. Life without love is an animal's life, and so is life without devotion to Bhagwant."
+	},
+	{
+		id: 212,
+		text: "विषय वासना उरझि कर, जनम गँवाया बाद।\nअब पछताए क्या करे, निज करनी कर याद॥",
+		meaning: "Entangled in sensual desire, you wasted your birth for nothing. What use is regret now? Remember your own deeds."
+	},
+	{
+		id: 213,
+		text: "जिहि घट प्रेम न प्रीति रस, पुनि रसना नहिं नाम।\nते नर-खर इस संसार में, उपजि भए बेकाम॥",
+		meaning: "A heart with no love and no taste of affection, a tongue with no Name: such men are donkeys in this world, born to no purpose."
+	},
+	{
+		id: 214,
+		text: "नदी किनारे मैं खड़ी, ज्यों जल मैला होय।\nमैं मैली पिया उजरे, मिलन कहाँ से होय॥",
+		meaning: "I stand on the riverbank as if in muddy water. I am soiled and my Beloved is pure; how can we meet?"
+	},
+	{
+		id: 215,
+		text: "कबीर रेख सिंदूर की, काजर दिया न जाय।\nतन मन में प्रीतम बसा, दूजा कहाँ समाय॥",
+		meaning: "Kabir Saheb says: where the line of sindoor is drawn, kohl cannot be applied. The Beloved lives in body and mind; where is there room for another?"
+	},
+	{
+		id: 216,
+		text: "जिन पावन भुइँ बहु फिरे, घूमे देस-विदेस।\nपिया मिलन जब होइया, आँगन भया विदेस॥",
+		meaning: "The feet that wandered many lands, roaming home and abroad: once the Beloved was met, even one's own courtyard became a foreign land."
+	},
+	{
+		id: 217,
+		text: "आपा मेटे हरि मिलें, हरि मिटे सब जाय।\nअकथ कहानी प्रेम की, कोई नहीं पतियाय॥",
+		meaning: "Erase the self and Hari is met; erase Hari and everything is lost. The story of love cannot be told, and no one believes it."
+	},
+	{
+		id: 218,
+		text: "जीवन ते मरना भला, जो मरि जाने कोय।\nमरने पहले जो मरे, सो अमर फिर होय॥",
+		meaning: "Dying is better than living, if one knows how to die. Whoever dies before death becomes immortal."
+	},
+	{
+		id: 219,
+		text: "यद्यपि हम कायर कुटिल, खेर चाकरी चोर।\nतदपि कृपा न छाड़िए, चीते आपनी ओर॥",
+		meaning: "Though I am cowardly and crooked, wicked and a shirker in service, do not withdraw your grace; look to your own nature."
+	},
+	{
+		id: 220,
+		text: "सतगुरु बड़े दयाल हैं, संतन के आधार।\nभवसागर अथाह सो, खेई उतारे पार॥",
+		meaning: "The true Guru is deeply compassionate, the support of the saints. He rows them across the bottomless ocean of existence to the far shore."
+	},
+	{
+		id: 221,
+		text: "जिस मरने से जग डरे, मेरो मन आनंद।\nकब मरिहूँ कब भेंट हो, पूरण परमानंद॥",
+		meaning: "The death the world fears fills my mind with joy. When will I die, and when will I meet the complete, supreme bliss?"
+	},
+	{
+		id: 222,
+		text: "प्रेम पियाला जो पिये, सीस दक्षिणा देय।\nलोभी सीस न दे सके, नाम प्रेम का लेय॥",
+		meaning: "Whoever would drink the cup of love must offer his head as the fee. The greedy cannot give his head; he only takes love's name."
+	},
+	{
+		id: 223,
+		text: "प्रेम बिना धीरज नहीं, बिरह बिना बैराग।\nसतगुरु बिन जावे नहीं, मन मनसा का दाग॥",
+		meaning: "Without love there is no patience; without the pain of separation there is no detachment. Without the true Guru, the stain of the mind's desires does not go."
+	},
+	{
+		id: 224,
+		text: "कबीरा सब धन निर्धना, धनवंता नहिं कोय।\nधनवंता सोई जानिए, राम रतन धन होय॥",
+		meaning: "Kabir Saheb says the whole world is poor; no one is rich. Know as rich only the one whose wealth is the jewel of Ram."
+	},
+	{
+		id: 225,
+		text: "बिरह बड़ो बैरी भयो, हृदय धरे न धीर।\nसुरति सनेही ना मिली, मिटे न मन की पीर॥",
+		meaning: "Separation has become a great enemy; the heart cannot keep its patience. The Beloved my attention longs for has not been met, and the mind's ache does not go."
+	},
+	{
+		id: 226,
+		text: "नींद निशानी मौत की, उठ कबीरा जाग।\nऔर रसायन छाड़ि के, राम रसायन लाग॥",
+		meaning: "Sleep is a sign of death; rise and wake, Kabir Saheb. Leave every other elixir and take to the elixir of Ram."
+	},
+	{
+		id: 227,
+		text: "हाड़ जले ज्यों लाकड़ी, केस जले ज्यों घास।\nसब जग जलता देख के, भए कबीर उदास॥",
+		meaning: "Bones burn like firewood, hair burns like grass. Seeing the whole world burning, Kabir Saheb turned away from it."
+	},
+	{
+		id: 228,
+		text: "कबीर यह संसार है, जैसे सेमल फूल।\nदिन दस के व्यवहार में, झूठे रंग न भूल॥",
+		meaning: "Kabir Saheb says this world is like the silk-cotton flower. In dealings that last ten days, do not be fooled by false colours."
+	},
+	{
+		id: 229,
+		text: "श्रम से सब होत है, जो मन राखे धीर।\nश्रम ते खोदत कूप ज्यों, थल में प्रकटे नीर॥",
+		meaning: "Everything comes through effort, if the mind keeps patience, just as digging a well with effort brings water up even in dry land."
+	},
+	{
+		id: 230,
+		text: "कबीर रण में आय के, पीछे रहे न सूर।\nसाईं के सन्मुख रहे, जूझे सदा हुजूर॥",
+		meaning: "Kabir Saheb says: having come to the battlefield, the warrior does not hang back. He stays face to face with Sai and always fights in the Master's presence."
+	},
+	{
+		id: 231,
+		text: "मन के मते न चलिए, मन के मते अनेक।\nजो मन पर असवार है, सो साधु कोई एक॥",
+		meaning: "Do not follow the mind's opinions; the mind has countless opinions. The one who rides the mind is a rare saint."
+	},
+	{
+		id: 232,
+		text: "जोगी हुआ झक लगी, मिट गई खींचातान।\nउलट समाना आप में, हुआ ब्रह्म समान॥",
+		meaning: "He became a yogi and was absorbed; all the pulling this way and that came to an end. Turning back, he merged into himself and became one with Brahm."
+	},
+	{
+		id: 233,
+		text: "मन को मारूँ पटकि के, टूक टूक ह्वै जाय।\nविष की क्यारी बोय के, लुनता क्यों पछताय॥",
+		meaning: "I would dash the mind down until it breaks into pieces. Having sown a bed of poison, why lament when reaping it?"
+	},
+	{
+		id: 234,
+		text: "बैद मुआ रोगी मुआ, मुआ सकल संसार।\nएक कबीरा ना मुआ, जग में सौ सौ बार॥",
+		meaning: "The doctor died, the patient died, the whole world died. Only Kabir Saheb did not die, though the world dies a hundred times over."
+	},
+	{
+		id: 235,
+		text: "प्रेम बिना नहीं भेष कुछ, नाहक का संवाद।\nप्रेम भाव जब लग नहीं, तब लग वाद-विवाद॥",
+		meaning: "Without love, outward garb means nothing; it is empty talk. As long as there is no feeling of love, there is only argument."
+	},
+	{
+		id: 236,
+		text: "काह भरोसा देह का, बिनस जात छिन माहिं।\nसाँस साँस सुमिरन करो, और जतन कछु नाहिं॥",
+		meaning: "What trust can be placed in the body? It perishes in a moment. Remember with every breath; there is no other way."
+	},
+	{
+		id: 237,
+		text: "जागो लोगों मत सोओ, न करो नींद से प्यार।\nजैसा सपना रैन का, वैसा ये संसार॥",
+		meaning: "Wake up, people, do not sleep; do not fall in love with sleep. As a dream is in the night, so is this world."
+	},
+	{
+		id: 238,
+		text: "चले गए सो न मिले, किससे पूछूँ बात।\nमात पिता सुत बांधवा, झूठा सब संघात॥",
+		meaning: "Those who have gone are never met again; whom can I ask? Mother, father, son and kin: all such ties are false."
+	},
+	{
+		id: 239,
+		text: "दुर्लभ मानुष जन्म है, देह न बारंबार।\nतरुवर ज्यों पत्ता झड़े, बहुरि न लागे डार॥",
+		meaning: "Human birth is rare; the body is not given again and again, just as a leaf that falls from the tree never returns to the branch."
+	},
+	{
+		id: 240,
+		text: "कामी क्रोधी लालची, इनसे भक्ति न होय।\nभक्ति करे कोई सूरमा, जाति वरन कुल खोय॥",
+		meaning: "The lustful, the angry and the greedy cannot practise devotion. Only a brave one practises it, giving up caste, class and lineage."
+	},
+	{
+		id: 241,
+		text: "बहता पानी निर्मला, बंधा सो गंदा होय।\nसाधु जन रमता भला, दाग न लागे कोय॥",
+		meaning: "Flowing water stays clean; water that is held back turns foul. A saint is better wandering, so that no stain clings to him."
+	},
+	{
+		id: 242,
+		text: "बंदे तू कर बंदगी, तो पावे दीदार।\nअवसर मानुष जन्म का, बहुरि न बारंबार॥",
+		meaning: "Servant, offer your devotion and you will have the vision. The chance of a human birth does not come again and again."
+	},
+	{
+		id: 243,
+		text: "यह तो घर है प्रेम का, खाला का घर नाहिं।\nसीस उतारे भुइँ धरे, तब पैठे घर माहिं॥",
+		meaning: "This is the house of love, not an aunt's house that anyone may walk into. Only one who takes off his head and lays it on the ground may enter."
+	},
+	{
+		id: 244,
+		text: "चेत सवेरे बावरे, फिर पाछे पछताय।\nतुझको जाना दूर है, कहे कबीर जगाय॥",
+		meaning: "Wake up early, foolish one, or you will regret it later. You have far to go; Kabir Saheb says so to wake you."
+	},
+	{
+		id: 245,
+		text: "सतगुरु के उपदेश का, सुनिया एक विचार।\nजो सतगुरु मिलते नहीं, जाता जम के द्वार॥",
+		meaning: "Hear one thought from the true Guru's teaching: had I not met the true Guru, I would have gone to Yama's door."
+	},
+	{
+		id: 246,
+		text: "हमरे गुरु के दो भुजा, गोविंद के भुज चार।\nगोविंद से कछु ना भया, सतगुरु तारें पार॥",
+		meaning: "My Guru has two arms; Govind has four. Govind could do nothing for me; the true Guru carries me across."
+	},
+	{
+		id: 247,
+		text: "मन मक्का दिल द्वारका, काया काशी जान।\nदस द्वारे का देहरा, तामें ज्योति पहचान॥",
+		meaning: "Know the mind as Mecca, the heart as Dwarka and the body as Kashi. In this temple of ten doors, recognise the light."
+	},
+	{
+		id: 248,
+		text: "मैं अपराधी जन्म का, नख सिख भरा विकार।\nतुम दाता दुख भंजना, मेरी करो सम्हार॥",
+		meaning: "I have been a wrongdoer since birth, full of faults from head to toe. You are the giver, the breaker of sorrow; take care of me."
+	},
+	{
+		id: 249,
+		text: "झूठा सब संसार है, कोउ न अपना मीत।\nराम नाम को जान ले, चले सो भौजल जीत॥",
+		meaning: "The whole world is false; no one is truly your friend. Whoever comes to know Ram's name departs having crossed the ocean of existence."
+	},
+	{
+		id: 250,
+		text: "जंत्र मंत्र सब झूठ है, मति भरमो जग कोय।\nसार शब्द जाने बिना, कागा हंस न होय॥",
+		meaning: "Charms and spells are all false; let no one in the world be misled by them. Without knowing the essential Word, a crow does not become a swan."
+	},
+	{
+		id: 251,
+		text: "दास कहावन कठिन है, मैं दासन का दास।\nअब तो ऐसा होय रहूँ, ज्यों पाँव तले की घास॥",
+		meaning: "It is hard to be called a servant; I am the servant of servants. Now I want to live like the grass beneath the feet."
+	},
+	{
+		id: 252,
+		text: "तन मन ताको दीजिए, जाके विषया नाहिं।\nआपा सबही डारि के, राखे साहब माहिं॥",
+		meaning: "Give body and mind to the one who has no worldly desires, who has set aside all self and keeps you in the Sahib."
 	}
 ];

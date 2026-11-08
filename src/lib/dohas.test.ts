@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { dohas } from './dohas.js';
 
 describe('doha corpus', () => {
-	it('has 184 records', () => expect(dohas).toHaveLength(184));
+	it('has 252 records', () => expect(dohas).toHaveLength(252));
 
 	it('ids are unique positive integers', () => {
 		const ids = dohas.map((d) => d.id);
@@ -17,8 +17,8 @@ describe('doha corpus', () => {
 		}
 	});
 
-	it('dohas 1–58 have two lines ending in । and ॥', () => {
-		for (const d of dohas.filter((x) => x.id <= 58)) {
+	it('dohas 1–58 and 185–252 have two lines ending in । and ॥', () => {
+		for (const d of dohas.filter((x) => x.id <= 58 || x.id >= 185)) {
 			const lines = d.text.split('\n');
 			expect(lines, `doha ${d.id}`).toHaveLength(2);
 			expect(lines[0].endsWith('।'), `doha ${d.id} line 1`).toBe(true);
