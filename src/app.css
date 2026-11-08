@@ -382,10 +382,70 @@
     white-space:nowrap;
   }
 
+  .search-toolbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:12px;
+    flex-wrap:wrap;
+  }
+
+  /* List / Grid switch for search results (a small segmented control). */
+  .view-toggle{
+    display:inline-flex;
+    border:1px solid rgba(184,134,59,0.5);
+    border-radius:999px;
+    overflow:hidden;
+  }
+
+  .view-toggle .view-option{
+    background:transparent;
+    color:var(--muted);
+    font-size:0.8rem;
+    padding:6px 14px;
+    border-radius:0;
+  }
+
+  .view-toggle .view-option[aria-pressed="true"]{
+    background:var(--thread-gold);
+    color:#050505;
+  }
+
+  .view-toggle .view-option:hover{
+    background:rgba(184,134,59,0.15);
+    color:var(--paper);
+  }
+
+  .view-toggle .view-option[aria-pressed="true"]:hover{
+    background:#cf9c4d;
+    color:#050505;
+  }
+
   .search-results{
     display:flex;
     flex-direction:column;
     gap:8px;
+  }
+
+  /* Grid view: two columns, also on phones. */
+  .search-results.grid{
+    display:grid;
+    grid-template-columns:repeat(2, minmax(0, 1fr));
+    gap:8px;
+  }
+
+  .search-results.grid .search-result{
+    padding:10px 12px;
+  }
+
+  .search-results.grid .sr-meaning{
+    font-size:0.85rem;
+  }
+
+  .show-all{
+    align-self:center;
+    padding:8px 22px;
+    font-size:0.85rem;
   }
 
   .search-result{

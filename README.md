@@ -13,6 +13,8 @@ Built with **SvelteKit 3** (Svelte 5, TypeScript) and fully prerendered: every p
   - Matches whole words (`ram` finds राम but not "trample") and needs at least 2 letters.
   - Ignores capitalization and extra spaces.
   - Understands romanised Hindi (`mann` → मन, `ram` → राम) and English themes (`truth`, `death`, `ego`).
+  - Shows the first 3 results, with a "Show all N dohas" button when there are more.
+  - Results display as a list (default) or a 2-column grid.
 - **Copy buttons:** Copy Hindi and Copy English work separately.
 - **Share:** opens the phone's share sheet, or copies the doha, its meaning, "— Kabir Saheb" and its `/doha/N` link.
 - **Previously drawn:** the last five dohas before the current one. The list survives a page refresh.
