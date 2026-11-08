@@ -62,7 +62,9 @@ Kabir-sahab-website/
 │   ├── _headers                  # Cloudflare cache-control and security headers
 │   ├── favicon.ico, robots.txt
 │   ├── images/                   # Touch icon and og-image.jpg (fixed URLs)
-│   └── fonts/                    # 8 self-hosted .woff2 files + licences
+│   └── fonts/                    # Latin .woff2 files + licences (Devanagari is generated)
+├── fonts-src/                    # Full Tiro Devanagari font (not served; trimmed at build)
+├── scripts/subset-fonts.mjs      # Trims it to the glyphs the site uses (runs before dev/build/test)
 ├── vite.config.ts                # SvelteKit config (adapter, CSP), Vitest config
 ├── wrangler.jsonc                # Cloudflare Worker: serves build/ as static assets
 ├── package.json                  # Scripts: dev, build, check, test, preview:cloudflare
@@ -109,6 +111,14 @@ Imports inside the app use Node subpath imports: `import { dohas } from '#lib/do
 - The portrait is the largest element on the home page, so its AVIF preload must come **before** SvelteKit's script preloads. Component `<svelte:head>` tags always come after them, so `src/hooks.server.ts` inserts the preload into the `%kabir.portrait-preload%` placeholder at the top of `app.html` when pages are prerendered. Under throttling this is the difference between LCP 2.0 s and 4.0 s.
 - `og-image.jpg` and `apple-touch-icon.png` stay in `static/images/`: crawlers and iOS need fixed URLs.
 - **The CSS is inlined into every page** (`inlineStyleThreshold` in `vite.config.ts`), so there is no render-blocking stylesheet request. SvelteKit's CSP hash mode adds the `<style>` hash automatically. This works because the portrait preload comes first in `<head>`. Measured under real slow-4G throttling: first paint 2.1 s → 0.9 s, LCP 2.1 s → 1.4 s, score 97 → 100.
+- **The Devanagari font is trimmed at build time** to the glyphs the site actually draws: 96.5 KB → 23.5 KB. `scripts/subset-fonts.mjs` runs automatically before `dev`, `build`, `test` and `check`:
+  1. It finds every run of Devanagari text in `src/` (all dohas, sources and component text).
+  2. It shapes each run with HarfBuzz (the shaping engine Chrome and Android use), keeping the glyphs from *every* shaping step, because conjuncts form in stages (क + ् → half-क → क्य).
+  3. It subsets the full font in `fonts-src/` to those glyphs and writes `src/lib/assets/fonts/tiro-devanagari-hindi-subset.woff2` (git-ignored). `src/app.css` imports it, so Vite gives it a hashed, year-cached name.
+  - **New dohas need no extra step:** their letters and conjuncts are added on the next build. `src/lib/fonts.test.ts` fails if any character in `src/` is missing from the trimmed font.
+  - **Verification:** all 184 verses, source labels and the kicker were rendered in Chrome with both fonts and compared pixel by pixel, with 0 differences.
+  - **Search engines and copying are unaffected:** the HTML holds plain Unicode text. The search box and status line use other font stacks, so typed Hindi renders in the system font and never needs this font.
+  - **Licence:** subsetting is allowed by the SIL OFL; the font has no Reserved Font Name.
 - **No fonts are preloaded.** The `@font-face` rules in the inlined CSS start the font downloads as soon as text needs them, with `font-display: swap`. Fonts are cached for a year, so returning visitors get them before the first paint, with no visible font swap.
 - **Loading fonts from JavaScript after page load (the `FontFace` API) was tried and rejected.** It helped Lighthouse's simulated score slightly, but returning visitors saw a 50–130 ms flash of the fallback font on every page load.
 - When reading Lighthouse, run it in an incognito window without extensions. Password-manager extensions (e.g. Bitwarden) add JavaScript and block the back/forward cache ("WebAuthentication API").
@@ -468,6 +478,7 @@ When asked to update this project:
 - Keep content in `src/lib/dohas.ts`, logic in `src/lib/*.ts` (with tests), UI in `src/lib/components/`, page head tags in `src/routes/`, and styles in `src/app.css`.
 - This is **SvelteKit 3**, not 2: config is in `vite.config.ts` (there is no `svelte.config.js`), imports use `#lib/…` (not `$lib`), and `goto` takes `{ replace, reset, shallow }`.
 - Run `npm test`, `npm run check` and `npm run build` before opening a pull request, and test in `npm run preview:cloudflare`.
+- Never edit `src/lib/assets/fonts/` by hand: it is generated. To change the Devanagari font, replace the file in `fonts-src/`.
 - Report exact tests and results; do not claim deployment until the live URL has been checked.
 - Call him "Kabir Saheb" in all English text you add.
 - Ask for clarification only when a choice would materially change content, design, access, or repository history.

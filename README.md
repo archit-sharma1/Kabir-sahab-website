@@ -17,7 +17,7 @@ Built with **SvelteKit 3** (Svelte 5, TypeScript) and fully prerendered: every p
 - **Share:** opens the phone's share sheet, or copies the doha, its meaning, "— Kabir Saheb" and its `/doha/N` link.
 - **Previously drawn:** the last five dohas before the current one. The list survives a page refresh.
 - **Search-engine friendly:** prerendered pages, `sitemap.xml`, and the doha text in the HTML (works without JavaScript).
-- **Self-hosted fonts:** Poppins, Cormorant Garamond and Tiro Devanagari Hindi.
+- **Self-hosted fonts:** Poppins, Cormorant Garamond and Tiro Devanagari Hindi. The Devanagari font is trimmed at build time to the glyphs the site uses (96.5 KB → 23.5 KB), and new dohas are covered automatically.
 - **Language markup:** the page is marked English and the Hindi text is marked Hindi, for screen readers and search engines.
 - **Security:** a strict Content-Security-Policy and long-term caching of hashed assets.
 - **Kabir Saheb portrait** and a responsive OLED-black design.

@@ -1,8 +1,10 @@
 # Font licences
 
-All fonts in this folder are licensed under the SIL Open Font License, Version 1.1
-(https://openfontlicense.org). The `.woff2` files were taken unmodified from the
-@fontsource npm packages.
+All fonts used by this site are licensed under the SIL Open Font License, Version 1.1
+(https://openfontlicense.org). The `.woff2` files were taken from the @fontsource npm
+packages. The Latin files in this folder are unmodified. The Devanagari Tiro font
+(`fonts-src/`) is subset at build time to the glyphs the site uses, which the OFL
+permits; it has no Reserved Font Name.
 
 | Font | Copyright |
 | --- | --- |
