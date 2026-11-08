@@ -153,7 +153,7 @@ Preserve all of the following unless the user explicitly requests a change:
 
 - All 184 Hindi verses and all 184 English meanings.
 - Random **Draw a Doha** behavior (no repeats until every doha has been shown), with the "doha N of 184 shown this round" counter.
-- Hindi and English keyword search.
+- Hindi and English keyword search. Results show the first 3 (`PREVIEW_COUNT` in `SearchBox.svelte`) with a "Show all N dohas" / "Show fewer" button; every new search collapses back to 3. A List / Grid toggle (list is default; grid is 2 columns on every screen width) appears when there are 2 or more results, and the chosen view stays for later searches.
 - Separate **Copy Hindi** and **Copy English** buttons, and **Share**.
 - A prerendered page per doha at `/doha/N`, with its own title, description and preview text. Old `/#doha-N` links keep redirecting.
 - "Previously drawn" lists the last five dohas viewed **before** the one on the card. It survives a refresh, and falls back to memory if storage is blocked.
