@@ -36,7 +36,7 @@ The website uses a minimal OLED-black design and the Kabir Saheb portrait. It is
 ```text
 Kabir-sahab-website/
 ├── src/
-│   ├── app.html                  # HTML shell (lang="en", icons, preloads)
+│   ├── app.html                  # HTML shell (lang="en", icons, portrait preload slot)
 │   ├── hooks.server.ts           # Puts the portrait preload first in <head>
 │   ├── app.css                   # @font-face rules and the complete visual design
 │   ├── app.d.ts                  # App.PageData type (doha on /doha/N pages)
@@ -108,8 +108,9 @@ Imports inside the app use Node subpath imports: `import { dohas } from '#lib/do
 - The portrait uses **`@sveltejs/enhanced-img`** (plugin in `vite.config.ts`, before `sveltekit()`). The only source file is `src/lib/assets/kabir-saheb.png`, at 2x the display size (264 × 350). At build time `<enhanced:img>` in `SiteHeader.svelte` turns it into AVIF, WebP and JPEG at 132 px (1x) and 264 px (2x), with hashed names under `/_app/immutable/assets/` (cached for a year). EXIF data is stripped and width and height are set. AVIF is 2.8 KB at 1x and 7.9 KB at 2x. To change the portrait, replace that PNG; never hand-make resized copies.
 - The portrait is the largest element on the home page, so its AVIF preload must come **before** SvelteKit's script preloads. Component `<svelte:head>` tags always come after them, so `src/hooks.server.ts` inserts the preload into the `%kabir.portrait-preload%` placeholder at the top of `app.html` when pages are prerendered. Under throttling this is the difference between LCP 2.0 s and 4.0 s.
 - `og-image.jpg` and `apple-touch-icon.png` stay in `static/images/`: crawlers and iOS need fixed URLs.
-- Only the Cormorant Garamond 600 font (the title) is preloaded. Preloading the 97 KB Devanagari font competed with the portrait and didn't help; it loads from the CSS with `font-display: swap`.
-- Inlining the CSS (`inlineStyleThreshold`) was tried and rejected: it makes all eight fonts download immediately at top priority, which slowed the portrait.
+- **The CSS is inlined into every page** (`inlineStyleThreshold` in `vite.config.ts`), so there is no render-blocking stylesheet request. SvelteKit's CSP hash mode adds the `<style>` hash automatically. This works because the portrait preload comes first in `<head>`. Measured under real slow-4G throttling: first paint 2.1 s → 0.9 s, LCP 2.1 s → 1.4 s, score 97 → 100.
+- **No fonts are preloaded.** The `@font-face` rules in the inlined CSS start the font downloads as soon as text needs them, with `font-display: swap`. Fonts are cached for a year, so returning visitors get them before the first paint, with no visible font swap.
+- **Loading fonts from JavaScript after page load (the `FontFace` API) was tried and rejected.** It helped Lighthouse's simulated score slightly, but returning visitors saw a 50–130 ms flash of the fallback font on every page load.
 - When reading Lighthouse, run it in an incognito window without extensions. Password-manager extensions (e.g. Bitwarden) add JavaScript and block the back/forward cache ("WebAuthentication API").
 
 ### `src/app.css`

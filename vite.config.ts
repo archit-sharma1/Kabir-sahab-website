@@ -14,6 +14,8 @@ export default defineConfig({
 			},
 			// Every page is prerendered to plain HTML in build/, which Cloudflare
 			// serves as static assets (no server code runs).
+			// Inline the stylesheet into each page so it doesn't block the first paint.
+			inlineStyleThreshold: 32768,
 			adapter: adapter({ pages: 'build', assets: 'build', fallback: '404.html', precompress: false, strict: true }),
 			// Content-Security-Policy as a <meta> tag on every page. In 'hash' mode
 			// SvelteKit adds the hash of its own inline start-up script, so no
