@@ -202,6 +202,7 @@ Search must therefore ignore English capitalization and extra spaces while remai
 - Queries shorter than 2 letters show "Type at least 2 letters to search."
 - English words also match simple plural/verb endings (`word` → `words`, `die` → `died`).
 - For search only, nukta is ignored and chandrabindu is treated as anusvara (`बजार` = `बाज़ार` stem, `माँ` = `मां`).
+- The word index is built **lazily, on the first search**, not when the page starts. Building it for all verses cost ~40 ms of main-thread time on a mobile-speed CPU, about half of hydration, and most visits never search. Keep heavy work out of component setup.
 - `SEARCH_ALIASES` in `src/lib/search.ts` maps romanised Hindi (`mann` → `मन`, `ram` → `राम`, `shabd` → `शब्द`…) and English themes (`truth`, `death`, `god`, `ego`…) to related words. Add to it when a natural query finds nothing.
 
 ### Required regression searches

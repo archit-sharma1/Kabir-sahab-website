@@ -118,18 +118,25 @@ export type SearchResult =
 	| { status: 'too-short' }
 	| { status: 'done'; matches: Doha[] };
 
-/** Build a search function over a corpus (the index is computed once). */
+/**
+ * Build a search function over a corpus. The word index is built lazily, on
+ * the first search: building it for every doha costs ~40 ms on a slow phone,
+ * and most visits never search, so page start-up shouldn't pay for it.
+ */
 export function createSearch(corpus: readonly Doha[]) {
-	const index = corpus.map((d) => new Set(tokenize(`${d.text} ${d.meaning} ${d.source ?? ''}`)));
+	let index: Set<string>[] | null = null;
+	const buildIndex = () => corpus.map((d) => new Set(tokenize(`${d.text} ${d.meaning} ${d.source ?? ''}`)));
 
 	return function search(query: string): SearchResult {
+		index ??= buildIndex();
 		if (normalizeSearchText(query) === '') return { status: 'empty' };
 		const allTerms = tokenize(query);
 		const meaningful = allTerms.filter((t) => !STOP_WORDS.has(t));
 		const terms = (meaningful.length ? meaningful : allTerms).filter((t) => t.length >= MIN_QUERY_LENGTH);
 		if (terms.length === 0) return { status: 'too-short' };
+		const words = index;
 		const matches = corpus.filter((_, i) =>
-			terms.every((term) => termAlternatives(term).some((alt) => wordMatches(index[i], alt)))
+			terms.every((term) => termAlternatives(term).some((alt) => wordMatches(words[i], alt)))
 		);
 		return { status: 'done', matches };
 	};
