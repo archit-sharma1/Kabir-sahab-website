@@ -42,7 +42,8 @@ npm run preview:cloudflare   # build, then serve build/ through Cloudflare's run
 - `src/lib/components/`: `SiteHeader`, `SearchBox`, `DohaCard`, `HistoryList`, `DohaExplorer`, `SiteFooter`, `Seo`.
 - `src/routes/`: the layout, the home page, `/doha/[id]` pages, the error page and `sitemap.xml`.
 - `src/app.css`: fonts and the visual design.
-- `static/`: images, fonts, `favicon.ico`, `robots.txt` and the Cloudflare `_headers` file, copied into `build/`.
+- `src/lib/assets/`: the portrait source, optimised at build time by `@sveltejs/enhanced-img` (AVIF/WebP/JPEG, 1x/2x).
+- `static/`: preview image and touch icon, fonts, `favicon.ico`, `robots.txt` and the Cloudflare `_headers` file, copied into `build/`.
 - `vite.config.ts`: SvelteKit config (static adapter, Content-Security-Policy) and test config.
 - `wrangler.jsonc`: Cloudflare Worker config; serves `build/` as static assets.
 - `PROJECT_INSTRUCTIONS.md`: detailed rules for anyone (human or AI) changing the site.

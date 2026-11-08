@@ -2,9 +2,7 @@
 # Cloudflare reads this file at deploy time; it is not served as a page.
 # Docs: https://developers.cloudflare.com/workers/static-assets/headers/
 #
-# HTML keeps Cloudflare's default `Cache-Control: public, max-age=0,
-# must-revalidate`: browsers revalidate with the ETag (a cheap 304), so a new
-# deploy shows up immediately. The Content-Security-Policy for scripts,
+# The Content-Security-Policy for scripts,
 # styles etc. is a <meta> tag that SvelteKit writes into each page (see
 # vite.config.ts); the header below adds what a <meta> tag can't.
 
@@ -16,6 +14,25 @@
   Cross-Origin-Opener-Policy: same-origin
   Permissions-Policy: camera=(), microphone=(), geolocation=()
   Content-Security-Policy: frame-ancestors 'none'; object-src 'none'; base-uri 'self'
+
+# Pages: browsers reuse a page for 5 minutes without asking at all. After
+# that they show their copy instantly and refresh it in the background
+# (stale-while-revalidate), for up to a day; after a day they fetch first.
+# A new deploy therefore reaches returning visitors within about 5 minutes.
+# Cloudflare's edge cache sits in front either way (cf-cache-status: HIT).
+/
+  Cache-Control: public, max-age=300, stale-while-revalidate=86400
+/doha/*
+  Cache-Control: public, max-age=300, stale-while-revalidate=86400
+
+# Crawler files change only when dohas are added.
+/sitemap.xml
+  Cache-Control: public, max-age=3600
+/robots.txt
+  Cache-Control: public, max-age=3600
+
+# /_app/version.json keeps Cloudflare's default (max-age=0, must-revalidate):
+# SvelteKit checks it to notice new deploys.
 
 # SvelteKit's JS and CSS have a content hash in the file name, so they can be
 # cached for a year; a change produces a new file name.
