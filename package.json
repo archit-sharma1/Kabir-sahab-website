@@ -1,0 +1,41 @@
+{
+	"name": "kabir-saheb-website",
+	"version": "1.0.0",
+	"private": true,
+	"type": "module",
+	"imports": {
+		"#lib/*": "./src/lib/*"
+	},
+	"scripts": {
+		"dev": "vite dev",
+		"predev": "npm run fonts",
+		"build": "vite build",
+		"prebuild": "npm run fonts",
+		"fonts": "node scripts/subset-fonts.mjs",
+		"preview": "vite preview",
+		"preview:cloudflare": "npm run build && wrangler dev",
+		"deploy": "npm run build && wrangler deploy",
+		"prepare": "svelte-kit sync || echo ''",
+		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+		"precheck": "npm run fonts",
+		"test": "vitest run",
+		"pretest": "npm run fonts"
+	},
+	"devDependencies": {
+		"@sveltejs/adapter-static": "^4.0.1",
+		"@sveltejs/enhanced-img": "^1.0.0",
+		"@sveltejs/kit": "^3.1.1",
+		"@sveltejs/vite-plugin-svelte": "^7.3.1",
+		"@types/fontkit": "^2.0.9",
+		"@types/node": "^22.20.5",
+		"fontkit": "^2.0.4",
+		"fontverter": "^2.0.0",
+		"harfbuzzjs": "^1.6.4",
+		"svelte": "^5.57.3",
+		"svelte-check": "^4.7.8",
+		"typescript": "^6.0.3",
+		"vite": "^8.3.6",
+		"vitest": "^5.1.0",
+		"wrangler": "^4.158.0"
+	}
+}

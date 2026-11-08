@@ -1,0 +1,13 @@
+{
+	"$schema": "./node_modules/wrangler/config-schema.json",
+	// Must match the Worker's name in the Cloudflare dashboard.
+	"name": "kabir-saheb",
+	"compatibility_date": "2026-11-01",
+	// Static site only: Cloudflare serves the prerendered files in build/
+	// (made by `npm run build`). No Worker script runs.
+	"assets": {
+		"directory": "./build",
+		"not_found_handling": "404-page",
+		"html_handling": "auto-trailing-slash"
+	}
+}

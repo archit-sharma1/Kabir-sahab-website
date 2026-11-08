@@ -1,4 +1,0 @@
-# Files that Cloudflare should not upload as public static assets.
-.git
-.github
-*.md

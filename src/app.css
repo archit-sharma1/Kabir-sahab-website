@@ -6,7 +6,7 @@
     font-style:normal;
     font-weight:400;
     font-display:swap;
-    src:url(fonts/poppins-latin-400-normal.woff2) format('woff2');
+    src:url(/fonts/poppins-latin-400-normal.woff2) format('woff2');
   }
 
   @font-face{
@@ -14,7 +14,7 @@
     font-style:normal;
     font-weight:500;
     font-display:swap;
-    src:url(fonts/poppins-latin-500-normal.woff2) format('woff2');
+    src:url(/fonts/poppins-latin-500-normal.woff2) format('woff2');
   }
 
   @font-face{
@@ -22,7 +22,7 @@
     font-style:normal;
     font-weight:400;
     font-display:swap;
-    src:url(fonts/cormorant-garamond-latin-400-normal.woff2) format('woff2');
+    src:url(/fonts/cormorant-garamond-latin-400-normal.woff2) format('woff2');
   }
 
   @font-face{
@@ -30,7 +30,7 @@
     font-style:italic;
     font-weight:400;
     font-display:swap;
-    src:url(fonts/cormorant-garamond-latin-400-italic.woff2) format('woff2');
+    src:url(/fonts/cormorant-garamond-latin-400-italic.woff2) format('woff2');
   }
 
   @font-face{
@@ -38,7 +38,7 @@
     font-style:normal;
     font-weight:600;
     font-display:swap;
-    src:url(fonts/cormorant-garamond-latin-600-normal.woff2) format('woff2');
+    src:url(/fonts/cormorant-garamond-latin-600-normal.woff2) format('woff2');
   }
 
   @font-face{
@@ -46,7 +46,7 @@
     font-style:italic;
     font-weight:600;
     font-display:swap;
-    src:url(fonts/cormorant-garamond-latin-600-italic.woff2) format('woff2');
+    src:url(/fonts/cormorant-garamond-latin-600-italic.woff2) format('woff2');
   }
 
   @font-face{
@@ -54,7 +54,8 @@
     font-style:normal;
     font-weight:400;
     font-display:swap;
-    src:url(fonts/tiro-devanagari-hindi-devanagari-400-normal.woff2) format('woff2');
+    /* Trimmed at build time to the glyphs the site uses (scripts/subset-fonts.mjs); Vite hashes the file name. */
+    src:url(./lib/assets/fonts/tiro-devanagari-hindi-subset.woff2) format('woff2');
     unicode-range:U+0900-097F,U+1CD0-1CF9,U+200C-200D,U+20A8,U+20B9,U+20F0,U+25CC,U+A830-A839,U+A8E0-A8FF,U+11B00-11B09;
   }
 
@@ -63,7 +64,7 @@
     font-style:normal;
     font-weight:400;
     font-display:swap;
-    src:url(fonts/tiro-devanagari-hindi-latin-400-normal.woff2) format('woff2');
+    src:url(/fonts/tiro-devanagari-hindi-latin-400-normal.woff2) format('woff2');
     unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
   }
 
@@ -80,6 +81,12 @@
   *{ box-sizing:border-box; }
 
   [hidden]{ display:none !important; }
+
+  /* SvelteKit mount point; no box of its own (avoids an inline style, which the CSP blocks). */
+  .app{ display:contents; }
+
+  /* Off-screen textarea used by the copy fallback (a class, not an inline style, for the CSP). */
+  .visually-hidden-copy{ position:fixed; top:0; left:0; opacity:0; pointer-events:none; }
 
   html{
     min-height:100%;
@@ -255,6 +262,19 @@
     padding-top:16px;
   }
 
+  .notice{
+    width:100%;
+    text-align:center;
+    font-family:'Cormorant Garamond', serif;
+    font-style:italic;
+    font-size:1.1rem;
+    color:#c9b98f;
+  }
+
+  .notice a{
+    color:var(--thread-gold);
+  }
+
   .placeholder{
     font-family:'Cormorant Garamond', serif;
     font-style:italic;
@@ -362,10 +382,70 @@
     white-space:nowrap;
   }
 
+  .search-toolbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:12px;
+    flex-wrap:wrap;
+  }
+
+  /* List / Grid switch for search results (a small segmented control). */
+  .view-toggle{
+    display:inline-flex;
+    border:1px solid rgba(184,134,59,0.5);
+    border-radius:999px;
+    overflow:hidden;
+  }
+
+  .view-toggle .view-option{
+    background:transparent;
+    color:var(--muted);
+    font-size:0.8rem;
+    padding:6px 14px;
+    border-radius:0;
+  }
+
+  .view-toggle .view-option[aria-pressed="true"]{
+    background:var(--thread-gold);
+    color:#050505;
+  }
+
+  .view-toggle .view-option:hover{
+    background:rgba(184,134,59,0.15);
+    color:var(--paper);
+  }
+
+  .view-toggle .view-option[aria-pressed="true"]:hover{
+    background:#cf9c4d;
+    color:#050505;
+  }
+
   .search-results{
     display:flex;
     flex-direction:column;
     gap:8px;
+  }
+
+  /* Grid view: two columns, also on phones. */
+  .search-results.grid{
+    display:grid;
+    grid-template-columns:repeat(2, minmax(0, 1fr));
+    gap:8px;
+  }
+
+  .search-results.grid .search-result{
+    padding:10px 12px;
+  }
+
+  .search-results.grid .sr-meaning{
+    font-size:0.85rem;
+  }
+
+  .show-all{
+    align-self:center;
+    padding:8px 22px;
+    font-size:0.85rem;
   }
 
   .search-result{
