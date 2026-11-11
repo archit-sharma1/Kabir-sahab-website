@@ -26,11 +26,11 @@ describe('required regression searches', () => {
 		expect(ids(query)).toEqual(expected);
 	});
 
-	it('diamond → 4', () => expect(ids('diamond')).toHaveLength(4));
+	it('diamond → 2', () => expect(ids('diamond')).toHaveLength(2));
 	it('marketplace → 3', () => expect(ids('marketplace')).toHaveLength(3));
 
-	it('ram → 19, never "trample" (#2)', () => {
-		expect(ids('ram')).toHaveLength(19);
+	it('ram → 3, never "trample" (#2)', () => {
+		expect(ids('ram')).toHaveLength(3);
 		expect(ids('ram')).not.toContain(2);
 	});
 

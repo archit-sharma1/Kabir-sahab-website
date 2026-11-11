@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { dohas } from './dohas.js';
 
 describe('doha corpus', () => {
-	it('has 184 records', () => expect(dohas).toHaveLength(184));
+	it('has 58 records', () => expect(dohas).toHaveLength(58));
 
 	it('ids are unique positive integers', () => {
 		const ids = dohas.map((d) => d.id);
@@ -39,8 +39,8 @@ describe('doha corpus', () => {
 		}
 	});
 
-	it('unverified: 23, 25 and the BhaktiMala additions 59–184', () => {
-		const expected = [23, 25, ...Array.from({ length: 126 }, (_, i) => 59 + i)];
+	it('unverified: 23 and 25 only', () => {
+		const expected = [23, 25];
 		expect(dohas.filter((d) => d.unverified).map((d) => d.id)).toEqual(expected);
 	});
 
