@@ -128,6 +128,8 @@ Imports inside the app use Node subpath imports: `import { dohas } from '#lib/do
 - Owns the OLED-black visual system and responsive layout, starting with `@font-face` rules for the self-hosted fonts in `static/fonts/` (`font-display: swap`; Tiro Devanagari Hindi is split into Devanagari and Latin subsets with `unicode-range`).
 - Do not switch to Google Fonts or another CDN: the CSP allows only `'self'`.
 - **No inline `<style>` elements or inline event handlers.** Use classes in `app.css`.
+- **Phones up to 430px wide** get a slightly smaller doha size (1.15rem), narrower card padding and a smaller search input, so most doha lines stay on one line (measured: 0–3 of 58 dohas wrap at 390–430px, 17 at 360px). Check this with all dohas after adding long ones.
+- The footer text is 0.95rem in a light warm grey (`#b8b0a1`, 9.8:1 contrast on black, up from 5.7:1) so the credits are readable on phones.
 - Avoid visual redesigns unless the user explicitly requests one.
 
 ### `vite.config.ts` (CSP)
@@ -203,7 +205,7 @@ Search must therefore ignore English capitalization and extra spaces while remai
 - English words also match simple plural/verb endings (`word` → `words`, `die` → `died`).
 - For search only, nukta is ignored and chandrabindu is treated as anusvara (`बजार` = `बाज़ार` stem, `माँ` = `मां`).
 - The word index is built **lazily, on the first search**, not when the page starts. Building it for all verses cost ~40 ms of main-thread time on a mobile-speed CPU, about half of hydration, and most visits never search. Keep heavy work out of component setup.
-- `SEARCH_ALIASES` in `src/lib/search.ts` maps romanised Hindi (`mann` → `मन`, `ram` → `राम`, `shabd` → `शब्द`…) and English themes (`truth`, `death`, `god`, `ego`…) to related words. Add to it when a natural query finds nothing.
+- `SEARCH_ALIASES` in `src/lib/search.ts` maps romanised Hindi (`mann` → `मन`, `ram` → `राम`, `shabd` → `शब्द`…) and English themes (`truth`, `death`, `god`, `ego`…) to related words. `sach`, `saanch`, `sachcha`, `satya`, `सच`, `सांच`, `सत्य`, `सच्चा` and `सच्चाई` search exactly like `truth` (shared `TRUTH_WORDS` list; tested). Add to it when a natural query finds nothing.
 
 ### Required regression searches
 

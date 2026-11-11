@@ -43,6 +43,10 @@ describe('required regression searches', () => {
 		expect(ids('Four   Forms of RAM')).toEqual([56]);
 	});
 
+	it.each(['sach', 'saanch', 'sachcha', 'सच', 'सांच', 'सत्य'])('%s finds the same dohas as "truth"', (q) => {
+		expect(ids(q)).toEqual(ids('truth'));
+	});
+
 	it('needs at least 2 letters', () => {
 		expect(search('a')).toEqual({ status: 'too-short' });
 		expect(search('   ')).toEqual({ status: 'empty' });

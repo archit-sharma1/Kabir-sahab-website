@@ -173,7 +173,7 @@ export const dohas: readonly Doha[] = [
 	{
 		id: 31,
 		text: "शब्द हमारा आदि का, शब्दहि पैठा जीव।\nफूल रहन की टोकनी, घोरा खाया घीव॥",
-		meaning: "Our Word is from the very beginning; the living being has entered into the Word. A basket for keeping flowers — and the horse has eaten the ghee.",
+		meaning: "Our Word is from the very beginning; the living being has entered into the Word. A basket for keeping flowers — and the horse has eaten the ghee. In other words, what is precious is wasted on what cannot use it, as a life is wasted when the Word is not taken in.",
 		source: "बीजक — साखी ३"
 	},
 	{
