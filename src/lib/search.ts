@@ -10,6 +10,9 @@ export const MIN_QUERY_LENGTH = 2;
 
 const STOP_WORDS = new Set(['a', 'an', 'the', 'of', 'to', 'in', 'is', 'and', 'or', 'on', 'at', 'by', 'for', 'be']);
 
+/** What "sach", "सच", "सत्य" and similar words search for: the same as "truth". */
+const TRUTH_WORDS = ['truth', 'true', 'truly', 'real', 'reality', 'essence', 'सत्य', 'सांच', 'सार'];
+
 // Add to this when a natural query finds nothing.
 export const SEARCH_ALIASES: Record<string, string[]> = {
 	// Romanised Hindi → Devanagari
@@ -63,6 +66,20 @@ export const SEARCH_ALIASES: Record<string, string[]> = {
 	ego: ['आपा', 'pride'],
 	pride: ['ego', 'आपा'],
 	truth: ['true', 'truly', 'real', 'reality', 'essence', 'सत्य', 'सांच', 'सार'],
+	// Romanised and Hindi words for truth search the same as "truth".
+	sach: TRUTH_WORDS,
+	sacha: TRUTH_WORDS,
+	saach: TRUTH_WORDS,
+	saanch: TRUTH_WORDS,
+	sanch: TRUTH_WORDS,
+	sachcha: TRUTH_WORDS,
+	sacchai: TRUTH_WORDS,
+	satya: TRUTH_WORDS,
+	'सच': TRUTH_WORDS,
+	'सांच': TRUTH_WORDS,
+	'सत्य': TRUTH_WORDS,
+	'सच्चा': TRUTH_WORDS,
+	'सच्चाई': TRUTH_WORDS,
 	death: ['die', 'died', 'dies', 'dying', 'mortal', 'forever', 'vanish', 'मुआ', 'मुए', 'मरि'],
 	die: ['death', 'died', 'dies', 'dying', 'मुआ', 'मुए'],
 	god: ['lord', 'divine', 'हरि', 'राम', 'साईं', 'प्रभु', 'गोविन्द', 'परमेश्वर', 'भगवान'],
