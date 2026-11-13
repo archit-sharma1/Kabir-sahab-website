@@ -102,6 +102,7 @@ Imports inside the app use Node subpath imports: `import { dohas } from '#lib/do
   - Old `/#doha-N` links redirect to `/doha/N`.
 - **Share** uses `navigator.share` when available. Otherwise it copies the same content and shows "Link copied!". Shared content is the doha, a blank line, the meaning, `— Kabir Saheb` (no doha number), a blank line, and the `/doha/N` link (`shareText` in `src/lib/clipboard.ts`, covered by a test).
 - `/doha/[id]/+page.ts` lists every id in `entries()` so all 58 pages are prerendered. The doha itself is in the HTML, so search engines and readers without JavaScript see it.
+- `src/routes/+error.svelte` shows missing pages in a red box above the search, inside the normal layout, with status 404 and `noindex`. `/doha/505` says "Doha 505 doesn't exist"; any other missing address says "Page not found". Both add "This site has N dohas, numbered 1 to N" (count from `dohas.ts`; the range is left out if ids ever have gaps). Styles: `.not-found*` in `app.css`.
 - `<html lang="en">`. Every element containing Hindi carries `lang="hi"`: the kicker, the doha text, Hindi source labels, search-result first lines and history items. Keep this when adding new Hindi text.
 - Keep the existing IDs and class names (`#drawBtn`, `#card`, `.doha-text`, `.history-item`…). The CSS and the browser regression tests rely on them.
 

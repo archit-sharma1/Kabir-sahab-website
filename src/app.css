@@ -262,16 +262,52 @@
     padding-top:16px;
   }
 
-  .notice{
+  /* Not-found / error box (src/routes/+error.svelte). */
+  .not-found{
     width:100%;
-    text-align:center;
-    font-family:'Cormorant Garamond', serif;
-    font-style:italic;
-    font-size:1.1rem;
-    color:#c9b98f;
+    background:rgba(140,28,28,0.18);
+    border:1px solid #b23a3a;
+    border-left:4px solid #d04545;
+    border-radius:14px;
+    padding:20px 22px;
+    text-align:left;
   }
 
-  .notice a{
+  .not-found-title{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin:0 0 8px;
+    font-family:'Cormorant Garamond', serif;
+    font-size:1.45rem;
+    font-weight:600;
+    color:#f1d4cf;
+  }
+
+  .not-found-icon{
+    flex:none;
+    width:26px;
+    height:26px;
+    border-radius:50%;
+    background:#d04545;
+    color:#1a0505;
+    display:grid;
+    place-items:center;
+    font-family:'Poppins', sans-serif;
+    font-size:0.95rem;
+    font-weight:600;
+  }
+
+  .not-found-text{
+    margin:0;
+    font-family:'Cormorant Garamond', serif;
+    font-style:italic;
+    font-size:1.08rem;
+    line-height:1.55rem;
+    color:#e3c9c4;
+  }
+
+  .not-found-text a{
     color:var(--thread-gold);
   }
 
