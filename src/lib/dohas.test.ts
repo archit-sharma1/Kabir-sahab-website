@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { dohas } from './dohas.js';
 
 describe('doha corpus', () => {
-	it('has 58 records', () => expect(dohas).toHaveLength(58));
+	it('has 93 records', () => expect(dohas).toHaveLength(93));
 
 	it('ids are unique positive integers', () => {
 		const ids = dohas.map((d) => d.id);
@@ -46,5 +46,15 @@ describe('doha corpus', () => {
 
 	it('no record is both unverified and sourced', () => {
 		expect(dohas.filter((d) => d.unverified && d.source)).toEqual([]);
+	});
+
+	it('keeps retired ids 59–184 unused', () => {
+		expect(dohas.filter((d) => d.id >= 59 && d.id <= 184)).toEqual([]);
+	});
+
+	it('new Gurudev verses cite their published source', () => {
+		for (const d of dohas.filter((x) => x.id >= 185)) {
+			expect(d.source, `doha ${d.id}`).toContain('सद्गुरु कबीर की साखी');
+		}
 	});
 });

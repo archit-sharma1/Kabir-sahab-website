@@ -332,5 +332,215 @@ export const dohas: readonly Doha[] = [
 		id: 58,
 		text: "प्रभुता को सब कोई भजै, प्रभु को भजै न कोय।\nकहैं कबीर प्रभु को भजै, प्रभुता चेरी होय॥",
 		meaning: "Everyone worships power, but no one worships Prabhu, the Real. Kabir Saheb says: whoever worships Prabhu, power itself becomes their servant."
+	},
+	{
+		id: 185,
+		text: "पाहन पूजे हरि मिले, तो मैं पूजूँ पहार।\nताते तो चक्की भली, पीसि खाये संसार॥",
+		meaning: "If Hari could be found by worshipping a stone, I would worship a mountain. Better than that stone is the millstone, which grinds grain for the world to eat.",
+		source: "सद्गुरु कबीर की साखी — भूमिका"
+	},
+	{
+		id: 186,
+		text: "सतगुरु ऐसा कीजिये, लोभ मोह भ्रम नाँहि।\nदरिया सो न्यारा रहे, दीखे दरिया माँहि॥",
+		meaning: "Choose such a Satguru in whom there is no greed, attachment or delusion—one who remains distinct from the river even while appearing within it.",
+		source: "सद्गुरु कबीर की साखी — भूमिका"
+	},
+	{
+		id: 187,
+		text: "हिन्दू अपनी करे बड़ाई, गागर छुअन न देई।\nवैश्या के पायन तर सोवै, ये देखो हिन्दुआई॥",
+		meaning: "The Hindu boasts of himself and will not let another touch his water-pot, yet sleeps at a courtesan's feet—behold this Hindu conduct.",
+		source: "सद्गुरु कबीर की साखी — भूमिका"
+	},
+	{
+		id: 188,
+		text: "मुसलमान के पीर औलिया, मुर्गी मुर्गी खाई।\nखाला केरी बेटी ब्याहावै, घर में करे सगाई॥",
+		meaning: "The Muslims' pirs and saints eat fowl after fowl; one marries his maternal aunt's daughter and arranges the match within the family.",
+		source: "सद्गुरु कबीर की साखी — भूमिका"
+	},
+	{
+		id: 189,
+		text: "गुरु को कीजै दंडवत, कोटि कोटि परनाम।\nकीट न जाने भृंगको, गुरु करिले आप समान॥",
+		meaning: "Prostrate before the Guru and offer countless salutations. As the insect does not understand the bhringa, yet the bhringa makes it like itself, so does the Guru make the disciple like himself.",
+		source: "सद्गुरु कबीर की साखी — गुरुदेव को अंग, साखी 1"
+	},
+	{
+		id: 190,
+		text: "दंडवत गोविन्द गुरु, वंदौं अब जन सोय।\nपहिले भये प्रणाम तिन, नमो जु आगे होय॥",
+		meaning: "I prostrate before Govind, the Guru, and bow to those people: salutations to those who came before, and homage to those who will come hereafter.",
+		source: "सद्गुरु कबीर की साखी — गुरुदेव को अंग, साखी 2"
+	},
+	{
+		id: 191,
+		text: "गुरु गोविन्द करि जानिये, रहिये शब्द समाय।\nमिले तो दंडवत बंदगी, नहीं पल पल ध्यान लगाय॥",
+		meaning: "Know the Guru as Govind and remain absorbed in the Word. If you meet the Guru, bow and offer reverence; if not, hold the Guru in meditation every moment.",
+		source: "सद्गुरु कबीर की साखी — गुरुदेव को अंग, साखी 3"
+	},
+	{
+		id: 192,
+		text: "गुरु गोविन्द दोउ एक हैं, दूजा सब आकार।\nआपा मेटे हरि भजे, तब पावे दीदार॥",
+		meaning: "Guru and Govind are one; all appearance of two is only form. When one erases the self and worships Hari, one then beholds the Divine.",
+		source: "सद्गुरु कबीर की साखी — गुरुदेव को अंग, साखी 5"
+	},
+	{
+		id: 193,
+		text: "गुरु हैं बड़े गोविन्द ते, मन में देखु विचार।\nहरि सिरजे ते वार हैं, गुरु सिरजे ते पार॥",
+		meaning: "The Guru is greater than Govind—consider this within your mind. Those fashioned by Hari remain on this shore; those fashioned by the Guru cross beyond.",
+		source: "सद्गुरु कबीर की साखी — गुरुदेव को अंग, साखी 6"
+	},
+	{
+		id: 194,
+		text: "गुरु तो गरुआ मिला, ज्यों आंटे में लौन।\nजाति पाँति कुल मिटि गया, नाम धरेगा कौन॥",
+		meaning: "A weighty Guru was found, like salt mingled into flour. Caste, rank and lineage were erased—who then will retain a separate name?",
+		source: "सद्गुरु कबीर की साखी — गुरुदेव को अंग, साखी 7"
+	},
+	{
+		id: 195,
+		text: "गुरु सों ज्ञानजु लीजिये, सीस दीजिये दान।\nबहुतक भोंद बहि गये, राखि जीव अभिमान॥",
+		meaning: "Receive knowledge from the Guru, offering your head as the gift. Many fools were swept away because they preserved the living ego's pride.",
+		source: "सद्गुरु कबीर की साखी — गुरुदेव को अंग, साखी 8"
+	},
+	{
+		id: 196,
+		text: "गुरु की आज्ञा आवई, गुरु की आज्ञा जाय।\nकहैं कबीर सो संत हैं, आवागवन नसाय॥",
+		meaning: "One comes by the Guru's command and goes by the Guru's command. Kabir Saheb says: that person is a saint who destroys the cycle of coming and going.",
+		source: "सद्गुरु कबीर की साखी — गुरुदेव को अंग, साखी 9"
+	},
+	{
+		id: 197,
+		text: "गुरु पारस गुरु पुरुष हैं, चंदन वास सुवास।\nसतगुरु पारस जीव को, दीन्हा मुक्ति निवास॥",
+		meaning: "The Guru is the philosopher's stone, the true person, and the fragrant scent of sandalwood. The Satguru, like the philosopher's stone, gives the living being an abode in liberation.",
+		source: "सद्गुरु कबीर की साखी — गुरुदेव को अंग, साखी 10"
+	},
+	{
+		id: 198,
+		text: "गुरु पारस को अन्तरो, जानत हैं सब सन्त।\nवह लोहा कंचन करे, ये करि लेय महन्त॥",
+		meaning: "All saints know the difference between the Guru and the philosopher's stone: that turns iron into gold, while the Guru makes the disciple great like himself.",
+		source: "सद्गुरु कबीर की साखी — गुरुदेव को अंग, साखी 11"
+	},
+	{
+		id: 199,
+		text: "कुमति कीच चेला भरा, गुरु ज्ञान जल होय।\nजनम जनम का मोरचा, पल में डारे धोय॥",
+		meaning: "The disciple is filled with the mud of wrong understanding; the Guru's knowledge is water. In a moment it washes away the grime accumulated over birth after birth.",
+		source: "सद्गुरु कबीर की साखी — गुरुदेव को अंग, साखी 12"
+	},
+	{
+		id: 200,
+		text: "गुरु धोबी सिष कापड़ा, साबुन सिरजनहार।\nसुरति सिला पर धोइये, निकसे जोति अपार॥",
+		meaning: "The Guru is the washerman, the disciple the cloth, and the Creator the soap. Washed upon the stone of attentive awareness, boundless light emerges.",
+		source: "सद्गुरु कबीर की साखी — गुरुदेव को अंग, साखी 13"
+	},
+	{
+		id: 201,
+		text: "गुरु कुम्हार सिष कुंभ है, गढ़ि गढ़ि काढ़े खोट।\nअन्तर हाथ सहार दे, बाहर बाहे चोट॥",
+		meaning: "The Guru is the potter and the disciple the pot; shaping it again and again, the Guru removes its flaws. A hand supports it from within while blows strike it from outside.",
+		source: "सद्गुरु कबीर की साखी — गुरुदेव को अंग, साखी 14"
+	},
+	{
+		id: 202,
+		text: "गुरु समान दाता नहीं, याचक सीष समान।\nतीन लोक की संपदा, सो गुरु दीन्हीं दान॥",
+		meaning: "There is no giver equal to the Guru and no petitioner equal to the disciple. The wealth of the three worlds is what the Guru gives in donation.",
+		source: "सद्गुरु कबीर की साखी — गुरुदेव को अंग, साखी 15"
+	},
+	{
+		id: 203,
+		text: "पहिले दाता सिष भया, तन मन अरपन सीस।\nपाछे दाता गुरु भये, नाम दिया बखसीस॥",
+		meaning: "First the disciple became the giver, offering body, mind and head. Afterwards the Guru became the giver and bestowed the Name as a blessing.",
+		source: "सद्गुरु कबीर की साखी — गुरुदेव को अंग, साखी 16"
+	},
+	{
+		id: 204,
+		text: "गुरु जो बसै बनारसी, सीष समुदर तीर।\nएक पलक बिसरे नहीं, जो गुण होय सरीर॥",
+		meaning: "Though the Guru may live in Banaras and the disciple on the seashore, a worthy disciple does not forget the Guru for even a moment.",
+		source: "सद्गुरु कबीर की साखी — गुरुदेव को अंग, साखी 17"
+	},
+	{
+		id: 205,
+		text: "लच्छ कोस जो गुरु बसे, दीजे सुरति पठाय।\nशब्द तुरी असवार है, छिन आवै छिन जाय॥",
+		meaning: "If the Guru lives a hundred thousand kos away, send your attentive awareness there. The Word is a swift mare and awareness its rider, coming and going in an instant.",
+		source: "सद्गुरु कबीर की साखी — गुरुदेव को अंग, साखी 18"
+	},
+	{
+		id: 206,
+		text: "गुरु को सिर पर राखिये, चलिये आज्ञा मांहि।\nकहैं कबीर ता दास को, तीन लोक भय नाहिं॥",
+		meaning: "Keep the Guru above your head and walk within the Guru's command. Kabir Saheb says: such a servant has no fear in the three worlds.",
+		source: "सद्गुरु कबीर की साखी — गुरुदेव को अंग, साखी 19"
+	},
+	{
+		id: 207,
+		text: "गुरु को मानुष जो गिने, चरणामृत को पान।\nते नर नरके जायेंगे, जनम जनम ह्वै स्वान॥",
+		meaning: "Those who regard the Guru as merely human while drinking the nectar of the Guru's feet will go to hell and become dogs birth after birth.",
+		source: "सद्गुरु कबीर की साखी — गुरुदेव को अंग, साखी 20"
+	},
+	{
+		id: 208,
+		text: "गुरु को मानुष जानते, ते नर कहिये अंध।\nहोय दुखी संसार में, आगे जम का फंद॥",
+		meaning: "Those who consider the Guru merely human are to be called blind. They suffer in the world, and ahead lies Yama's noose.",
+		source: "सद्गुरु कबीर की साखी — गुरुदेव को अंग, साखी 21"
+	},
+	{
+		id: 209,
+		text: "गुरु बिन ज्ञान न उपजे, गुरु बिन मिलें न भेद।\nगुरु बिन संशय ना मिटे, जय जय जय गुरुदेव॥",
+		meaning: "Without the Guru knowledge does not arise; without the Guru the mystery is not found. Without the Guru doubt does not disappear—victory, victory, victory to Gurudev.",
+		source: "सद्गुरु कबीर की साखी — गुरुदेव को अंग, साखी 22"
+	},
+	{
+		id: 210,
+		text: "गुरु बिन ज्ञान न ऊपजे, गुरु बिन मिलें न मोष।\nगुरु बिन लखै न सत्य को, गुरु बिन मिटे न दोष॥",
+		meaning: "Without the Guru knowledge does not arise, and without the Guru liberation is not found. Without the Guru truth is not perceived, and without the Guru faults are not erased.",
+		source: "सद्गुरु कबीर की साखी — गुरुदेव को अंग, साखी 23"
+	},
+	{
+		id: 211,
+		text: "गुरु नारायण रूप है, गुरु ज्ञान को घाट।\nसतगुरु वचन प्रताप सों, मन के मिटे उचाट॥",
+		meaning: "The Guru is the form of Narayan and the landing-place of knowledge. Through the power of the Satguru's words, the mind's restlessness is erased.",
+		source: "सद्गुरु कबीर की साखी — गुरुदेव को अंग, साखी 24"
+	},
+	{
+		id: 212,
+		text: "गुरु महिमा गावत सदा, मन अति राखे मोद।\nसो भव फिरि आवे नहीं, बैठे प्रभु की गोद॥",
+		meaning: "The one who always sings the Guru's greatness and keeps the mind deeply joyful does not return again to worldly becoming, but sits in Prabhu's lap.",
+		source: "सद्गुरु कबीर की साखी — गुरुदेव को अंग, साखी 25"
+	},
+	{
+		id: 213,
+		text: "गुरु सेवा जन बंदगी, हरि सुमिरन वैराग।\nये चारों तबहीं मिलें, पूरन होवै भाग॥",
+		meaning: "Service to the Guru, reverence to saints, remembrance of Hari and detachment—these four are obtained only when one's fortune becomes complete.",
+		source: "सद्गुरु कबीर की साखी — गुरुदेव को अंग, साखी 26"
+	},
+	{
+		id: 214,
+		text: "गुरु मुक्तवै जीव को, चौरासी बद छोर।\nभक्ति प्रवाना देहि गुरु, जम सों तिनका तोर॥",
+		meaning: "The Guru frees the living being, releasing it from the bonds of the eighty-four lakh forms. The Guru gives the warrant of devotion and breaks its tie with Yama.",
+		source: "सद्गुरु कबीर की साखी — गुरुदेव को अंग, साखी 27"
+	},
+	{
+		id: 215,
+		text: "गुरु सों प्रीति निवाहिये, जिहि तत निबहै संत।\nप्रेम बिना ढिंग दूर है, प्रेम निकट गुरु कंत॥",
+		meaning: "Sustain love for the Guru in the way saints sustain that truth. Without love the Guru is distant even when near; through love the beloved Guru is near.",
+		source: "सद्गुरु कबीर की साखी — गुरुदेव को अंग, साखी 28"
+	},
+	{
+		id: 216,
+		text: "गुरु की महिमा को कहै, शिव विरंचि नहिं जान।\nगुरु सतगुरु को चीन्हिकै, पावै पद निरबान॥",
+		meaning: "Who can describe the Guru's greatness? Even Shiva and Brahma do not know it. Recognising the Guru as Satguru, one attains the state of nirvana.",
+		source: "सद्गुरु कबीर की साखी — गुरुदेव को अंग, साखी 30"
+	},
+	{
+		id: 217,
+		text: "गुरु मुख बानी उचरे, शीष सांच कर मान।\nया विधि फंदा छूटहीं, और युक्ति नहिं आन॥",
+		meaning: "Whatever speech comes from the Guru's mouth, the disciple should accept as true. In this way the snare is released; there is no other method.",
+		source: "सद्गुरु कबीर की साखी — गुरुदेव को अंग, साखी 31"
+	},
+	{
+		id: 218,
+		text: "गुरु मूरति गति चंद्रमा, सेवक नैन चकोर।\nआठ पहर निरखत रहे, गुरु मूरति की ओर॥",
+		meaning: "The Guru's form is like the moon, and the servant's eyes like the chakor bird. Through all eight watches of the day, they keep gazing toward the Guru's form.",
+		source: "सद्गुरु कबीर की साखी — गुरुदेव को अंग, साखी 32"
+	},
+	{
+		id: 219,
+		text: "गुरु समाना शीष में, शीष लिया करि नेह।\nबिलगाये बिलगै नहीं, एक प्रान दुइ देह॥",
+		meaning: "The Guru entered the disciple, and the disciple was lovingly taken in by the Guru. Even if separated, they are not separate: one life in two bodies.",
+		source: "सद्गुरु कबीर की साखी — गुरुदेव को अंग, साखी 33"
 	}
 ];
