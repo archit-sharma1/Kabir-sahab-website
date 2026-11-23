@@ -1,6 +1,6 @@
 # Kabir Saheb Doha Website
 
-A contemplative website featuring 93 Hindi verses attributed to Kabir Saheb, each paired with an original plain-sense English meaning. Entries whose published source has not yet been verified are clearly marked.
+A contemplative website featuring 149 Hindi verses attributed to Kabir Saheb, each paired with an original plain-sense English meaning. Entries whose published source has not yet been verified are clearly marked.
 
 Built with **SvelteKit 3** (Svelte 5, TypeScript) and fully prerendered: every page is plain HTML served by Cloudflare.
 
@@ -39,7 +39,7 @@ npm run preview:cloudflare   # build, then serve build/ through Cloudflare's run
 
 ## Project structure
 
-- `src/lib/dohas.ts`: **the only content store**, with all 93 records (`id`, Hindi `text`, English `meaning`, optional `source`, optional `unverified`). Edit dohas here.
+- `src/lib/dohas.ts`: **the only content store**, with all 149 records (`id`, Hindi `text`, English `meaning`, optional `source`, optional `unverified`). Edit dohas here.
 - `src/lib/search.ts`, `history.ts`, `explorer.svelte.ts`: search, history/draw logic and shared state, with tests in `*.test.ts`.
 - `src/lib/components/`: `SiteHeader`, `SearchBox`, `DohaCard`, `HistoryList`, `DohaExplorer`, `SiteFooter`, `Seo`.
 - `src/routes/`: the layout, the home page, `/doha/[id]` pages, the error page and `sitemap.xml`.

@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { dohas } from './dohas.js';
 
 describe('doha corpus', () => {
-	it('has 93 records', () => expect(dohas).toHaveLength(93));
+	it('has 149 records', () => expect(dohas).toHaveLength(149));
 
 	it('ids are unique positive integers', () => {
 		const ids = dohas.map((d) => d.id);
